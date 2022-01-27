@@ -23,20 +23,25 @@ export const Frame1 = styled.div`
 	background-size: cover;
 	background-position: center;
 	background-image: url('https://static.overlay-tech.com/assets/a132ce96-6a0e-4222-b26a-31d846c762d4.png');
-	padding: 18px 20px 20px 18px;
+	padding: 20px 14px 14px 20px;
 	display: flex;
 	align-items: flex-start;
 	justify-content: start;
 `;
 export const Frame6 = styled.div`
 	flex: 1;
-	padding: 10px 4px 4px 4px;
+	padding: 20px 4px 4px 4px;
 	display: flex;
 	align-items: flex-start;
 	justify-content: start;
 `;
 export const Frame5 = styled.div`
-	position: flex;
+	position: relative;
+	display: relative;
+	padding: 4px 0px 0px 0px;
+
+	align-items: left;
+	justify-content: left;
 `;
 export const VerivanMagalhaesFerreira = styled.p`
 	font-family: 'Cousine';
@@ -50,10 +55,10 @@ export const VerivanMagalhaesFerreira = styled.p`
 	letter-spacing: 0.84px;
 `;
 export const Num35966120211203023536 = styled.p`
-	color: rgb(170, 111, 2);
+	color: rgb(104, 74, 17);
 	position: relative;
-
-	align-self: left;
+	left: 0px;
+	align-items: left;
 	font-family: ${Theme.fonts.cousine18Regular.family};
 	font-size: ${Theme.fonts.cousine18Regular.size};
 	font-weight: ${Theme.fonts.cousine18Regular.weight};
