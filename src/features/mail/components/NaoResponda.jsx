@@ -4,15 +4,17 @@ import styled from 'styled-components';
 import { Theme } from '../../../shared/constants/colors';
 
 export const Frame3Eleven = styled.div`
+	position: relative;
+	width: 100%;
 	background-color: ${Theme.colors.leegaYellow};
 	padding: 20px 32px 38px;
-	display: flex;
+
 	flex-direction: column;
 	align-items: center;
 	align-self: stretch;
 `;
 export const AtencaoNaoRespondaEsseEMailEleE = styled.p`
-	width: 902px;
+	width: 100%;
 	font-family: 'Roboto';
 	font-size: 18px;
 	font-weight: 500;

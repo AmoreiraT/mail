@@ -7,26 +7,34 @@ import GlassMorphCard from './GlassMorphCard';
 import LegalInfos from './LegalInfos';
 
 export const CardLegalContainer = styled.div`
-	width: 100%;
-	/* height: auto; */
+	height: max-content;
+	position: relative;
 	margin-bottom: 40px;
-	/* padding: 0 40px 2px; */
 	display: flex;
-
 	justify-content: center;
+	justify-items: center;
+	@media (max-width: 800px) {
+		flex-direction: column;
+		position: relative;
+		align-items: center;
+	}
 `;
 export const CardLegalDivider = styled.div`
-	width: 290px;
-	height: 450px;
-	/* padding: 0 00px 0px 00px; */
+	width: fit-content;
+	height: auto;
 	position: relative;
+	margin-bottom: 20px;
 	&:not(:last-of-type) {
 		margin-right: 80px;
+	}
+	&:not(:last-of-type) {
+		@media (max-width: 800px) {
+			margin-right: 0px;
+		}
 	}
 `;
 
 const CardDepContainer = ({ cartoes, nomeColab }) => {
-	console.log(cartoes);
 	return (
 		<CardLegalContainer>
 			{cartoes.map(cartao => (
