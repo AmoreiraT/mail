@@ -14,13 +14,18 @@ module.exports = {
 		Atomics: 'readonly',
 		SharedArrayBuffer: 'readonly',
 	},
+	parser: 'babel-eslint',
 	parserOptions: {
+		parser: 'babel-eslint',
 		ecmaFeatures: {
+			experimentalObjectRestSpread: true,
 			jsx: true,
 		},
-		ecmaVersion: 12,
+
+		ecmaVersion: 2020,
 		sourceType: 'module',
 	},
+
 	plugins: ['react', 'react-hooks', 'prettier'],
 	rules: {
 		'react/jsx-props-no-spreading': 'off',

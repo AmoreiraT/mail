@@ -58,7 +58,7 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
 	},
 }));
 
-export default function Simulation() {
+export default function Simulation({ toggleTheme }) {
 	const theme = createTheme();
 	return (
 		<ThemeProvider theme={theme}>
@@ -75,7 +75,11 @@ export default function Simulation() {
 				>
 					<Stack direction="row" spacing={1} alignItems="center">
 						<Typography>Leega</Typography>
-						<MaterialUISwitch sx={{ m: 1 }} defaultChecked />
+						<MaterialUISwitch
+							sx={{ m: 1 }}
+							defaultChecked
+							onChange={toggleTheme}
+						/>
 
 						<Typography>4MapIt</Typography>
 					</Stack>
