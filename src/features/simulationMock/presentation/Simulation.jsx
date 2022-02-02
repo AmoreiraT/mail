@@ -1,4 +1,12 @@
-import { Container, Stack, Switch, TextField, Typography } from '@mui/material';
+/* eslint-disable react/destructuring-assignment */
+import {
+	Button,
+	Container,
+	Stack,
+	Switch,
+	TextField,
+	Typography,
+} from '@mui/material';
 import CssBaseline from '@mui/material/CssBaseline';
 import { Box } from '@mui/system';
 
@@ -58,7 +66,7 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
 	},
 }));
 
-export default function Simulation({ toggleTheme }) {
+export default function Simulation(props) {
 	const theme = createTheme();
 	return (
 		<ThemeProvider theme={theme}>
@@ -73,13 +81,10 @@ export default function Simulation({ toggleTheme }) {
 						alignItems: 'center',
 					}}
 				>
+					<Button onClick={() => props}>Alterar Tema</Button>
 					<Stack direction="row" spacing={1} alignItems="center">
 						<Typography>Leega</Typography>
-						<MaterialUISwitch
-							sx={{ m: 1 }}
-							defaultChecked
-							onChange={toggleTheme}
-						/>
+						<MaterialUISwitch sx={{ m: 1 }} onClick={props.toggleTheme} />
 
 						<Typography>4MapIt</Typography>
 					</Stack>

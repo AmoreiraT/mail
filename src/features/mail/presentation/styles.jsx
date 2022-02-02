@@ -6,7 +6,7 @@ import { Theme } from '../../../shared/constants/colors';
 export const Container = styled.div`
 	position: relative;
 	width: 100%;
-	background-color: rgba(255, 164, 0, 0.6);
+	background-color: ${props => props.theme.backgroundColor};
 	padding: 16px 32px;
 	display: flex;
 	flex-direction: column;
