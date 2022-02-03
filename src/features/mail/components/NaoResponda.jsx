@@ -1,12 +1,11 @@
 import React from 'react';
 
 import styled from 'styled-components';
-import { Theme } from '../../../shared/constants/colors';
 
 export const Frame3Eleven = styled.div`
 	position: relative;
 	width: 100%;
-	background-color: ${Theme.colors.leegaYellow};
+	background-color: ${props => props.theme.equivalentColor};
 	padding: 20px 32px 38px;
 
 	flex-direction: column;

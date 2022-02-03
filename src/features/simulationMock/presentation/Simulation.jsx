@@ -1,10 +1,9 @@
 /* eslint-disable react/destructuring-assignment */
 import {
-	Button,
 	Container,
 	Stack,
 	Switch,
-	TextField,
+	// TextField,
 	Typography,
 } from '@mui/material';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -13,13 +12,15 @@ import { Box } from '@mui/system';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import React from 'react';
 import styled from '@emotion/styled';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as MailAction from '../../../core/store/redux/actions/userset';
 
 const MaterialUISwitch = styled(Switch)(({ theme }) => ({
 	width: 62,
 	height: 34,
 	padding: 7,
 	'& .MuiSwitch-switchBase': {
-		backgroundColor: '#1726f3',
 		margin: 1,
 		padding: 0,
 		transform: 'translateX(6px)',
@@ -62,11 +63,12 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
 	'& .MuiSwitch-track': {
 		opacity: 1,
 		backgroundColor: theme.palette.mode === 'dark' ? '#0b5aa8' : '#f3b817',
+
 		borderRadius: 20 / 2,
 	},
 }));
 
-export default function Simulation(props) {
+function Simulation({ isLeega, tootgleTheme, themeSet }) {
 	const theme = createTheme();
 	return (
 		<ThemeProvider theme={theme}>
@@ -81,15 +83,17 @@ export default function Simulation(props) {
 						alignItems: 'center',
 					}}
 				>
-					<Button onClick={() => props}>Alterar Tema</Button>
 					<Stack direction="row" spacing={1} alignItems="center">
 						<Typography>Leega</Typography>
-						<MaterialUISwitch sx={{ m: 1 }} onClick={props.toggleTheme} />
+						<MaterialUISwitch
+							sx={{ m: 1 }}
+							onClick={() => tootgleTheme(isLeega, themeSet)}
+						/>
 
 						<Typography>4MapIt</Typography>
 					</Stack>
 
-					<Box component="form">
+					{/* <Box component="form">
 						<TextField
 							margin="normal"
 							fullWidth
@@ -115,9 +119,18 @@ export default function Simulation(props) {
 							label="Número do Cartão"
 							name="numCartao"
 						/>
-					</Box>
+					</Box> */}
 				</Box>
 			</Container>
 		</ThemeProvider>
 	);
 }
+
+const mapStateToProps = state => ({
+	isLeega: state.mail.isLeega,
+	themeSet: state.mail.theme,
+});
+
+const mapDispatchToProps = dispatch => bindActionCreators(MailAction, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(Simulation);

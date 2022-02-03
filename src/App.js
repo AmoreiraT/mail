@@ -1,56 +1,74 @@
 import React from 'react';
-import { Provider } from 'react-redux';
-import './App.css';
+import { connect, Provider } from 'react-redux';
 import { ThemeProvider } from 'styled-components';
 import store from './core/store';
 import MailPresentation from './features/mail';
 import Simulation from './features/simulationMock';
-import * as themes from './shared/themes';
+// import * as themes from './shared/themes';
 import ThemeContext from './shared/themes/context';
 
-class App extends React.Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			theme: themes.leegaTheme,
-		};
-	}
+function App({ theme }) {
+	return (
+		<div>
+			<Provider store={store}>
+				<ThemeContext.Provider value={theme}>
+					<Simulation />
 
-	toggleTheme = () => {
-		const { state } = this.state;
-		console.log(state);
-		this.setState({
-			theme: state === themes.leegaTheme ? themes.fMapTheme : themes.leegaTheme,
-		});
-	};
-
-	render() {
-		const { theme } = this.state;
-		const { toggleTheme } = this.toggleTheme;
-		return (
-			<div className="App">
-				<Provider store={store}>
-					<ThemeContext.Provider value={theme}>
-						<Simulation theme={toggleTheme} />
-						{/* <MailPresentation /> */}
-
-						{/* <ThemeProvider theme={theme}>
-							<MailPresentation />
-						</ThemeProvider> */}
-						<ThemeContext.Consumer>
-							{t => {
-								return (
-									<ThemeProvider theme={t}>
-										<MailPresentation />
-									</ThemeProvider>
-								);
-							}}
-						</ThemeContext.Consumer>
-					</ThemeContext.Provider>
-				</Provider>
-			</div>
-		);
-	}
+					<ThemeContext.Consumer>
+						{t => (
+							<ThemeProvider theme={t}>
+								<MailPresentation />
+							</ThemeProvider>
+						)}
+					</ThemeContext.Consumer>
+				</ThemeContext.Provider>
+			</Provider>
+		</div>
+	);
 }
 
-export default App;
+const mapStateToProps = state => ({
+	theme: state.mail.theme,
+});
+export default connect(mapStateToProps)(App);
+
+// class App extends React.Component {
+// 	constructor(props) {
+// 		super(props);
+// 		this.state = {
+// 			theme: themes.leegaTheme,
+// 		};
+// 	}
+
+// 	// toggleTheme = () => {
+// 	// 	const { state } = this.state;
+// 	// 	console.log(state);
+// 	// 	this.setState({
+// 	// 		theme: state === themes.leegaTheme ? themes.fMapTheme : themes.leegaTheme,
+// 	// 	});
+// 	// };
+
+// 	render() {
+// 		const { theme } = this.state;
+
+// 		return (
+// 			<div>
+// 				<Provider store={store}>
+// 					<ThemeContext.Provider value={theme}>
+// 						<Simulation />
+
+// 						<ThemeContext.Consumer>
+// 							{t => (
+// 								<ThemeProvider theme={t}>
+// 									<MailPresentation />
+// 								</ThemeProvider>
+// 							)}
+// 						</ThemeContext.Consumer>
+// 					</ThemeContext.Provider>
+// 				</Provider>
+// 			</div>
+// 		);
+// 	}
+// }
+
+// export default App;

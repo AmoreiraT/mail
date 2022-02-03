@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import LeegaLogoSvg from '../../../shared/assets/svg/LeegaLogoSvg';
 import FourMapItLogo from '../../../shared/assets/svg/FourMapItLogo';
-import { Theme } from '../../../shared/constants/colors';
 
 export const Container = styled.div`
 	position: relative;
@@ -38,13 +37,13 @@ export const EmailBody = styled.div`
 	background-color: rgba(255, 255, 255, 1);
 	position: relative;
 	width: 100%;
-	border-radius: 35px 15px;
+	border-radius: ${props => props.theme.borderRadius};
 	display: relative;
 	flex-direction: column;
 	align-items: left;
 	justify-content: left;
 	align-self: stretch;
-	border: 2px solid ${Theme.colors.leegaYellow};
+	border: 2px solid ${props => props.theme.equivalentColor};
 	overflow: hidden;
 `;
 
@@ -81,7 +80,7 @@ export const ColaboradorNome = styled.strong`
 	align-self: left;
 	align-items: left;
 	justify-content: left;
-	color: ${Theme.colors.leegaYellow};
+	color: ${props => props.theme.equivalentColor};
 	letter-spacing: 2.4px;
 `;
 
@@ -108,7 +107,7 @@ export const InformamosQueSuaSolicitacaoFoiEncam = styled.p`
 	font-size: 26px;
 	font-weight: 400;
 	line-height: 31px;
-	color: ${Theme.colors.leegaYellow};
+	color: ${props => props.theme.equivalentColor};
 	text-align: center;
 	margin-bottom: 10px;
 	letter-spacing: -0.26px;
@@ -177,7 +176,7 @@ export const AreaDeGente = styled.p`
 	font-size: 18px;
 	font-weight: 500;
 	line-height: 22px;
-	color: ${Theme.colors.leegaYellow};
+	color: ${props => props.theme.primaryColor};
 	text-align: center;
 	text-transform: uppercase;
 	margin-bottom: 20px;
@@ -189,7 +188,7 @@ export const GenteComBr = styled.p`
 	font-size: 18px;
 	font-weight: 500;
 	line-height: 22px;
-	color: ${Theme.colors.leegaYellow};
+	color: ${props => props.theme.primaryColor};
 	text-align: center;
 	text-transform: lowercase;
 	text-decoration: underline;
@@ -203,7 +202,7 @@ export const HttpWwwPortoseguroComBr = styled.p`
 	font-size: 24px;
 	font-weight: 400;
 	line-height: 29px;
-	color: rgba(0, 0, 0, 1);
+	color: ${props => props.theme.secondaryColor};
 	align-self: stretch;
 	text-align: center;
 	text-decoration: underline;

@@ -26,15 +26,16 @@ import {
 	VoceJaPodeSeCadastrarNoSite,
 } from './styles';
 
-const MailPresentation = ({ colaboradorNome, dataSolicita }) => {
+const MailPresentation = ({ colaboradorNome, dataSolicita, isLeega }) => {
 	const arrayName = colaboradorNome.split(' ');
 	const primeiroNome = arrayName[0];
 
 	return (
 		<Container>
 			<LogoFrame>
-				<StyledFMapLogo />
-				<StyledLeegaLogoSvg />
+				{isLeega === true ? <StyledFMapLogo /> : <StyledLeegaLogoSvg />}
+				{/* <StyledLeegaLogoSvg />
+				<StyledFMapLogo /> */}
 			</LogoFrame>
 			<EmailBody>
 				<CorpoEmail>
@@ -97,6 +98,7 @@ const MailPresentation = ({ colaboradorNome, dataSolicita }) => {
 const mapStateToProps = state => ({
 	colaboradorNome: state.mail.nameColab,
 	dataSolicita: state.mail.dataSolicita,
+	isLeega: state.mail.isLeega,
 });
 
 export default connect(mapStateToProps)(MailPresentation);

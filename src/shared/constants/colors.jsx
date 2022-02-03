@@ -2,7 +2,10 @@ export const Theme = {
 	colors: {
 		darkSlateGray: 'rgba(37,41,68,1)',
 		fMapBlue: 'rgba(21,64,100,1)',
+		fmapSecondary: '#8DC63F',
+		leegaBg: 'rgba(255,164,0,0.6)',
 		leegaYellow: 'rgba(255,164,0,1)',
+		leegaSecondary: '#000',
 		transparentBlack: 'rgba(0,0,0,0.25)',
 		transparentOliveDrab: 'rgba(96,147,54,0.75)',
 		transparentOliveDrab4: 'rgba(96,147,54,0.52)',

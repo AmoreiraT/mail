@@ -1,4 +1,10 @@
+import * as themes from '../../shared/themes';
+
 export const COLABORADOR = {
+	theme: themes.leegaTheme,
+	isLeega: false,
+	cnpj: false,
+	empresa: 'Leega',
 	nameColab: 'Thiago Moreira Faria',
 	email: '',
 	dataSolicita: '03/12/2021 15:41',
