@@ -5,3 +5,9 @@ export function tootgleTheme(isLeega, theme) {
 		theme,
 	};
 }
+export function setTitular(nameColab) {
+	return {
+		type: 'USER_SET',
+		nameColab,
+	};
+}

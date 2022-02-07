@@ -1,6 +1,7 @@
 /* eslint-disable react/destructuring-assignment */
 import {
 	Container,
+	FormGroup,
 	Stack,
 	Switch,
 	// TextField,
@@ -12,6 +13,7 @@ import { Box } from '@mui/system';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import React from 'react';
 import styled from '@emotion/styled';
+
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as MailAction from '../../../core/store/redux/actions/userset';
@@ -67,8 +69,52 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
 		borderRadius: 20 / 2,
 	},
 }));
+const AntSwitch = styled(Switch)(({ theme }) => ({
+	width: 28,
+	height: 16,
+	padding: 0,
+	display: 'flex',
+	'&:active': {
+		'& .MuiSwitch-thumb': {
+			width: 15,
+		},
+		'& .MuiSwitch-switchBase.Mui-checked': {
+			transform: 'translateX(9px)',
+		},
+	},
+	'& .MuiSwitch-switchBase': {
+		padding: 0,
+		'&.Mui-checked': {
+			transform: 'translateX(12px)',
+			color: '#ff7575',
+			'& + .MuiSwitch-track': {
+				opacity: 1,
+				backgroundColor: theme.palette.mode === 'dark' ? '#177ddc' : '#1890ff',
+			},
+		},
+	},
+	'& .MuiSwitch-thumb': {
+		boxShadow: '0 2px 4px 0 rgb(0 35 11 / 20%)',
+		width: 14,
+		height: 14,
+		borderRadius: 20,
+		backgroundColor: '#3441f3',
+		transition: theme.transitions.create(['width'], {
+			duration: 200,
+		}),
+	},
+	'& .MuiSwitch-track': {
+		borderRadius: 16 / 2,
+		opacity: 1,
+		backgroundColor:
+			theme.palette.mode === 'dark'
+				? 'rgba(255,255,255,.35)'
+				: 'rgba(0,0,0,.25)',
+		boxSizing: 'border-box',
+	},
+}));
 
-function Simulation({ isLeega, tootgleTheme, themeSet }) {
+function Simulation({ isLeega, tootgleTheme: toggleTheme, themeSet }) {
 	const theme = createTheme();
 	return (
 		<ThemeProvider theme={theme}>
@@ -83,43 +129,22 @@ function Simulation({ isLeega, tootgleTheme, themeSet }) {
 						alignItems: 'center',
 					}}
 				>
-					<Stack direction="row" spacing={1} alignItems="center">
-						<Typography>Leega</Typography>
-						<MaterialUISwitch
-							sx={{ m: 1 }}
-							onClick={() => tootgleTheme(isLeega, themeSet)}
-						/>
+					<FormGroup>
+						<Stack direction="row" spacing={1} alignItems="center">
+							<Typography>Leega</Typography>
+							<MaterialUISwitch
+								sx={{ m: 1 }}
+								onClick={() => toggleTheme(isLeega, themeSet)}
+							/>
 
-						<Typography>4MapIt</Typography>
-					</Stack>
-
-					{/* <Box component="form">
-						<TextField
-							margin="normal"
-							fullWidth
-							required
-							id="email"
-							label="Email"
-							name="email"
-							autoComplete="email"
-						/>
-						<TextField
-							margin="normal"
-							required
-							fullWidth
-							id="name"
-							label="Nome Completo"
-							name="name"
-						/>
-						<TextField
-							margin="normal"
-							required
-							fullWidth
-							id="cartao"
-							label="Número do Cartão"
-							name="numCartao"
-						/>
-					</Box> */}
+							<Typography>4MapIt</Typography>
+						</Stack>
+						<Stack direction="row" spacing={1} alignItems="center">
+							<Typography>cpf</Typography>
+							<AntSwitch />
+							<Typography>cnpj</Typography>
+						</Stack>
+					</FormGroup>
 				</Box>
 			</Container>
 		</ThemeProvider>

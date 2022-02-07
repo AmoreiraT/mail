@@ -1086,6 +1086,11 @@
     enabled "2.0.x"
     kuler "^2.0.0"
 
+"@emailjs/browser@^3.4.0":
+  version "3.4.0"
+  resolved "https://registry.yarnpkg.com/@emailjs/browser/-/browser-3.4.0.tgz#47e9bf7b52a45ec416a6c82b89876316e32053aa"
+  integrity sha512-pTR9wEj0KLrJBVWFfB6IFEwmGIod/6cfN541Y0TVN2+9Bbn+R9a8gq6GeJZ6ggbYs36J3gCTXDyVKhtxjRsjtw==
+
 "@emotion/babel-plugin@^11.3.0":
   version "11.7.2"
   resolved "https://registry.yarnpkg.com/@emotion/babel-plugin/-/babel-plugin-11.7.2.tgz#fec75f38a6ab5b304b0601c74e2a5e77c95e5fa0"
@@ -8790,6 +8795,16 @@ query-string@^6.13.8:
   version "6.14.1"
   resolved "https://registry.yarnpkg.com/query-string/-/query-string-6.14.1.tgz#7ac2dca46da7f309449ba0f86b1fd28255b0c86a"
   integrity sha512-XDxAeVmpfu1/6IjyT/gXHOl+S0vQ9owggJ30hhWKdHAsNPOcasn5o9BW0eejZqL2e4vMjhAxoW3jVHcD6mbcYw==
+  dependencies:
+    decode-uri-component "^0.2.0"
+    filter-obj "^1.1.0"
+    split-on-first "^1.0.0"
+    strict-uri-encode "^2.0.0"
+
+query-string@^7.1.1:
+  version "7.1.1"
+  resolved "https://registry.yarnpkg.com/query-string/-/query-string-7.1.1.tgz#754620669db978625a90f635f12617c271a088e1"
+  integrity sha512-MplouLRDHBZSG9z7fpuAAcI7aAYjDLhtsiVZsevsfaHWDS2IDdORKbSd1kWUA+V4zyva/HZoSfpwnYMMQDhb0w==
   dependencies:
     decode-uri-component "^0.2.0"
     filter-obj "^1.1.0"

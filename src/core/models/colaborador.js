@@ -5,7 +5,7 @@ export const COLABORADOR = {
 	isLeega: false,
 	cnpj: false,
 	empresa: 'Leega',
-	nameColab: 'Thiago Moreira Faria',
+	nameColab: 'Patricia Ferreira Silva',
 	email: '',
 	dataSolicita: '03/12/2021 15:41',
 	cartoes: [

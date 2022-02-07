@@ -12,6 +12,15 @@ export default function mail(state, action) {
 			theme: action.isLeega === true ? themes.leegaTheme : themes.fMapTheme,
 		};
 	}
+
+	if (action.type === 'USER_SET') {
+		console.log(action);
+
+		return {
+			...state,
+			nameColab: action.nameColab,
+		};
+	}
 	console.log(state);
 
 	return state;

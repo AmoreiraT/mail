@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import CardDepContainer from '../components/CardDepContainer';
-
 import NaoResponda from '../components/NaoResponda';
 import {
 	AreaDeGente,
@@ -25,8 +25,17 @@ import {
 	StyledFMapLogo,
 	VoceJaPodeSeCadastrarNoSite,
 } from './styles';
+import { login } from '../../../core/api/client';
+import * as MailAction from '../../../core/store/redux/actions/userset';
 
-const MailPresentation = ({ colaboradorNome, dataSolicita, isLeega }) => {
+const MailPresentation = ({
+	colaboradorNome,
+	dataSolicita,
+
+	isLeega,
+}) => {
+	login();
+
 	const arrayName = colaboradorNome.split(' ');
 	const primeiroNome = arrayName[0];
 
@@ -34,8 +43,6 @@ const MailPresentation = ({ colaboradorNome, dataSolicita, isLeega }) => {
 		<Container>
 			<LogoFrame>
 				{isLeega === true ? <StyledFMapLogo /> : <StyledLeegaLogoSvg />}
-				{/* <StyledLeegaLogoSvg />
-				<StyledFMapLogo /> */}
 			</LogoFrame>
 			<EmailBody>
 				<CorpoEmail>
@@ -101,4 +108,6 @@ const mapStateToProps = state => ({
 	isLeega: state.mail.isLeega,
 });
 
-export default connect(mapStateToProps)(MailPresentation);
+const mapDispatchToProps = dispatch => bindActionCreators(MailAction, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(MailPresentation);
