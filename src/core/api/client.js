@@ -55,9 +55,14 @@ const fetchEpm = token => {
 
 			if (responseJson.list.length > 0) {
 				console.log(responseJson.list[0].Titular);
+				console.log(responseJson.list[0].DATA_ADMISSAO);
 				responseJson.list[0].Empresa === 'LEEGA' ? true : false;
+				COLABORADOR.dataSolicita = responseJson.list[0].DATA_ADMISSAO;
 				COLABORADOR.nameColab = responseJson.list[0].Titular;
-				// MailAction.setTitular(responseJson.list[0].Titular);
+				COLABORADOR.empresa = responseJson.list[0].Empresa;
+				console.log(responseJson.list[0]);
+
+				// return responseJson.list[0];
 			}
 		});
 };

@@ -12,13 +12,21 @@ export default function mail(state, action) {
 			theme: action.isLeega === true ? themes.leegaTheme : themes.fMapTheme,
 		};
 	}
+	if (action.type === 'IS_CNPJ') {
+		console.log(action);
 
+		return {
+			...state,
+			cnpj: action.cnpj === true ? false : true,
+		};
+	}
 	if (action.type === 'USER_SET') {
 		console.log(action);
 
 		return {
 			...state,
 			nameColab: action.nameColab,
+			dataSolicita: action.dataSolicita,
 		};
 	}
 	console.log(state);

@@ -114,7 +114,7 @@ const AntSwitch = styled(Switch)(({ theme }) => ({
 	},
 }));
 
-function Simulation({ isLeega, tootgleTheme: toggleTheme, themeSet }) {
+function Simulation({ isLeega, toggleTheme, themeSet, isCnpj, cnpj, empresa }) {
 	const theme = createTheme();
 	return (
 		<ThemeProvider theme={theme}>
@@ -134,14 +134,14 @@ function Simulation({ isLeega, tootgleTheme: toggleTheme, themeSet }) {
 							<Typography>Leega</Typography>
 							<MaterialUISwitch
 								sx={{ m: 1 }}
-								onClick={() => toggleTheme(isLeega, themeSet)}
+								onClick={() => toggleTheme(isLeega, themeSet, empresa)}
 							/>
 
 							<Typography>4MapIt</Typography>
 						</Stack>
 						<Stack direction="row" spacing={1} alignItems="center">
 							<Typography>cpf</Typography>
-							<AntSwitch />
+							<AntSwitch onClick={() => isCnpj(cnpj)} />
 							<Typography>cnpj</Typography>
 						</Stack>
 					</FormGroup>
@@ -154,6 +154,8 @@ function Simulation({ isLeega, tootgleTheme: toggleTheme, themeSet }) {
 const mapStateToProps = state => ({
 	isLeega: state.mail.isLeega,
 	themeSet: state.mail.theme,
+	cnpj: state.mail.cnpj,
+	empresa: state.mail.empresa,
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators(MailAction, dispatch);

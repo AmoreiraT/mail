@@ -25,17 +25,19 @@ import {
 	StyledFMapLogo,
 	VoceJaPodeSeCadastrarNoSite,
 } from './styles';
-import { login } from '../../../core/api/client';
+import fetchEpm, { login } from '../../../core/api/client';
 import * as MailAction from '../../../core/store/redux/actions/userset';
 
 const MailPresentation = ({
 	colaboradorNome,
 	dataSolicita,
-
 	isLeega,
+	cnpj,
+	empresa,
 }) => {
 	login();
-
+	console.log(fetchEpm);
+	console.log(empresa);
 	const arrayName = colaboradorNome.split(' ');
 	const primeiroNome = arrayName[0];
 
@@ -48,7 +50,8 @@ const MailPresentation = ({
 				<CorpoEmail>
 					{/* Init */}
 					<PrezadoaSra>
-						Caro prestador.
+						{cnpj === true ? 'Caro(a) prestador(a)' : ' Prezado(a) Sr(a).'}
+
 						<ColaboradorNome>{primeiroNome}</ColaboradorNome>
 					</PrezadoaSra>
 					<SolicitacaoEnviadaContainer>
@@ -56,6 +59,17 @@ const MailPresentation = ({
 							<InformamosQueSuaSolicitacaoFoiEncam>
 								Informamos que sua solicitação foi encaminhada com sucesso.
 							</InformamosQueSuaSolicitacaoFoiEncam>
+							{/* {isLeega === false || cnpj === true ? (
+								'oi'
+							) : (
+								<VoceJaPodeSeCadastrarNoSite>
+									Você já pode se cadastrar no site da Porto Seguro e aguardar
+									72 horas para efetivação em sistema, <br />
+									em seguida baixe o App para ter acesso a sua carteirinha
+									digital e mais informações. <br /> Após a conclusão desta
+									etapa, você poderá utilizar seu plano em 12 horas.
+								</VoceJaPodeSeCadastrarNoSite>
+							)} */}
 							<VoceJaPodeSeCadastrarNoSite>
 								Você já pode se cadastrar no site da Porto Seguro e aguardar 72
 								horas para efetivação em sistema, <br />
@@ -69,7 +83,9 @@ const MailPresentation = ({
 					<FrameDadosLegais>
 						<ReferenteASolicitacaoDeIngresso>
 							<ReferenteAPula>Referente a: </ReferenteAPula>
-							Solicitação de ingresso de colaborador da empresa LEEGA
+							{cnpj === true
+								? 'Solicitação de ingresso de subestipulante'
+								: `Solicitação de ingresso de colaborador da empresa ${empresa}`}
 						</ReferenteASolicitacaoDeIngresso>
 						<ReferenteAoTitular>
 							<ReferenteAPula>Referente ao titular: </ReferenteAPula>
@@ -87,7 +103,7 @@ const MailPresentation = ({
 					{/* Maiores infos */}
 					<FrameDadosLegais>
 						<AreaDeGente>
-							Maiores informações procure à área de gentE
+							Maiores informações procure à área de gente
 						</AreaDeGente>
 						<GenteComBr>gente&#64;leega.com.br</GenteComBr>
 					</FrameDadosLegais>
@@ -106,6 +122,8 @@ const mapStateToProps = state => ({
 	colaboradorNome: state.mail.nameColab,
 	dataSolicita: state.mail.dataSolicita,
 	isLeega: state.mail.isLeega,
+	cnpj: state.mail.cnpj,
+	empresa: state.mail.empresa,
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators(MailAction, dispatch);

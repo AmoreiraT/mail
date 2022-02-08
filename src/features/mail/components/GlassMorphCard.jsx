@@ -15,11 +15,12 @@ export const GlassMorphismStyle = styled.div`
 	background-size: cover;
 	background-position: center;
 	background-image: url('https://static.overlay-tech.com/assets/9b92558e-7e4a-4613-b1df-2b6a3a544664.png');
-	background: 180deg rgba(83, 84, 87, 0.85) 0% rgba(116, 116, 116, 0.1) 100%
-		rgba(255, 255, 255, 1) 100%;
+	background: 180deg rgba(28, 27, 27, 0.85) 0% rgba(41, 41, 41, 0.1) 100%
+		#828181 100%;
 
 	overflow: hidden;
 	border-radius: 20px;
+	border: 2px solid rgba(63, 63, 63, 0.186);
 	padding: 2px 2px 2px 2px;
 	backdrop-filter: blur(50px);
 `;
@@ -86,11 +87,12 @@ export const IconMapHealth = styled.img`
 `;
 export const Unimedica = styled.p`
 	width: max-content;
-
-	font-family: 'Myriad Pro';
+	font-family: 'Myriad Pro', Myriad, 'Liberation Sans', 'Nimbus Sans L',
+		'Helvetica Neue', Helvetica, Arial, sans-serif;
 	font-size: 18px;
 	font-weight: 600;
 	line-height: normal;
+	font-style: italic;
 	color: #045d7e;
 	/* text-transform: uppercase; */
 	position: relative;
