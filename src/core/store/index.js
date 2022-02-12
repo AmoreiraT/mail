@@ -1,8 +1,17 @@
-import { createStore } from 'redux';
-import rootReducer from './redux/reducers';
+// import { applyMiddleware, createStore } from 'redux';
+// import thunk from 'redux-thunk';
 
-const store = createStore(rootReducer);
+import { configureStore } from '@reduxjs/toolkit';
+
+import mail from './redux/reducers/mail';
+
+// const store = createStore(rootReducer, applyMiddleware(thunk));
 
 // store.replaceReducer(rootReducer);
 
-export default store;
+// export default store;
+export default configureStore({
+	reducer: {
+		mail,
+	},
+});

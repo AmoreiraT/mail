@@ -35,6 +35,7 @@ export const CardLegalDivider = styled.div`
 `;
 
 const CardDepContainer = ({ cartoes, nomeColab }) => {
+	console.log(cartoes);
 	return (
 		<CardLegalContainer>
 			{cartoes.map(cartao => (

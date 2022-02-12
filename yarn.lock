@@ -1633,10 +1633,10 @@
   resolved "https://registry.yarnpkg.com/@popperjs/core/-/core-2.11.2.tgz#830beaec4b4091a9e9398ac50f865ddea52186b9"
   integrity sha512-92FRmppjjqz29VMJ2dn+xdyXZBrMlE42AV6Kq6BwjWV7CNUW1hs2FtxSNLQE+gJhaZ6AAmYuO9y8dshhcBl7vA==
 
-"@reduxjs/toolkit@^1.7.1":
-  version "1.7.1"
-  resolved "https://registry.yarnpkg.com/@reduxjs/toolkit/-/toolkit-1.7.1.tgz#994962aeb7df3c77be343dd2ad1aa48221dbaa0c"
-  integrity sha512-wXwXYjBVz/ItxB7SMzEAMmEE/FBiY1ze18N+VVVX7NtVbRUrdOGKhpQMHivIJfkbJvSdLUU923a/yAagJQzY0Q==
+"@reduxjs/toolkit@^1.7.2":
+  version "1.7.2"
+  resolved "https://registry.yarnpkg.com/@reduxjs/toolkit/-/toolkit-1.7.2.tgz#b428aaef92582379464f9de698dbb71957eafb02"
+  integrity sha512-wwr3//Ar8ZhM9bS58O+HCIaMlR4Y6SNHfuszz9hKnQuFIKvwaL3Kmjo6fpDKUOjo4Lv54Yi299ed8rofCJ/Vjw==
   dependencies:
     immer "^9.0.7"
     redux "^4.1.2"
@@ -2926,6 +2926,13 @@ axios@^0.21.4:
   integrity sha512-ut5vewkiu8jjGBdqpM44XxjuCjq9LAKeHVmoVfHVzy8eHgxxq8SbAVQNovDA8mVi05kP0Ea/n/UzcSHcTJQfNg==
   dependencies:
     follow-redirects "^1.14.0"
+
+axios@^0.25.0:
+  version "0.25.0"
+  resolved "https://registry.yarnpkg.com/axios/-/axios-0.25.0.tgz#349cfbb31331a9b4453190791760a8d35b093e0a"
+  integrity sha512-cD8FOb0tRH3uuEe6+evtAbgJtfxr7ly3fQjYcMcuPlgkwVS9xboaVIpcDV+cYQe+yGykgwZCs1pzjntcGa6l5g==
+  dependencies:
+    follow-redirects "^1.14.7"
 
 axobject-query@^2.2.0:
   version "2.2.0"
@@ -5291,6 +5298,11 @@ follow-redirects@^1.0.0, follow-redirects@^1.14.0:
   resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.14.7.tgz#2004c02eb9436eee9a21446a6477debf17e81685"
   integrity sha512-+hbxoLbFMbRKDwohX8GkTataGqO6Jb7jGwpAlwgy2bIz25XtRm7KEzJM76R1WiNT5SwZkX4Y75SwBolkpmE7iQ==
 
+follow-redirects@^1.14.7:
+  version "1.14.8"
+  resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.14.8.tgz#016996fb9a11a100566398b1c6839337d7bfa8fc"
+  integrity sha512-1x0S9UVJHsQprFcEC/qnNzBLcIxsjAV905f/UkQxbclCsoTWlacCNOpQa/anodLl2uaEKFhfWOvM2Qg77+15zA==
+
 foreground-child@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/foreground-child/-/foreground-child-2.0.0.tgz#71b32800c9f15aa8f2f83f4a6bd9bff35d861a53"
@@ -5846,7 +5858,7 @@ ignore@^5.1.8, ignore@^5.2.0:
   resolved "https://registry.yarnpkg.com/ignore/-/ignore-5.2.0.tgz#6d3bac8fa7fe0d45d9f9be7bac2fc279577e345a"
   integrity sha512-CmxgYGiEPCLhfLnpPp1MoRmifwEIOgjcHXxOBjv7mY96c+eWScsOP9c112ZyLdWHi0FxHjI+4uVhKYp/gcdRmQ==
 
-immer@^9.0.7:
+immer@^9.0.12, immer@^9.0.7:
   version "9.0.12"
   resolved "https://registry.yarnpkg.com/immer/-/immer-9.0.12.tgz#2d33ddf3ee1d247deab9d707ca472c8c942a0f20"
   integrity sha512-lk7UNmSbAukB5B6dh9fnh5D0bJTOFKxVg2cyJWTYrWRfhLrLMBquONcUs3aFq507hNoIZEDDh8lb8UtOizSMhA==

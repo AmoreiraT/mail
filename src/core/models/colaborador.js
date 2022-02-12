@@ -5,9 +5,9 @@ export const COLABORADOR = {
 	isLeega: false,
 	cnpj: false,
 	empresa: 'Leega',
-	nameColab: 'Patricia Ferreira Silva',
-	email: '',
-	dataSolicita: '03/12/2021 15:41',
+	nameColab: 'CARREGANDO SERVIÇO',
+	email: 'CARREGANDO SERVIÇO',
+	dataSolicita: 'CARREGANDO SERVIÇO',
 	cartoes: [
 		{
 			id: 1,

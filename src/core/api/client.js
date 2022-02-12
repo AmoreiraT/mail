@@ -2,11 +2,11 @@ import queryString from 'query-string';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { COLABORADOR } from '../models/colaborador';
+// import { COLABORADOR } from '../models/colaborador';
 import * as MailAction from '../store/redux/actions/userset';
 
-export const login = () => {
-	fetch('https://apps.blueprojects.com.br/arturos_mr/Security/login', {
+export const login = async () => {
+	await fetch('https://apps.blueprojects.com.br/arturos_mr/Security/login', {
 		method: 'POST',
 		headers: {
 			Accept: 'application/json',
@@ -28,9 +28,10 @@ export const login = () => {
 		});
 };
 
-const fetchEpm = token => {
+const fetchEpm = async token => {
 	const value = queryString.parse(window.location.search);
 	console.log(value.id);
+
 	const obj = {
 		qid: 'MINHAS_SOLICITACOES:MINHAS_SOLICITACOES',
 		conditions: [
@@ -40,7 +41,7 @@ const fetchEpm = token => {
 			},
 		],
 	};
-	fetch('https://apps.blueprojects.com.br/arturos_mr/Integration/Query', {
+	await fetch('https://apps.blueprojects.com.br/arturos_mr/Integration/Query', {
 		method: 'POST',
 		headers: {
 			Accept: 'application/json',
@@ -57,16 +58,20 @@ const fetchEpm = token => {
 				console.log(responseJson.list[0].Titular);
 				console.log(responseJson.list[0].DATA_ADMISSAO);
 				responseJson.list[0].Empresa === 'LEEGA' ? true : false;
-				COLABORADOR.dataSolicita = responseJson.list[0].DATA_ADMISSAO;
-				COLABORADOR.nameColab = responseJson.list[0].Titular;
-				COLABORADOR.empresa = responseJson.list[0].Empresa;
+				// COLABORADOR.dataSolicita = responseJson.list[0].DATA_ADMISSAO;
+				// COLABORADOR.nameColab = responseJson.list[0].Titular;
+				// COLABORADOR.empresa = responseJson.list[0].Empresa;
 				console.log(responseJson.list[0]);
 
-				// return responseJson.list[0];
+				return responseJson.list[0];
 			}
 		});
 };
 
 const mapDispatchToProps = dispatch => bindActionCreators(MailAction, dispatch);
 
-export default connect(mapDispatchToProps)(fetchEpm);
+const mapStateToProps = state => ({
+	colab: state.mail,
+});
+
+export default connect(mapDispatchToProps, mapStateToProps)(fetchEpm);

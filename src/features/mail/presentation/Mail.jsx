@@ -1,6 +1,6 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import React, { useEffect } from 'react';
+import { connect, useDispatch } from 'react-redux';
+// import { bindActionCreators } from 'redux';
 import CardDepContainer from '../components/CardDepContainer';
 import NaoResponda from '../components/NaoResponda';
 import {
@@ -25,8 +25,9 @@ import {
 	StyledFMapLogo,
 	VoceJaPodeSeCadastrarNoSite,
 } from './styles';
-import fetchEpm, { login } from '../../../core/api/client';
-import * as MailAction from '../../../core/store/redux/actions/userset';
+// import { login } from '../../../core/api/client';
+// import * as MailAction from '../../../core/store/redux/actions/userset';
+import { doLogin } from '../../../core/store/redux/fetchActions/index';
 
 const MailPresentation = ({
 	colaboradorNome,
@@ -35,9 +36,15 @@ const MailPresentation = ({
 	cnpj,
 	empresa,
 }) => {
-	login();
-	console.log(fetchEpm);
-	console.log(empresa);
+	// login();
+	// console.log(fetchEpm);
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+		dispatch(doLogin());
+	}, [dispatch]);
+
+	// console.log(empresa);
 	const arrayName = colaboradorNome.split(' ');
 	const primeiroNome = arrayName[0];
 
@@ -126,6 +133,6 @@ const mapStateToProps = state => ({
 	empresa: state.mail.empresa,
 });
 
-const mapDispatchToProps = dispatch => bindActionCreators(MailAction, dispatch);
+// const mapDispatchToProps = dispatch => bindActionCreators(MailAction, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(MailPresentation);
+export default connect(mapStateToProps)(MailPresentation);

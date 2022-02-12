@@ -85,6 +85,7 @@ export const JoseCarlosFerreira = styled.p`
 `;
 
 const LegalInfos = ({ cartao }) => {
+	console.log(cartao);
 	return (
 		<Frame3Seven>
 			<Frame3Five>
