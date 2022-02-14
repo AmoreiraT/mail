@@ -11,6 +11,8 @@ export const CartaoNoCentro = styled.div`
 export const GlassMorphismStyle = styled.div`
 	position: relative;
 	width: max-content;
+	min-width: 280px;
+	min-height: 173px;
 	height: fit-content;
 	background-size: cover;
 	background-position: center;
@@ -23,10 +25,13 @@ export const GlassMorphismStyle = styled.div`
 	border: 2px solid rgba(63, 63, 63, 0.186);
 	padding: 2px 2px 2px 2px;
 	backdrop-filter: blur(50px);
+	filter: drop-shadow(0 1mm 2mm rgba(119, 137, 157, 0.549));
 `;
 export const Frame1 = styled.div`
 	position: relative;
 	width: max-content;
+	min-width: 280px;
+	min-height: 173px;
 	background-size: cover;
 	background-position: center;
 	background-image: url('https://static.overlay-tech.com/assets/a132ce96-6a0e-4222-b26a-31d846c762d4.png');
@@ -37,12 +42,14 @@ export const Frame6 = styled.div`
 	flex: 1;
 	padding: 20px 4px 4px 4px;
 	display: flex;
+	align-items: stretch;
 `;
 export const Frame5 = styled.div`
 	position: relative;
-	padding: 4px 0px 0px 0px;
+	padding: 30px 0px 0px 0px;
 	align-items: left;
 	justify-content: left;
+	align-self: stretch;
 `;
 export const VerivanMagalhaesFerreira = styled.p`
 	font-family: 'Cousine';
@@ -77,6 +84,7 @@ export const Frame4 = styled.div`
 `;
 export const IconMapHealth = styled.img`
 	position: flex;
+	filter: drop-shadow(0 1mm 2mm rgb(235, 235, 235));
 
 	width: max-content;
 	flex: 1;
@@ -94,6 +102,8 @@ export const Unimedica = styled.p`
 	line-height: normal;
 	font-style: italic;
 	color: #045d7e;
+	filter: drop-shadow(0 1mm 2mm rgb(235, 235, 235));
+
 	/* text-transform: uppercase; */
 	position: relative;
 	margin-top: 10px;

@@ -17,11 +17,17 @@ export default createReducer(COLABORADOR, {
 		...state,
 		cnpj: action.cnpj === true ? false : true,
 	}),
-	[userSet.type]: (state, action) => ({
-		...state,
-		nameColab: action.payload.Titular,
-		dataSolicita: action.payload.DATA_ADMISSAO,
-	}),
+	[userSet.type]: (state, action) => {
+		const cartao = state.cartoes.map((card, i) =>
+			i === 0 ? { ...card, cardNum: action.payload.NRO_CARTEIRA } : card,
+		);
+		return {
+			...state,
+			nameColab: action.payload.Titular,
+			dataSolicita: action.payload.DATA_ADMISSAO,
+			cartoes: cartao,
+		};
+	},
 	[depSet.type]: (state, action) => {
 		const cartao = state.cartoes.map((card, i) =>
 			i === 0 ? { ...card, dependentes: [action.payload] } : card,
