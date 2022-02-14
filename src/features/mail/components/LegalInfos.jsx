@@ -50,8 +50,8 @@ export const Frame4Two = styled.div`
 	position: relative;
 	padding: 0 0 2px;
 	display: relative;
-	align-items: flex-start;
-	align-self: stretch;
+	align-items: center;
+	align-self: center;
 `;
 export const Dependentes = styled.p`
 	width: 100%;
@@ -61,21 +61,24 @@ export const Dependentes = styled.p`
 	font-weight: 300;
 	line-height: 17px;
 	color: rgba(0, 0, 0, 1);
-	text-align: center;
+	text-align: left;
 	margin-right: 10px;
 	letter-spacing: -0.14px;
 `;
 export const Frame3Six = styled.div`
 	display: flex;
 	flex-direction: column;
-	align-items: flex-start;
+	align-items: center;
 	flex: 1;
 `;
 export const JoseCarlosFerreira = styled.p`
 	width: 100%;
+	position: relative;
 	font-family: 'Roboto';
 	font-size: 14px;
-	font-weight: 700;
+	text-align: center;
+
+	font-weight: 500;
 	line-height: 17px;
 	color: ${Theme.colors.darkSlateGray};
 	letter-spacing: -0.14px;
@@ -86,6 +89,8 @@ export const JoseCarlosFerreira = styled.p`
 
 const LegalInfos = ({ cartao }) => {
 	console.log(cartao);
+	console.log(cartao.dependentes.NOME_DEPENDENTE);
+
 	return (
 		<Frame3Seven>
 			<Frame3Five>
@@ -94,22 +99,53 @@ const LegalInfos = ({ cartao }) => {
 					{cartao.cardNum}
 				</Num35966120211203023536Two>
 			</Frame3Five>
-			<Frame4Two>
-				<Dependentes>Dependentes:</Dependentes>
-				<Frame3Six>
-					{cartao.dependentes.map(dependente => (
-						<Frame3Five key={dependente.id}>
-							<JoseCarlosFerreira>{dependente.name}</JoseCarlosFerreira>
+			{cartao.dependentes.length > 0 ? (
+				<Frame4Two>
+					<Dependentes>Dependentes:</Dependentes>
+					<Frame3Six>
+						{cartao.dependentes.map(dependente => (
+							<Frame3Five key={dependente.ID}>
+								<JoseCarlosFerreira>
+									{dependente.NOME_DEPENDENTE}
+								</JoseCarlosFerreira>
 
-							<Num35966120211203023536Two>
-								{dependente.cardNum}
-							</Num35966120211203023536Two>
-						</Frame3Five>
-					))}
-				</Frame3Six>
-			</Frame4Two>
+								<Num35966120211203023536Two>
+									{dependente.NRO_SEGURO}
+								</Num35966120211203023536Two>
+							</Frame3Five>
+						))}
+					</Frame3Six>
+				</Frame4Two>
+			) : (
+				<> </>
+			)}
 		</Frame3Seven>
 	);
 };
 
 export default LegalInfos;
+
+// {
+// 	/* <Frame3Five>
+//     <JoseCarlosFerreira>
+//         {cartao.dependentes.NOME_DEPENDENTE}
+//     </JoseCarlosFerreira>
+
+//     <Num35966120211203023536Two>
+//         {cartao.dependentes.NRO_SEGURO}
+//     </Num35966120211203023536Two>
+// </Frame3Five> */
+// }
+// {
+// 	/* {cartao.dependentes.map(dependente => (
+//     <Frame3Five key={dependente.ID}>
+//         <JoseCarlosFerreira>
+//             {dependente.NOME_DEPENDENTE}
+//         </JoseCarlosFerreira>
+
+//         <Num35966120211203023536Two>
+//             {dependente.NRO_SEGURO}
+//         </Num35966120211203023536Two>
+//     </Frame3Five>
+// ))} */
+// }

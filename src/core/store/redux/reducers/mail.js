@@ -23,26 +23,19 @@ export default createReducer(COLABORADOR, {
 		dataSolicita: action.payload.DATA_ADMISSAO,
 	}),
 	[depSet.type]: (state, action) => {
-		const variavelArray = state.cartoes[0].dependentes;
-		variavelArray.push({ name: action.payload.NOME_DEPENDENTE });
-		console.log(variavelArray);
+		const cartao = state.cartoes.map((card, i) =>
+			i === 0 ? { ...card, dependentes: [action.payload] } : card,
+		);
+		cartao.map((card, i) =>
+			i === 1 ? { ...card, dependentes: [action.payload] } : card,
+		);
 
+		console.log(cartao);
+		console.log(state.cartoes);
 		console.log(action.payload.NOME_DEPENDENTE);
 		return {
 			...state,
-			// dependentes: action.payload.NOME_DEPENDENTE,
+			cartoes: cartao,
 		};
 	},
-
-	//     => ({
-	// 	...state,
-	// 	dependentes: action.payload,
-
-	// 	// cartoes: {
-	// 	// 	...state.cartoes[0],
-	// 	// 	dependentes: {
-	// 	// 		...action.payload,
-	// 	// 	},
-	// 	// },
-	// }),
 });
