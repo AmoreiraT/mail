@@ -46,9 +46,6 @@ export default createReducer(COLABORADOR, {
 			i === 1 ? { ...card, dependentes: [action.payload] } : card,
 		);
 
-		// console.log(cartao);
-		// console.log(state.cartoes);
-		// console.log(action.payload.NOME_DEPENDENTE);
 		return {
 			...state,
 			cartoes: cartao,

@@ -13,8 +13,8 @@ export const login = async () => {
 			'Content-Type': 'application/json',
 		},
 		body: JSON.stringify({
-			username: 'leega_admin',
-			password: 'leega@mr',
+			username: 'andre',
+			password: 'andre',
 		}),
 	})
 		.then(response => response.json())
