@@ -43,7 +43,6 @@ const CardDepContainer = ({ cartoes, nomeColab }) => {
 						name={nomeColab}
 						num={cartao.cardNum}
 						nomePlano={cartao.nomePlano}
-						iconCard={cartao.icon}
 					/>
 					<LegalInfos cartao={cartao} />
 				</CardLegalDivider>

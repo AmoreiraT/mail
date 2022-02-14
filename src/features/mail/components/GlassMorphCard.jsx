@@ -113,7 +113,7 @@ export const Unimedica = styled.p`
 	top: 1px;
 `;
 
-export default function GlassMorphCard({ name, num, nomePlano, iconCard }) {
+export default function GlassMorphCard({ name, num, nomePlano }) {
 	return (
 		<GlassMorphismStyle>
 			<Frame1>
@@ -123,7 +123,10 @@ export default function GlassMorphCard({ name, num, nomePlano, iconCard }) {
 						<VerivanMagalhaesFerreira>{name}</VerivanMagalhaesFerreira>
 					</Frame5>
 					<Frame4>
-						<IconMapHealth alt="" src={iconCard} />
+						<IconMapHealth
+							alt=""
+							src="https://static.overlay-tech.com/assets/a2445a6e-0ea9-49f4-ac5d-36e50c62108f.png"
+						/>
 						<Unimedica>{nomePlano}</Unimedica>
 					</Frame4>
 				</Frame6>

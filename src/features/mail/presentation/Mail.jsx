@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { connect, useDispatch } from 'react-redux';
+import CssBaseline from '@mui/material/CssBaseline';
 import CardDepContainer from '../components/CardDepContainer';
 import NaoResponda from '../components/NaoResponda';
 import {
@@ -34,8 +35,6 @@ const MailPresentation = ({
 	cnpj,
 	empresa,
 }) => {
-	// login();
-	// console.log(fetchEpm);
 	const dispatch = useDispatch();
 
 	useEffect(() => {
@@ -43,14 +42,14 @@ const MailPresentation = ({
 	}, [dispatch]);
 
 	const formatData = dataSolicita.replace('T', ' às ').replaceAll('-', '/');
-	// formatData = formatData.replace('-', '/');
-	console.log(formatData);
 
 	const arrayName = colaboradorNome.split(' ');
 	const primeiroNome = arrayName[0];
 
 	return (
 		<Container>
+			<CssBaseline />
+
 			<LogoFrame>
 				{isLeega === false ? <StyledFMapLogo /> : <StyledLeegaLogoSvg />}
 			</LogoFrame>
@@ -133,7 +132,5 @@ const mapStateToProps = state => ({
 	cnpj: state.mail.cnpj,
 	empresa: state.mail.empresa,
 });
-
-// const mapDispatchToProps = dispatch => bindActionCreators(MailAction, dispatch);
 
 export default connect(mapStateToProps)(MailPresentation);
