@@ -1,6 +1,6 @@
 import queryString from 'query-string';
 // import api from '../../../services/api';
-import { depSet, userSet } from '../reducers/mail';
+import { depSet, userSet, toogleTheme, isCNPJ } from '../reducers/mail';
 
 export const doLogin = () => {
 	return async dispatch => {
@@ -66,6 +66,8 @@ export const fetchMR = token => {
 					// const nameColab = responseJson.list[0].DATA_ADMISSAO.payload;
 					// console.log(dataSolicita);
 					dispatch(userSet(titular));
+					dispatch(toogleTheme(titular));
+					dispatch(isCNPJ(titular));
 				}
 			});
 	};

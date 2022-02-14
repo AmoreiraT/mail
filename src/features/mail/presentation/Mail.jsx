@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { connect, useDispatch } from 'react-redux';
-// import { bindActionCreators } from 'redux';
 import CardDepContainer from '../components/CardDepContainer';
 import NaoResponda from '../components/NaoResponda';
 import {
@@ -25,8 +24,7 @@ import {
 	StyledFMapLogo,
 	VoceJaPodeSeCadastrarNoSite,
 } from './styles';
-// import { login } from '../../../core/api/client';
-// import * as MailAction from '../../../core/store/redux/actions/userset';
+
 import { doLogin } from '../../../core/store/redux/fetchActions/index';
 
 const MailPresentation = ({
@@ -44,14 +42,17 @@ const MailPresentation = ({
 		dispatch(doLogin());
 	}, [dispatch]);
 
-	// console.log(empresa);
+	const formatData = dataSolicita.replace('T', ' às ').replaceAll('-', '/');
+	// formatData = formatData.replace('-', '/');
+	console.log(formatData);
+
 	const arrayName = colaboradorNome.split(' ');
 	const primeiroNome = arrayName[0];
 
 	return (
 		<Container>
 			<LogoFrame>
-				{isLeega === true ? <StyledFMapLogo /> : <StyledLeegaLogoSvg />}
+				{isLeega === false ? <StyledFMapLogo /> : <StyledLeegaLogoSvg />}
 			</LogoFrame>
 			<EmailBody>
 				<CorpoEmail>
@@ -100,7 +101,7 @@ const MailPresentation = ({
 						</ReferenteAoTitular>
 						<ReferenteASolicitacaoDeIngresso>
 							<ReferenteAPula> Data da solicitação: </ReferenteAPula>
-							{dataSolicita}
+							{formatData}
 						</ReferenteASolicitacaoDeIngresso>
 					</FrameDadosLegais>
 					{/* Cartao e Dependentes  */}

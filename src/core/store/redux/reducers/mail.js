@@ -8,15 +8,25 @@ export const userSet = createAction('USER_SET');
 export const depSet = createAction('DEP_SET');
 
 export default createReducer(COLABORADOR, {
-	[toogleTheme.type]: (state, action) => ({
-		...state,
-		isLeega: action.isLeega === true ? false : true,
-		theme: action.isLeega === true ? themes.leegaTheme : themes.fMapTheme,
-	}),
-	[isCNPJ.type]: (state, action) => ({
-		...state,
-		cnpj: action.cnpj === true ? false : true,
-	}),
+	[toogleTheme.type]: (state, action) => {
+		const empresaNome = action.payload.Empresa;
+		const empresa = empresaNome === 'LEEGA' ? true : false;
+
+		return {
+			...state,
+			isLeega: empresa,
+			theme: empresa === true ? themes.leegaTheme : themes.fMapTheme,
+		};
+	},
+	[isCNPJ.type]: (state, action) => {
+		const regimeName = action.payload.REGIME;
+		const regime = regimeName === 'CLT' ? false : true;
+		console.log(regimeName);
+		return {
+			...state,
+			cnpj: regime,
+		};
+	},
 	[userSet.type]: (state, action) => {
 		const cartao = state.cartoes.map((card, i) =>
 			i === 0 ? { ...card, cardNum: action.payload.NRO_CARTEIRA } : card,
@@ -36,9 +46,9 @@ export default createReducer(COLABORADOR, {
 			i === 1 ? { ...card, dependentes: [action.payload] } : card,
 		);
 
-		console.log(cartao);
-		console.log(state.cartoes);
-		console.log(action.payload.NOME_DEPENDENTE);
+		// console.log(cartao);
+		// console.log(state.cartoes);
+		// console.log(action.payload.NOME_DEPENDENTE);
 		return {
 			...state,
 			cartoes: cartao,
