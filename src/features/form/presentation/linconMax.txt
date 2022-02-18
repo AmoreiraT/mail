@@ -1,0 +1,2995 @@
+/* eslint-disable class-methods-use-this */
+/* eslint-disable no-dupe-keys */
+/* eslint-disable no-empty */
+/* eslint-disable no-useless-constructor */
+/* eslint-disable react/no-unused-state */
+/* eslint-disable react/state-in-constructor */
+/* eslint-disable react/sort-comp */
+/* eslint-disable react/no-unused-class-component-methods */
+/* eslint-disable radix */
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable jsx-a11y/alt-text */
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/jsx-no-duplicate-props */
+/* eslint-disable eqeqeq */
+/* eslint-disable react/destructuring-assignment */
+
+import Avatar from '@mui/material/Avatar';
+import Button from '@mui/material/Button';
+import CssBaseline from '@mui/material/CssBaseline';
+import TextField from '@mui/material/TextField';
+import Checkbox from '@mui/material/Checkbox';
+import Link from '@mui/material/Link';
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
+import React from 'react';
+import Paper from '@mui/material/Paper';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import DatePicker from '@mui/lab/DatePicker';
+// import DatePicker from '@material-ui/lab/DatePicker';
+import DateFnsUtils from '@date-io/date-fns'; // choose your lib
+import {
+	// DatePicker,
+	TimePicker,
+	DateTimePicker,
+	MuiPickersUtilsProvider,
+} from '@material-ui/pickers';
+import LocalizationProvider from '@mui/lab/LocalizationProvider';
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
+
+import FormGroup from '@mui/material/FormGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Switch from '@mui/material/Switch';
+import Modal from '@mui/material/Modal';
+import Stepper from '@mui/material/Stepper';
+import Step from '@mui/material/Step';
+import StepLabel from '@mui/material/StepLabel';
+import LoadingButton from '@mui/lab/LoadingButton';
+import SaveIcon from '@material-ui/icons/Save';
+import Description from '@material-ui/icons/Description';
+
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
+
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+
+import queryString from 'query-string';
+
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemAvatar from '@mui/material/ListItemAvatar';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+
+import CircularProgress from '@mui/material/CircularProgress';
+import AddCircleIcon from '@material-ui/icons/AddCircle';
+import IconButton from '@mui/material/IconButton';
+import HelpIcon from '@material-ui/icons/Help';
+// import AppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
+
+import NumberFormat from 'react-number-format';
+
+import moment from 'moment';
+
+const Alert = React.forwardRef(function Alert(props, ref) {
+	return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
+
+const NumberFormatCustom = React.forwardRef(function NumberFormatCustom(
+	props,
+	ref,
+) {
+	const { onChange, ...other } = props;
+
+	return (
+		<NumberFormat
+			{...other}
+			getInputRef={ref}
+			onValueChange={values => {
+				onChange({
+					target: {
+						name: props.name,
+						value: values.value,
+					},
+				});
+			}}
+			decimalSeparator=","
+			allowNegative={false}
+			decimalScale={2}
+			thousandSeparator={false}
+			isNumericString
+		/>
+	);
+});
+
+export default class Titular extends React.Component {
+	constructor(props) {
+		super(props);
+	}
+
+	state = {
+		token: '',
+		selectedSexo: '',
+		domainSexo: [],
+		selectedEstadoCivil: '',
+		domainEstadoCivil: [],
+		selectedOperadora: null,
+		domainOperadora: [],
+		selectedDataNascimento: null,
+		selectedTemPlanoSaude: '',
+		selectedTemOdonto: '',
+		domainPlanos: [],
+		domainPlanosOdonto: [],
+		tipoDependente: [],
+		selectedTipoDependente: '',
+		selectedPlano: null,
+		loading: false,
+		url_imagem: '',
+		selectedOperadoraOutroBeneificio: null,
+		selectedBeneficio: null,
+		cargo: '',
+		aceitoPagar: 101,
+		regime: '',
+		steps: ['Dados do Titular', 'Dependentes', 'Concluído'],
+		nome: '',
+		email: '',
+		whatsapp: '',
+		cpf: '',
+		rg: '',
+		email: '',
+		dataNascimento: null,
+		idade: '',
+		nomeMae: '',
+		dataAdmissao: null,
+		peso: '',
+		altura: '',
+		cep: '',
+		endereco: '',
+		bairro: '',
+		cidade: '',
+		erroMessage: '',
+
+		resposta_1: 101,
+		pergunta_1: '',
+		esclarecimento_1: '',
+		resposta_2: 101,
+		pergunta_2: '',
+		esclarecimento_2: '',
+		resposta_3: 101,
+		pergunta_3: '',
+		esclarecimento_3: '',
+		resposta_4: 101,
+		pergunta_4: '',
+		esclarecimento_4: '',
+		resposta_5: 101,
+		pergunta_5: '',
+		esclarecimento_5: '',
+		resposta_6: 101,
+		pergunta_6: '',
+		esclarecimento_6: '',
+		resposta_7: 101,
+		pergunta_7: '',
+		esclarecimento_7: '',
+		resposta_8: 101,
+		pergunta_8: '',
+		esclarecimento_8: '',
+		resposta_9: 101,
+		pergunta_9: '',
+		esclarecimento_9: '',
+		pdfPlano: null,
+
+		solicitacao_empresa: '',
+		id_solicitacao: 0,
+		showSuccess: false,
+		showError: false,
+
+		selectedStep: 0,
+		openModal: false,
+
+		outroBeneficio: 101,
+		domainBeneficios: [],
+		termoAceito: 101,
+		seguroVida: 101,
+
+		dependente_cpf: '',
+		dependente_rg: '',
+		dependente_nome: '',
+		dependente_nome_mae: '',
+		dependente_peso: '',
+		dependente_altura: '',
+
+		loadingInicial: true,
+
+		arrayDependentes: [],
+		concluido: false,
+
+		mensagemOdonto: '',
+		valorAdicionalOdonto: '',
+		termoAceiteOdonto: 101,
+	};
+
+	componentDidMount() {
+		this.loginGuest();
+	}
+
+	loginGuest() {
+		fetch('https://apps.blueprojects.com.br/arturos_mr/Security/login', {
+			method: 'POST',
+			headers: {
+				Accept: 'application/json',
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				username: 'leega_admin',
+				password: 'leega@mr',
+			}),
+		})
+			.then(response => response.json())
+			.then(responseJson => {
+				console.log(responseJson);
+
+				// var token;
+
+				const token = responseJson.data.auth_ticket;
+				this.getDomains(token);
+			});
+	}
+
+	getDomains(token) {
+		const value = queryString.parse(window.location.search);
+		console.log(value.id);
+
+		this.getSolicitacoes(token, value.id);
+		this.setState({ token });
+		this.getSexo(token);
+		this.getEstadoCivil(token);
+
+		this.getTipoDependente(token);
+		this.getTermos(token);
+	}
+
+	getSimNao(token) {}
+
+	getOperadora(token, fk_empresa) {
+		try {
+			const obj = {
+				qid: 'DOMINIOS:OPERADORA',
+				conditions: [
+					{
+						filterid: 'EMPRESA',
+						values: [fk_empresa],
+					},
+				],
+			};
+
+			fetch('https://apps.blueprojects.com.br/arturos_mr/Integration/Query', {
+				method: 'POST',
+				headers: {
+					Accept: 'application/json',
+					'Content-Type': 'application/json',
+					auth: token,
+				},
+				body: JSON.stringify(obj),
+			})
+				.then(response => response.json())
+				.then(responseJson => {
+					console.log(responseJson);
+
+					this.setState({ domainOperadora: responseJson.list });
+				});
+		} catch (err) {}
+	}
+
+	getPDFPlano(token, id_plano) {
+		try {
+			this.setState({ pdfPlano: null });
+
+			const obj = {
+				qid: 'DOMINIOS:PDF_PLANO',
+				conditions: [
+					{
+						filterid: 'ID',
+						values: [id_plano],
+					},
+				],
+			};
+
+			fetch('https://apps.blueprojects.com.br/arturos_mr/Integration/Query', {
+				method: 'POST',
+				headers: {
+					Accept: 'application/json',
+					'Content-Type': 'application/json',
+					auth: token,
+				},
+				body: JSON.stringify(obj),
+			})
+				.then(response => response.json())
+				.then(responseJson => {
+					console.log(responseJson);
+
+					if (responseJson.list.length > 0) {
+						this.setState({ pdfPlano: responseJson.list[0].FILENAME });
+					}
+				});
+		} catch (err) {}
+	}
+
+	getTipoDependente(token) {
+		try {
+			const obj = {
+				qid: 'DOMINIOS:TIPO_DEPENDENTE',
+				conditions: [],
+			};
+
+			fetch('https://apps.blueprojects.com.br/arturos_mr/Integration/Query', {
+				method: 'POST',
+				headers: {
+					Accept: 'application/json',
+					'Content-Type': 'application/json',
+					auth: token,
+				},
+				body: JSON.stringify(obj),
+			})
+				.then(response => response.json())
+				.then(responseJson => {
+					console.log(responseJson);
+
+					this.setState({ tipoDependente: responseJson.list });
+				});
+		} catch (err) {}
+	}
+
+	getPlanoOdonto(operadora, token) {
+		try {
+			const obj = {
+				qid: 'DOMINIOS:PLANO_ODONTO',
+				conditions: [
+					{
+						filterid: 'FK_OPERADORA',
+						values: [operadora],
+					},
+				],
+			};
+
+			fetch('https://apps.blueprojects.com.br/arturos_mr/Integration/Query', {
+				method: 'POST',
+				headers: {
+					Accept: 'application/json',
+					'Content-Type': 'application/json',
+					auth: token,
+				},
+				body: JSON.stringify(obj),
+			})
+				.then(response => response.json())
+				.then(responseJson => {
+					console.log(responseJson);
+
+					this.setState({ domainPlanosOdonto: responseJson.list });
+				});
+		} catch (err) {}
+	}
+
+	getPlano(operadora, fk_cargo, token) {
+		try {
+			const { idade } = this.state;
+
+			if (idade == null || idade == '') {
+				Alert('Preencha o campo idade');
+			}
+
+			const obj = {
+				qid: 'DOMINIOS:PLANOS',
+				conditions: [
+					{
+						filterid: 'FK_OPERADORA',
+						values: [operadora],
+					},
+					{
+						filterid: 'FK_CARGO',
+						values: [this.state.fk_cargo],
+					},
+					{
+						filterid: 'IDADE_INICIO',
+						values: [idade],
+						operation: 3,
+					},
+					{
+						filterid: 'IDADE_FIM',
+						values: [idade],
+						operation: 5,
+					},
+				],
+			};
+
+			fetch('https://apps.blueprojects.com.br/arturos_mr/Integration/Query', {
+				method: 'POST',
+				headers: {
+					Accept: 'application/json',
+					'Content-Type': 'application/json',
+					auth: token,
+				},
+				body: JSON.stringify(obj),
+			})
+				.then(response => response.json())
+				.then(responseJson => {
+					console.log(responseJson);
+
+					this.setState({ domainPlanos: responseJson.list });
+				});
+		} catch (err) {}
+	}
+
+	getBeneficio(operadora, token) {
+		try {
+			const obj = {
+				qid: 'DOMINIOS:BENEFICIO',
+				conditions: [
+					{
+						filterid: 'FK_OPERADORA',
+						values: [operadora],
+					},
+				],
+			};
+
+			fetch('https://apps.blueprojects.com.br/arturos_mr/Integration/Query', {
+				method: 'POST',
+				headers: {
+					Accept: 'application/json',
+					'Content-Type': 'application/json',
+					auth: token,
+				},
+				body: JSON.stringify(obj),
+			})
+				.then(response => response.json())
+				.then(responseJson => {
+					console.log(responseJson);
+
+					this.setState({ domainBeneficios: responseJson.list });
+				});
+		} catch (err) {}
+	}
+
+	getSexo(token) {
+		try {
+			const obj = {
+				qid: 'DOMINIOS:SEXO',
+				conditions: [],
+			};
+
+			fetch('https://apps.blueprojects.com.br/arturos_mr/Integration/Query', {
+				method: 'POST',
+				headers: {
+					Accept: 'application/json',
+					'Content-Type': 'application/json',
+					auth: token,
+				},
+				body: JSON.stringify(obj),
+			})
+				.then(response => response.json())
+				.then(responseJson => {
+					console.log(responseJson);
+
+					this.setState({ domainSexo: responseJson.list });
+				});
+		} catch (err) {}
+	}
+
+	getTermos(token) {
+		try {
+			const obj = {
+				qid: 'LGPD:LGPD',
+				conditions: [],
+			};
+
+			fetch('https://apps.blueprojects.com.br/arturos_mr/Integration/Query', {
+				method: 'POST',
+				headers: {
+					Accept: 'application/json',
+					'Content-Type': 'application/json',
+					auth: token,
+				},
+				body: JSON.stringify(obj),
+			})
+				.then(response => response.json())
+				.then(responseJson => {
+					console.log(responseJson);
+
+					if (!responseJson.error) {
+						if (responseJson.list.length > 0) {
+							this.setState({ urlPDF: responseJson.list[0].Arquivo });
+						}
+					}
+				});
+		} catch (err) {}
+	}
+
+	getEstadoCivil(token) {
+		try {
+			const obj = {
+				qid: 'DOMINIOS:ESTADO_CIVIL',
+				conditions: [],
+			};
+
+			fetch('https://apps.blueprojects.com.br/arturos_mr/Integration/Query', {
+				method: 'POST',
+				headers: {
+					Accept: 'application/json',
+					'Content-Type': 'application/json',
+					auth: token,
+				},
+				body: JSON.stringify(obj),
+			})
+				.then(response => response.json())
+				.then(responseJson => {
+					console.log(responseJson);
+
+					this.setState({ domainEstadoCivil: responseJson.list });
+				});
+		} catch (err) {}
+	}
+
+	getCEP(token, cep) {
+		try {
+			const obj = {
+				qid: 'DOMINIOS:CEP',
+				conditions: [
+					{
+						filterid: 'CEP',
+						values: [cep],
+					},
+				],
+			};
+
+			fetch('https://apps.blueprojects.com.br/arturos_mr/Integration/Query', {
+				method: 'POST',
+				headers: {
+					Accept: 'application/json',
+					'Content-Type': 'application/json',
+					auth: token,
+				},
+				body: JSON.stringify(obj),
+			})
+				.then(response => response.json())
+				.then(responseJson => {
+					console.log(responseJson);
+
+					if (!responseJson.error) {
+						if (responseJson.list.length > 0) {
+							this.setState({
+								endereco: responseJson.list[0].ENDERECO,
+								bairro: responseJson.list[0].BAIRRO,
+								cidade: responseJson.list[0].CIDADE,
+							});
+						}
+					}
+				});
+		} catch (err) {}
+	}
+
+	getSolicitacoes(token, ID) {
+		try {
+			const obj = {
+				qid: 'MINHAS_SOLICITACOES:MINHAS_SOLICITACOES',
+				conditions: [
+					{
+						filterid: 'HASH',
+						values: [ID],
+					},
+				],
+			};
+
+			fetch('https://apps.blueprojects.com.br/arturos_mr/Integration/Query', {
+				method: 'POST',
+				headers: {
+					Accept: 'application/json',
+					'Content-Type': 'application/json',
+					auth: token,
+				},
+				body: JSON.stringify(obj),
+			})
+				.then(response => response.json())
+				.then(responseJson => {
+					console.log(responseJson);
+
+					if (responseJson.list.length > 0) {
+						this.getOperadora(token, responseJson.list[0].FK_EMPRESA);
+
+						this.setState({
+							loadingInicial: false,
+							email: responseJson.list[0].EMail,
+							whatsapp: responseJson.list[0].WhatsApp,
+							solicitacao_empresa: responseJson.list[0].Empresa,
+							nome: responseJson.list[0].Titular,
+							id_solicitacao: responseJson.list[0].ID,
+							cpf: responseJson.list[0].CPF,
+							url_imagem: responseJson.list[0].Arquivo,
+							cargo: responseJson.list[0].CARGO,
+							dataAdmissao:
+								responseJson.list[0].DATA_ADMISSAO != null
+									? responseJson.list[0].DATA_ADMISSAO
+									: null,
+							regime: responseJson.list[0].REGIME,
+							fk_cargo: responseJson.list[0].ID_CARGO,
+						});
+					}
+				});
+		} catch (err) {}
+	}
+
+	getValores(token, ID_PLANO) {
+		try {
+			const obj = {
+				qid: 'DOMINIOS:VALORES_PLANO',
+				conditions: [
+					{
+						filterid: 'ID_PLANO',
+						values: [ID_PLANO],
+					},
+				],
+			};
+
+			fetch('https://apps.blueprojects.com.br/arturos_mr/Integration/Query', {
+				method: 'POST',
+				headers: {
+					Accept: 'application/json',
+					'Content-Type': 'application/json',
+					auth: token,
+				},
+				body: JSON.stringify(obj),
+			})
+				.then(response => response.json())
+				.then(responseJson => {
+					console.log(responseJson);
+
+					if (responseJson.list.length > 0) {
+						this.setState({
+							valor_pagar: responseJson.list[0].VALOR_PAGAR.toFixed(2),
+							valor_plano: responseJson.list[0].VALOR_PLANO.toFixed(2),
+							valor_participacao:
+								responseJson.list[0].VALOR_PARTICIPACAO.toFixed(2),
+						});
+					}
+				});
+		} catch (err) {}
+	}
+
+	updateDadosTitular() {
+		if (this.state.email == '') {
+			this.setState({
+				showError: true,
+				erroMessage: 'Preencha o campo e-mail',
+			});
+			return;
+		}
+
+		if (this.state.whatsapp == '') {
+			this.setState({
+				showError: true,
+				erroMessage: 'Preencha o campo Whatsapp',
+			});
+			return;
+		}
+
+		if (this.state.cpf == '') {
+			this.setState({ showError: true, erroMessage: 'Preencha o campo CPF' });
+			return;
+		}
+
+		if (this.state.rg == '') {
+			this.setState({ showError: true, erroMessage: 'Preencha o campo RG' });
+			return;
+		}
+
+		if (this.state.nomeMae == '') {
+			this.setState({
+				showError: true,
+				erroMessage: 'Preencha o campo nome da mãe',
+			});
+			return;
+		}
+
+		if (this.state.cep == '') {
+			this.setState({ showError: true, erroMessage: 'Preencha o campo cep' });
+			return;
+		}
+
+		if (this.state.endereco == '') {
+			this.setState({
+				showError: true,
+				erroMessage: 'Preencha o campo endereço',
+			});
+			return;
+		}
+
+		if (this.state.bairro == '') {
+			this.setState({
+				showError: true,
+				erroMessage: 'Preencha o campo bairro',
+			});
+			return;
+		}
+
+		if (this.state.cidade == '') {
+			this.setState({
+				showError: true,
+				erroMessage: 'Preencha o campo cidade',
+			});
+			return;
+		}
+
+		if (this.state.peso == '') {
+			this.setState({ showError: true, erroMessage: 'Preencha o campo peso' });
+			return;
+		}
+
+		if (this.state.altura == '') {
+			this.setState({
+				showError: true,
+				erroMessage: 'Preencha o campo altura',
+			});
+			return;
+		}
+
+		if (this.state.selectedTemPlanoSaude == '') {
+			this.setState({
+				showError: true,
+				erroMessage: 'Preencha o campo Plano Saúde',
+			});
+			return;
+		}
+
+		if (this.state.selectedTemOdonto == '') {
+			this.setState({
+				showError: true,
+				erroMessage: 'Preencha o campo Plano Odonto',
+			});
+			return;
+		}
+
+		if (this.state.selectedTemPlanoSaude == 100) {
+			if (this.state.selectedOperadora == '') {
+				this.setState({
+					showError: true,
+					erroMessage: 'Preencha o campo Operadora',
+				});
+				return;
+			}
+
+			if (this.state.selectedPlano == '') {
+				this.setState({
+					showError: true,
+					erroMessage: 'Preencha o campo Plano',
+				});
+				return;
+			}
+		}
+
+		if (this.state.selectedTemOdonto == 100) {
+			if (this.state.selectedOperadoraOdonto == '') {
+				this.setState({
+					showError: true,
+					erroMessage: 'Preencha o campo Operadora',
+				});
+				return;
+			}
+
+			if (this.state.selectedPlanoOdonto == '') {
+				this.setState({
+					showError: true,
+					erroMessage: 'Preencha o campo Plano',
+				});
+				return;
+			}
+		}
+
+		if (this.state.outroBeneficio == 100) {
+			if (this.state.selectedOperadoraOutroBeneificio == null) {
+				this.setState({
+					showError: true,
+					erroMessage: 'Preencha o campo Operadora',
+				});
+				return;
+			}
+
+			if (this.state.selectedBeneficio == null) {
+				this.setState({
+					showError: true,
+					erroMessage: 'Preencha o campo Benefício',
+				});
+				return;
+			}
+		}
+
+		this.setState({ loading: true });
+
+		const obj = {
+			tid: 'VF9NUl9USVRVTEFSOjA5ODI5Mw==',
+			fid: 100,
+			data: {
+				DATA_ADMISSAO: new Date(this.state.dataAdmissao),
+				FK_SEXO: this.state.selectedSexo,
+				FK_ESTADO_CIVIL: this.state.selectedEstadoCivil,
+				CEP: this.state.cep,
+				ENDERECO: this.state.endereco,
+				BAIRRO: this.state.bairro,
+				CPF: this.state.cpf,
+				RG: this.state.rg,
+				PESO: parseInt(this.state.peso),
+				ALTURA: parseFloat(this.state.altura.replace(',', '.')),
+				DATA_NASCIMENTO: new Date(this.state.dataNascimento),
+				EMAIL: this.state.email,
+				NOME_MAE: this.state.nomeMae,
+				FK_PLANO_SAUDE: this.state.selectedTemPlanoSaude,
+				FK_ODONTO: this.state.selectedTemOdonto,
+				FK_OPERADORA_ODONTO: this.state.selectedOperadoraOdonto,
+				FK_PLANO_ODONTO: this.state.selectedPlanoOdonto,
+				IDADE: this.state.idade,
+				CIDADE: this.state.cidade,
+				FK_PLANO: this.state.selectedPlano,
+				FK_OPERADORA_SAUDE: this.state.selectedOperadora,
+				WHATSAPP: this.state.whatsapp,
+				FLG_SEGURO_VIDA: this.state.seguroVida,
+				// PERGUNTA_1: this.state.pergunta_1,
+				RESPOSTA_1: this.state.resposta_1,
+				ESCLARECIMENTO_1: this.state.esclarecimento_1,
+
+				// PERGUNTA_2: this.state.pergunta_2,
+				RESPOSTA_2: this.state.resposta_2,
+				ESCLARECIMENTO_2: this.state.esclarecimento_2,
+
+				// PERGUNTA_3: this.state.pergunta_3,
+				RESPOSTA_3: this.state.resposta_3,
+				ESCLARECIMENTO_3: this.state.esclarecimento_3,
+
+				// PERGUNTA_4: this.state.pergunta_4,
+				RESPOSTA_4: this.state.resposta_4,
+				ESCLARECIMENTO_4: this.state.esclarecimento_4,
+
+				// PERGUNTA_5: this.state.pergunta_5,
+				RESPOSTA_5: this.state.resposta_5,
+				ESCLARECIMENTO_5: this.state.esclarecimento_5,
+
+				// PERGUNTA_6: this.state.pergunta_6,
+				RESPOSTA_6: this.state.resposta_6,
+				ESCLARECIMENTO_6: this.state.esclarecimento_6,
+
+				// PERGUNTA_7: this.state.pergunta_7,
+				RESPOSTA_7: this.state.resposta_7,
+				ESCLARECIMENTO_7: this.state.esclarecimento_7,
+
+				FLG_OUTRO_BENEFICIO: this.state.outroBeneficio,
+				FK_OPERADORA_BENEFICIOS: this.state.selectedOperadoraOutroBeneificio,
+				FK_OUTRO_BENEFICIO: this.state.selectedBeneficio,
+
+				VALOR_PLANO: this.state.valor_plano,
+				VALOR_PARTICIPACAO: this.state.valor_participacao,
+				FLG_TERMO_ACEITE: this.state.aceitoPagar,
+				// VALOR_PAGAR: this.state.valor_pagar,
+			},
+			key: {
+				id: this.state.id_solicitacao,
+			},
+		};
+
+		fetch('https://apps.blueprojects.com.br/arturos_mr/Integration/Save', {
+			method: 'POST',
+			headers: {
+				Accept: 'application/json',
+				'Content-Type': 'application/json',
+				auth: this.state.token,
+			},
+			body: JSON.stringify(obj),
+		})
+			.then(response => response.json())
+			.then(responseJson => {
+				console.log(responseJson);
+
+				this.setState({ loading: false });
+
+				if (responseJson.error) {
+					this.setState({
+						erroMessage: responseJson.error.message,
+						showError: true,
+					});
+				} else {
+					this.setState({ showSuccess: true, selectedStep: 1 });
+				}
+			});
+	}
+
+	clearModal() {
+		this.setState({
+			dependente_nome: '',
+			selectedTipoDependente: null,
+			dependente_dataNascimento: null,
+			dependente_nome_mae: '',
+			dependente_cpf: '',
+			dependente_rg: '',
+			selectedDependenteSaude: null,
+			selectedDependenteOdonto: null,
+			dependente_peso: '',
+			dependente_altura: '',
+		});
+		this.setState({
+			dependente_esclarecimento_1: '',
+			dependente_esclarecimento_2: '',
+			dependente_esclarecimento_3: '',
+			dependente_esclarecimento_4: '',
+			dependente_esclarecimento_5: '',
+			dependente_esclarecimento_6: '',
+			dependente_esclarecimento_7: '',
+			dependente_nome: '',
+			dependente_nome_mae: '',
+			dependente_peso: '',
+			dependente_cpf: '',
+			dependente_altura: '',
+			termoAceiteOdonto: 101,
+		});
+	}
+
+	saveDependente() {
+		const array = this.state.arrayDependentes;
+
+		if (this.state.dependente_cpf == '') {
+			this.setState({ showError: true, erroMessage: 'Preencha o campo CPF' });
+			return;
+		}
+
+		if (this.state.dependente_rg == '') {
+			this.setState({ showError: true, erroMessage: 'Preencha o campo RG' });
+			return;
+		}
+
+		if (this.state.dependente_nome_mae == '') {
+			this.setState({
+				showError: true,
+				erroMessage: 'Preencha o campo nome da mãe',
+			});
+			return;
+		}
+
+		this.setState({ loading: true });
+
+		const obj = {
+			tid: 'VF9NUl9ERVBFTkRFTlRFOjExNjUwOQ==',
+			fid: 110,
+			data: {
+				FK_TITULAR: this.state.id_solicitacao,
+				NOME_DEPENDENTE: this.state.dependente_nome,
+				FK_TIPO_DEPENDENTE: this.state.selectedTipoDependente,
+				DATA_NASCIMENTO: this.state.dependente_dataNascimento,
+				NOME_MAE: this.state.dependente_nome_mae,
+				CPF: this.state.dependente_cpf,
+				RG: this.state.dependente_rg,
+				FLG_DEPENDE_SAUDE: this.state.selectedDependenteSaude,
+				FLG_DEPENDE_ODONTO: this.state.selectedDependenteOdonto,
+				PESO: this.state.dependente_peso,
+				ALTURA: this.state.dependente_altura,
+				FLG_ACEITE_DIFERENCA: this.state.termoAceiteOdonto,
+			},
+		};
+
+		fetch('https://apps.blueprojects.com.br/arturos_mr/Integration/Save', {
+			method: 'POST',
+			headers: {
+				Accept: 'application/json',
+				'Content-Type': 'application/json',
+				auth: this.state.token,
+			},
+			body: JSON.stringify(obj),
+		})
+			.then(response => response.json())
+			.then(responseJson => {
+				console.log(responseJson);
+
+				this.setState({ loading: false });
+
+				if (responseJson.error) {
+					this.setState({
+						erroMessage: responseJson.error.message,
+						showError: true,
+					});
+				} else {
+					this.setState({ showSuccess: true, openModal: false });
+
+					const _data = {
+						FK_TITULAR: this.state.id_solicitacao,
+						NOME_DEPENDENTE: this.state.dependente_nome,
+						FK_TIPO_DEPENDENTE: this.state.selectedTipoDependente,
+						DATA_NASCIMENTO: this.state.dependente_dataNascimento,
+						NOME_MAE: this.state.dependente_nome_mae,
+						CPF: this.state.dependente_cpf,
+						RG: this.state.dependente_rg,
+						FLG_DEPENDE_SAUDE: this.state.selectedDependenteSaude,
+						FLG_DEPENDE_ODONTO: this.state.selectedDependenteOdonto,
+						PESO: this.state.dependente_peso,
+						ALTURA: this.state.dependente_altura,
+						FLG_ACEITE_DIFERENCA: this.state.termoAceiteOdonto,
+					};
+
+					array.push(_data);
+
+					this.setState({ arrayDependentes: array });
+				}
+			});
+	}
+
+	finalizarAceite() {
+		const obj = {
+			tid: 'VF9NUl9USVRVTEFSOjA5ODI5Mw==',
+			fid: 100,
+			data: {
+				DATA_ACEITE: new Date(),
+				FLG_VALIDADO: this.state.termoAceito,
+				DATA_ADMISSAO: new Date(this.state.dataAdmissao),
+				FK_SEXO: this.state.selectedSexo,
+				FK_ESTADO_CIVIL: this.state.selectedEstadoCivil,
+				CEP: this.state.cep,
+				ENDERECO: this.state.endereco,
+				BAIRRO: this.state.bairro,
+				CPF: this.state.cpf,
+				RG: this.state.rg,
+				PESO: parseInt(this.state.peso),
+				ALTURA: parseFloat(this.state.altura.replace(',', '.')),
+				DATA_NASCIMENTO: new Date(this.state.dataNascimento),
+				EMAIL: this.state.email,
+				NOME_MAE: this.state.nomeMae,
+				FK_PLANO_SAUDE: this.state.selectedTemPlanoSaude,
+				FK_ODONTO: this.state.selectedTemOdonto,
+				FK_OPERADORA_ODONTO: this.state.selectedOperadoraOdonto,
+				FK_PLANO_ODONTO: this.state.selectedPlanoOdonto,
+				IDADE: this.state.idade,
+				FK_PLANO: this.state.selectedPlano,
+				FK_OPERADORA_SAUDE: this.state.selectedOperadora,
+				WHATSAPP: this.state.whatsapp,
+				FLG_SEGURO_VIDA: this.state.seguroVida,
+				// PERGUNTA_1: this.state.pergunta_1,
+				RESPOSTA_1: this.state.resposta_1,
+				ESCLARECIMENTO_1: this.state.esclarecimento_1,
+
+				// PERGUNTA_2: this.state.pergunta_2,
+				RESPOSTA_2: this.state.resposta_2,
+				ESCLARECIMENTO_2: this.state.esclarecimento_2,
+
+				// PERGUNTA_3: this.state.pergunta_3,
+				RESPOSTA_3: this.state.resposta_3,
+				ESCLARECIMENTO_3: this.state.esclarecimento_3,
+
+				// PERGUNTA_4: this.state.pergunta_4,
+				RESPOSTA_4: this.state.resposta_4,
+				ESCLARECIMENTO_4: this.state.esclarecimento_4,
+
+				// PERGUNTA_5: this.state.pergunta_5,
+				RESPOSTA_5: this.state.resposta_5,
+				ESCLARECIMENTO_5: this.state.esclarecimento_5,
+
+				// PERGUNTA_6: this.state.pergunta_6,
+				RESPOSTA_6: this.state.resposta_6,
+				ESCLARECIMENTO_6: this.state.esclarecimento_6,
+
+				// PERGUNTA_7: this.state.pergunta_7,
+				RESPOSTA_7: this.state.resposta_7,
+				ESCLARECIMENTO_7: this.state.esclarecimento_7,
+
+				FLG_OUTRO_BENEFICIO: this.state.outroBeneficio,
+				FK_OPERADORA_BENEFICIOS: this.state.selectedOperadoraOutroBeneificio,
+				FK_OUTRO_BENEFICIO: this.state.selectedBeneficio,
+			},
+			key: {
+				id: this.state.id_solicitacao,
+			},
+		};
+
+		fetch('https://apps.blueprojects.com.br/arturos_mr/Integration/Save', {
+			method: 'POST',
+			headers: {
+				Accept: 'application/json',
+				'Content-Type': 'application/json',
+				auth: this.state.token,
+			},
+			body: JSON.stringify(obj),
+		})
+			.then(response => response.json())
+			.then(responseJson => {
+				console.log(responseJson);
+
+				this.setState({ concluido: true });
+			});
+	}
+
+	handleChangeSexo = event => {
+		this.setState({ selectedSexo: event.target.value });
+	};
+
+	handleChangeData = event => {};
+
+	handleClose = () => {
+		this.setState({ showSuccess: false, showError: false });
+	};
+
+	renderContainers() {
+		if (this.state.selectedStep == 0) {
+			return this.renderTitular();
+		}
+		if (this.state.selectedStep == 1) {
+			return this.renderDependente();
+		}
+		if (this.state.selectedStep == 2) {
+			return this.renderConcluido();
+		}
+	}
+
+	renderConcluido() {
+		return (
+			<div>
+				<Grid container spacing={3}>
+					<Grid item xs={12} sm={12} style={{ marginBottom: 60 }}>
+						{!!this.state.concluido && (
+							<Typography
+								component="h3"
+								variant="h4"
+								align="center"
+								className="headerTitle"
+							>
+								Cadastro Finalizado!
+							</Typography>
+						)}
+
+						{!this.state.concluido && (
+							<Grid container>
+								<Grid item xs={12} sm={12} style={{ marginLeft: 20 }}>
+									<FormControlLabel
+										control={
+											<Checkbox
+												defaultChecked={false}
+												onChange={event => {
+													this.setState({
+														termoAceito: event.target.checked ? 100 : 101,
+													});
+												}}
+											/>
+										}
+										label="Aceito os termos e condições de uso"
+									/>
+								</Grid>
+
+								<Grid item xs={12} sm={12}>
+									<LoadingButton
+										loading={false}
+										loadingPosition="start"
+										startIcon={<Description />}
+										variant="contained"
+										onClick={() => window.open(this.state.urlPDF, '_blank')}
+										style={{
+											marginBottom: 10,
+											marginTop: 20,
+											marginLeft: 25,
+											alignSelf: 'flex-end',
+											textAlign: 'right',
+											backgroundColor: '#f06e3c',
+										}}
+									>
+										Visualizar Termos
+									</LoadingButton>
+								</Grid>
+								<Grid item xs={12} sm={12}>
+									<LoadingButton
+										disabled={this.state.termoAceito == 101 ? true : false}
+										loading={this.state.loading}
+										loadingPosition="start"
+										startIcon={<SaveIcon />}
+										variant="contained"
+										onClick={() => this.finalizarAceite()}
+										style={{
+											marginBottom: 40,
+											marginTop: 0,
+											marginLeft: 25,
+											alignSelf: 'flex-end',
+											textAlign: 'right',
+											backgroundColor: '#f06e3c',
+										}}
+									>
+										Finalizar
+									</LoadingButton>
+								</Grid>
+							</Grid>
+						)}
+					</Grid>
+				</Grid>
+			</div>
+		);
+	}
+
+	handleCloseModal() {
+		this.setState({ openModal: false });
+	}
+
+	handlerAdicionar() {
+		this.saveDependente();
+	}
+
+	checkDependenteOdonto(planoOdonto, dependente) {
+		console.log(`${planoOdonto} - ${dependente}`);
+
+		if (dependente == 101) {
+			return;
+		}
+
+		const obj = {
+			qid: 'DOMINIOS:ODONTO_MENSAGEM',
+			conditions: [
+				{
+					filterid: 'FK_DEPENDENTE',
+					values: [dependente],
+				},
+				{
+					filterid: 'ID_PLANO_ODONTO',
+					values: [planoOdonto],
+				},
+			],
+		};
+
+		fetch('https://apps.blueprojects.com.br/arturos_mr/Integration/Query', {
+			method: 'POST',
+			headers: {
+				Accept: 'application/json',
+				'Content-Type': 'application/json',
+				auth: this.state.token,
+			},
+			body: JSON.stringify(obj),
+		})
+			.then(response => response.json())
+			.then(responseJson => {
+				console.log(responseJson);
+
+				if (responseJson.list != null) {
+					if (responseJson.list.length > 0) {
+						this.setState({
+							mensagemOdonto: responseJson.list[0].MENSAGEM,
+							valorAdicionalOdonto: responseJson.list[0].VALOR_ADICIONAL,
+						});
+					}
+				}
+			});
+	}
+
+	renderDependente() {
+		return (
+			<div>
+				<Grid container spacing={3}>
+					<Grid item xs={12} sm={12}>
+						<Typography
+							component="h3"
+							variant="h4"
+							align="left"
+							className="headerTitle"
+						>
+							Adicione os dependentes do seu plano
+						</Typography>
+					</Grid>
+					<Dialog
+						open={this.state.openModal}
+						onClose={() => this.handleCloseModal()}
+						scroll="paper"
+						maxWidth="md"
+						aria-labelledby="scroll-dialog-title"
+						aria-describedby="scroll-dialog-description"
+					>
+						<DialogTitle id="scroll-dialog-title">
+							Dados do Dependente
+						</DialogTitle>
+						<DialogContent dividers>
+							<div style={{ padding: 20 }}>
+								<Grid container spacing={3}>
+									<Grid item xs={12} sm={6}>
+										<TextField
+											required
+											id="firstName"
+											name="firstName"
+											label="Nome Completo"
+											fullWidth
+											autoComplete="given-name"
+											variant="standard"
+											value={this.state.dependente_nome}
+											onChange={event =>
+												this.setState({ dependente_nome: event.target.value })
+											}
+										/>
+									</Grid>
+									<Grid item xs={6} sm={3}>
+										<TextField
+											required
+											id="firstName"
+											name="firstName"
+											label="CPF"
+											fullWidth
+											autoComplete="given-name"
+											variant="standard"
+											value={this.state.dependente_cpf}
+											onChange={event =>
+												this.setState({ dependente_cpf: event.target.value })
+											}
+										/>
+									</Grid>
+									<Grid item xs={6} sm={3}>
+										<TextField
+											required
+											id="firstName"
+											name="firstName"
+											label="RG"
+											fullWidth
+											autoComplete="given-name"
+											variant="standard"
+											value={this.state.dependente_rg}
+											onChange={event =>
+												this.setState({ dependente_rg: event.target.value })
+											}
+										/>
+									</Grid>
+									<Grid item xs={4} sm={4}>
+										<div className="customDatePickerWidth">
+											<DatePicker
+												label="Data de Nascimento"
+												inputFormat="dd/MM/yyyy"
+												value={this.state.dependente_dataNascimento}
+												onChange={event =>
+													this.setState({ dependente_dataNascimento: event })
+												}
+												style={{ width: '100%' }}
+												renderInput={params => <TextField {...params} />}
+											/>
+										</div>
+									</Grid>
+									<Grid item xs={8} sm={8}>
+										<FormControl
+											style={{ width: '100%' }}
+											variant="standard"
+											sx={{ m: 1, minWidth: 120 }}
+										>
+											<InputLabel id="demo-simple-select-standard-label">
+												Tipo Dependente
+											</InputLabel>
+											<Select
+												defaultValue=""
+												style={{ width: '100%' }}
+												labelId="demo-simple-select-standard-label"
+												id="demo-simple-select-standard"
+												value={this.state.selectedTipoDependente}
+												onChange={event => {
+													this.setState({
+														selectedTipoDependente: event.target.value,
+													});
+												}}
+												label="Age"
+											>
+												{this.state.tipoDependente.map((item, index) => {
+													return (
+														<MenuItem value={item.ID}>
+															{item.TIPO_DEPENDENTE}
+														</MenuItem>
+													);
+												})}
+											</Select>
+										</FormControl>
+									</Grid>
+									<Grid item xs={12} sm={12}>
+										<TextField
+											required
+											id="firstName"
+											name="firstName"
+											label="Nome da mãe"
+											fullWidth
+											autoComplete="given-name"
+											variant="standard"
+											value={this.state.dependente_nome_mae}
+											onChange={event =>
+												this.setState({
+													dependente_nome_mae: event.target.value,
+												})
+											}
+										/>
+									</Grid>
+									<Grid item xs={6} sm={6}>
+										<TextField
+											required
+											id="firstName"
+											name="firstName"
+											label="Peso"
+											fullWidth
+											type="number"
+											variant="standard"
+											value={this.state.dependente_peso}
+											onChange={event =>
+												this.setState({ dependente_peso: event.target.value })
+											}
+										/>
+									</Grid>
+									<Grid item xs={6} sm={6}>
+										<TextField
+											required
+											id="firstName"
+											name="firstName"
+											label="Altura"
+											fullWidth
+											autoComplete="given-name"
+											variant="standard"
+											value={this.state.dependente_altura}
+											InputProps={{
+												inputComponent: NumberFormatCustom,
+											}}
+											onChange={event =>
+												this.setState({ dependente_altura: event.target.value })
+											}
+										/>
+									</Grid>
+									<Grid item xs={6} sm={6}>
+										<FormControl
+											style={{ width: '100%' }}
+											variant="standard"
+											sx={{ m: 1, minWidth: 120 }}
+										>
+											<InputLabel id="demo-simple-select-standard-label">
+												Dependente Odonto?
+											</InputLabel>
+											<Select
+												defaultValue=""
+												style={{ width: '100%' }}
+												labelId="demo-simple-select-standard-label"
+												id="demo-simple-select-standard"
+												value={this.state.selectedDependenteOdonto}
+												onChange={event => {
+													this.checkDependenteOdonto(
+														this.state.selectedPlanoOdonto,
+														event.target.value,
+													);
+													this.setState({
+														selectedDependenteOdonto: event.target.value,
+													});
+
+													if (event.target.value == 101) {
+														this.setState({
+															mensagemOdonto: '',
+															valorAdicionalOdonto: '',
+														});
+													}
+												}}
+												label="Age"
+											>
+												<MenuItem value={100}>Sim</MenuItem>
+												<MenuItem value={101}>Não</MenuItem>
+											</Select>
+
+											{!!(this.state.mensagemOdonto != '') && (
+												<Grid
+													item
+													xs={12}
+													sm={12}
+													style={{ marginLeft: 0, marginTop: 15 }}
+												>
+													<div style={{ marginBottom: 15 }}>
+														<div style={{ fontSize: 14 }}>Valor Adicional</div>
+
+														<TextField
+															required
+															id="firstName"
+															name="firstName"
+															fullWidth
+															autoComplete="given-name"
+															variant="standard"
+															contentEditable={false}
+															disabled
+															value={this.state.valorAdicionalOdonto}
+														/>
+													</div>
+
+													<FormControlLabel
+														control={
+															<Checkbox
+																defaultChecked={false}
+																onChange={event => {
+																	this.setState({
+																		termoAceiteOdonto: event.target.checked
+																			? 100
+																			: 101,
+																	});
+																}}
+															/>
+														}
+														label={this.state.mensagemOdonto}
+													/>
+												</Grid>
+											)}
+										</FormControl>
+									</Grid>
+									<Grid item xs={6} sm={6}>
+										<FormControl
+											style={{ width: '100%' }}
+											variant="standard"
+											sx={{ m: 1, minWidth: 120 }}
+										>
+											<InputLabel id="demo-simple-select-standard-label">
+												Dependente Saúde?
+											</InputLabel>
+											<Select
+												defaultValue=""
+												style={{ width: '100%' }}
+												labelId="demo-simple-select-standard-label"
+												id="demo-simple-select-standard"
+												value={this.state.selectedDependenteSaude}
+												onChange={event => {
+													this.setState({
+														selectedDependenteSaude: event.target.value,
+													});
+												}}
+												label="Age"
+											>
+												<MenuItem value={100}>Sim</MenuItem>
+												<MenuItem value={101}>Não</MenuItem>
+											</Select>
+										</FormControl>
+
+										{!!(this.state.selectedDependenteSaude == 100) && (
+											<Grid
+												item
+												xs={12}
+												sm={12}
+												style={{ marginLeft: 0, marginTop: 15 }}
+											>
+												<div style={{ marginBottom: 15 }}>
+													<div style={{ fontSize: 14 }}>Valor Adicional</div>
+
+													<TextField
+														required
+														id="firstName"
+														name="firstName"
+														fullWidth
+														autoComplete="given-name"
+														variant="standard"
+														contentEditable={false}
+														disabled
+														value={this.state.valor_plano}
+													/>
+												</div>
+											</Grid>
+										)}
+									</Grid>
+
+									<Grid
+										container
+										spacing={1}
+										style={{ marginBottom: 20, marginLeft: 20, marginTop: 50 }}
+									>
+										<Typography
+											component="h3"
+											variant="h4"
+											align="center"
+											className="headerTitle"
+										>
+											Marque os items abaixo
+										</Typography>
+									</Grid>
+									<Grid item xs={12} sm={12} style={{ marginBottom: 20 }}>
+										<FormControlLabel
+											control={
+												<Switch
+													defaultChecked={false}
+													onChange={value => {
+														const i = value.target.checked ? 100 : 101;
+														this.setState({ dependente_resposta_1: i });
+													}}
+												/>
+											}
+											label={
+												<Typography className="formControlLabel">
+													Você já fez ou tem que fazer alguma cirurgia?
+												</Typography>
+											}
+										/>
+
+										{!!(this.state.dependente_resposta_1 == 100) && (
+											<TextField
+												required
+												id="firstName"
+												name="firstName"
+												label="Esclarecimento"
+												fullWidth
+												autoComplete="given-name"
+												variant="standard"
+												value={this.state.dependente_esclarecimento_1}
+												onChange={event =>
+													this.setState({
+														dependente_esclarecimento_1: event.target.value,
+													})
+												}
+											/>
+										)}
+									</Grid>
+									<Grid item xs={12} sm={12} style={{ marginBottom: 20 }}>
+										<FormControlLabel
+											control={
+												<Switch
+													defaultChecked={false}
+													onChange={value => {
+														const i = value.target.checked ? 100 : 101;
+														this.setState({ dependente_resposta_2: i });
+													}}
+												/>
+											}
+											label={
+												<Typography className="formControlLabel">
+													Você já fez ou tem que fzer alguma cirurgia? Por qual
+													motivo? Quando?
+												</Typography>
+											}
+										/>
+
+										{!!(this.state.dependente_resposta_2 == 100) && (
+											<TextField
+												required
+												id="firstName"
+												name="firstName"
+												label="Esclarecimento"
+												fullWidth
+												autoComplete="given-name"
+												variant="standard"
+												value={this.state.dependente_esclarecimento_2}
+												onChange={event =>
+													this.setState({
+														dependente_esclarecimento_2: event.target.value,
+													})
+												}
+											/>
+										)}
+									</Grid>
+									<Grid item xs={12} sm={12} style={{ marginBottom: 20 }}>
+										<FormControlLabel
+											control={
+												<Switch
+													defaultChecked={false}
+													onChange={value => {
+														const i = value.target.checked ? 100 : 101;
+														this.setState({ dependente_resposta_3: i });
+													}}
+												/>
+											}
+											label={
+												<Typography className="formControlLabel">
+													É portador de doenças como infarto? Angina?
+													Hipertenção arterial? Doença de Chagas? Problemas
+													Pulmonares? Problema neurológicos? (ex: AVC, Esclerose
+													Múltipla, Epilepsia, Tumores) ?
+												</Typography>
+											}
+										/>
+
+										{!!(this.state.dependente_resposta_3 == 100) && (
+											<TextField
+												required
+												id="firstName"
+												name="firstName"
+												label="Esclarecimento"
+												fullWidth
+												autoComplete="given-name"
+												variant="standard"
+												value={this.state.dependente_esclarecimento_3}
+												onChange={event =>
+													this.setState({
+														dependente_esclarecimento_3: event.target.value,
+													})
+												}
+											/>
+										)}
+									</Grid>
+									<Grid item xs={12} sm={12} style={{ marginBottom: 20 }}>
+										<FormControlLabel
+											control={
+												<Switch
+													defaultChecked={false}
+													onChange={value => {
+														const i = value.target.checked ? 100 : 101;
+														this.setState({ dependente_resposta_4: i });
+													}}
+												/>
+											}
+											label={
+												<Typography className="formControlLabel">
+													É portador de doença nos rins (ex: Cálculos,
+													Insuficiencia Renal), na bexiga, próstata, órgãos
+													genitais? Problemas nas mamas, útero, ovários?
+												</Typography>
+											}
+										/>
+
+										{!!(this.state.dependente_resposta_4 == 100) && (
+											<TextField
+												required
+												id="firstName"
+												name="firstName"
+												label="Esclarecimento"
+												fullWidth
+												autoComplete="given-name"
+												variant="standard"
+												value={this.state.dependente_esclarecimento_4}
+												onChange={event =>
+													this.setState({
+														dependente_esclarecimento_4: event.target.value,
+													})
+												}
+											/>
+										)}
+									</Grid>
+									<Grid item xs={12} sm={12} style={{ marginBottom: 20 }}>
+										<FormControlLabel
+											control={
+												<Switch
+													defaultChecked={false}
+													onChange={value => {
+														const i = value.target.checked ? 100 : 101;
+														this.setState({ dependente_resposta_5: i });
+													}}
+												/>
+											}
+											label={
+												<Typography className="formControlLabel">
+													É portador de doenças da Tireóide? Diabetes? Doenças
+													do fígado (cirrose, hepatite) do estômago? Do
+													intestino (Crohn, Retocolite, Diverticulite) Tumores?
+													Câncer? Faz tratamentos? Quais?
+												</Typography>
+											}
+										/>
+										{!!(this.state.dependente_resposta_5 == 100) && (
+											<TextField
+												required
+												id="firstName"
+												name="firstName"
+												label="Esclarecimento"
+												fullWidth
+												autoComplete="given-name"
+												variant="standard"
+												value={this.state.dependente_esclarecimento_5}
+												onChange={event =>
+													this.setState({
+														dependente_esclarecimento_5: event.target.value,
+													})
+												}
+											/>
+										)}
+									</Grid>
+									<Grid item xs={12} sm={12} style={{ marginBottom: 20 }}>
+										<FormControlLabel
+											control={
+												<Switch
+													defaultChecked={false}
+													onChange={value => {
+														const i = value.target.checked ? 100 : 101;
+														this.setState({ dependente_resposta_6: i });
+													}}
+												/>
+											}
+											label={
+												<Typography className="formControlLabel">
+													Tem problemas nas articulações ( Artrose, Artrite,
+													Lúpus, Espondilite Anquilosante, Artrite Reumatóide,
+													Gota, outras) e na Coluna Vertebral? Faz tratamentos?
+													Quais?
+												</Typography>
+											}
+										/>
+
+										{!!(this.state.dependente_resposta_6 == 100) && (
+											<TextField
+												required
+												id="firstName"
+												name="firstName"
+												label="Esclarecimento"
+												fullWidth
+												autoComplete="given-name"
+												variant="standard"
+												value={this.state.dependente_esclarecimento_6}
+												onChange={event =>
+													this.setState({
+														dependente_esclarecimento_6: event.target.value,
+													})
+												}
+											/>
+										)}
+									</Grid>
+									<Grid item xs={12} sm={12} style={{ marginBottom: 20 }}>
+										<FormControlLabel
+											control={
+												<Switch
+													defaultChecked={false}
+													onChange={value => {
+														const i = value.target.checked ? 100 : 101;
+														this.setState({ dependente_resposta_7: i });
+													}}
+												/>
+											}
+											label={
+												<Typography className="formControlLabel">
+													É ou foi portador de Anemia, Leucemia, Linfoma (Doença
+													de Hodgkin, problemas com as plaquetas (púrpuras)
+													Doenças infecciosas (ex: HIV, Sífilis, Hepatite C,
+													Doenç de Chagas, outras)
+												</Typography>
+											}
+										/>
+										{!!(this.state.dependente_resposta_7 == 100) && (
+											<TextField
+												required
+												id="firstName"
+												name="firstName"
+												label="Esclarecimento"
+												fullWidth
+												autoComplete="given-name"
+												variant="standard"
+												value={this.state.dependente_esclarecimento_7}
+												onChange={event =>
+													this.setState({
+														dependente_esclarecimento_7: event.target.value,
+													})
+												}
+											/>
+										)}
+									</Grid>
+								</Grid>
+							</div>
+						</DialogContent>
+						<DialogActions>
+							<Button onClick={() => this.handleCloseModal()}>Cancelar</Button>
+							<Button onClick={() => this.handlerAdicionar()}>Adicionar</Button>
+						</DialogActions>
+					</Dialog>
+
+					<Grid item xs={12} sm={12}>
+						<IconButton
+							onClick={() => {
+								this.setState({
+									openModal: true,
+									mensagemOdonto: '',
+									valorAdicionalOdonto: '',
+								});
+								this.clearModal();
+							}}
+							variant="contained"
+						>
+							<AddCircleIcon />
+						</IconButton>
+					</Grid>
+
+					{/* this.state.arrayDependentes.map((item, index) => {
+                    return (<Grid item xs={12} sm={12}>
+                                
+                            </Grid>);
+                })
+                    
+                */}
+					<Grid item xs={12} sm={12}>
+						<List dense={false}>
+							{this.state.arrayDependentes.map((item, index) => {
+								return (
+									<ListItem>
+										<ListItemAvatar>
+											<Avatar>
+												{item.NOME_DEPENDENTE.substring(0, 1).toUpperCase()}
+											</Avatar>
+										</ListItemAvatar>
+										<ListItemText primary={item.NOME_DEPENDENTE} />
+									</ListItem>
+								);
+							})}
+						</List>
+					</Grid>
+
+					<Grid container>
+						<Grid item xs={2}>
+							<Button
+								onClick={() => this.setState({ selectedStep: 0 })}
+								variant="outlined"
+								style={{
+									marginBottom: 40,
+									marginTop: 60,
+									width: '100%',
+									marginLeft: 25,
+									alignSelf: 'flex-end',
+									textAlign: 'right',
+								}}
+							>
+								Voltar
+							</Button>
+						</Grid>
+						<Grid item xs={2}>
+							<LoadingButton
+								loading={this.state.loading}
+								loadingPosition="start"
+								startIcon={<SaveIcon />}
+								variant="contained"
+								onClick={() => this.setState({ selectedStep: 2 })}
+								style={{
+									marginBottom: 40,
+									marginTop: 60,
+									marginLeft: 40,
+									width: '100%',
+									textAlign: 'right',
+									backgroundColor: '#f06e3c',
+								}}
+							>
+								Avançar
+							</LoadingButton>
+						</Grid>
+					</Grid>
+				</Grid>
+			</div>
+		);
+	}
+
+	renderTitular() {
+		return (
+			<div>
+				<Grid container spacing={3}>
+					<Grid item xs={12} sm={12}>
+						<Typography component="h3" variant="h4" align="left">
+							Dados do Titular
+						</Typography>
+					</Grid>
+					<Grid item xs={12} sm={6}>
+						<TextField
+							required
+							id="firstName"
+							name="firstName"
+							label="Nome Completo"
+							fullWidth
+							autoComplete="given-name"
+							variant="standard"
+							contentEditable={false}
+							disabled
+							value={this.state.nome}
+						/>
+					</Grid>
+					<Grid item xs={6} sm={3}>
+						<TextField
+							required
+							id="firstName"
+							name="firstName"
+							label="CPF"
+							fullWidth
+							autoComplete="given-name"
+							variant="standard"
+							value={this.state.cpf}
+							disabled
+							contentEditable={false}
+							onChange={event => this.setState({ cpf: event.target.value })}
+						/>
+					</Grid>
+					<Grid item xs={6} sm={3}>
+						<TextField
+							required
+							id="firstName"
+							name="firstName"
+							label="RG"
+							fullWidth
+							autoComplete="given-name"
+							variant="standard"
+							value={this.state.rg}
+							onChange={event => this.setState({ rg: event.target.value })}
+						/>
+					</Grid>
+					<Grid item xs={6} sm={6}>
+						<TextField
+							required
+							id="firstName"
+							name="firstName"
+							label="E-mail"
+							fullWidth
+							autoComplete="given-name"
+							variant="standard"
+							value={this.state.email}
+							disabled
+							contentEditable={false}
+							onChange={event => this.setState({ email: event.target.value })}
+						/>
+					</Grid>
+					<Grid item xs={6} sm={6}>
+						<TextField
+							required
+							id="firstName"
+							name="firstName"
+							label="Whatsapp"
+							fullWidth
+							disabled
+							contentEditable={false}
+							autoComplete="given-name"
+							variant="standard"
+							value={this.state.whatsapp}
+							onChange={event =>
+								this.setState({ whatsapp: event.target.value })
+							}
+						/>
+					</Grid>
+					<Grid item xs={6} sm={6}>
+						<TextField
+							required
+							id="cargo"
+							name="cargo"
+							label="Cargo"
+							fullWidth
+							disabled
+							contentEditable={false}
+							autoComplete="given-name"
+							variant="standard"
+							value={this.state.cargo}
+							disabled
+						/>
+					</Grid>
+					<Grid item xs={6} sm={6}>
+						<TextField
+							required
+							id="regime"
+							name="regime"
+							label="Regime"
+							fullWidth
+							disabled
+							contentEditable={false}
+							autoComplete="given-name"
+							variant="standard"
+							value={this.state.regime}
+							disabled
+						/>
+					</Grid>
+
+					<Grid item xs={6} sm={6}>
+						<FormControl
+							style={{ width: '100%' }}
+							variant="standard"
+							sx={{ m: 1, minWidth: 120 }}
+						>
+							<InputLabel id="demo-simple-select-standard-label">
+								Sexo
+							</InputLabel>
+							<Select
+								defaultValue=""
+								style={{ width: '100%' }}
+								labelId="demo-simple-select-standard-label"
+								id="demo-simple-select-standard"
+								value={this.state.selectedSexo}
+								onChange={event => {
+									this.setState({ selectedSexo: event.target.value });
+								}}
+								label="Age"
+							>
+								{this.state.domainSexo.map((item, index) => {
+									return <MenuItem value={item.ID}>{item.SEXO}</MenuItem>;
+								})}
+							</Select>
+						</FormControl>
+					</Grid>
+					<Grid item xs={6} sm={6}>
+						<FormControl
+							style={{ width: '100%' }}
+							variant="standard"
+							sx={{ m: 1, minWidth: 120 }}
+						>
+							<InputLabel id="demo-simple-select-standard-label">
+								Estado Cívil
+							</InputLabel>
+							<Select
+								defaultValue=""
+								style={{ width: '100%' }}
+								labelId="demo-simple-select-standard-label"
+								id="demo-simple-select-standard"
+								value={this.state.selectedEstadoCivil}
+								onChange={event => {
+									this.setState({ selectedEstadoCivil: event.target.value });
+								}}
+								label="Age"
+							>
+								{this.state.domainEstadoCivil.map((item, index) => {
+									return (
+										<MenuItem value={item.ID}>{item.ESTADO_CIVIL}</MenuItem>
+									);
+								})}
+							</Select>
+						</FormControl>
+					</Grid>
+					<Grid item xs={8} sm={4}>
+						<div className="customDatePickerWidth">
+							<DatePicker
+								label="Data de Nascimento"
+								inputFormat="dd/MM/yyyy"
+								value={this.state.dataNascimento}
+								onChange={event => {
+									const years = moment().diff(event, 'years');
+									console.log(years);
+									this.setState({ dataNascimento: event });
+
+									if (years < 120 && years != null) {
+										this.setState({ idade: years });
+									}
+								}}
+								style={{ width: '100%' }}
+								renderInput={params => <TextField {...params} />}
+							/>
+						</div>
+					</Grid>
+					<Grid item xs={4} sm={2}>
+						<TextField
+							required
+							id="firstName"
+							name="firstName"
+							label="Idade"
+							fullWidth
+							autoComplete="given-name"
+							variant="standard"
+							value={this.state.idade}
+							onChange={event => this.setState({ idade: event.target.value })}
+						/>
+					</Grid>
+					<Grid item xs={12} sm={6}>
+						<TextField
+							required
+							id="firstName"
+							name="firstName"
+							label="Nome da Mãe"
+							fullWidth
+							autoComplete="given-name"
+							variant="standard"
+							value={this.state.nomeMae}
+							onChange={event => this.setState({ nomeMae: event.target.value })}
+						/>
+					</Grid>
+					<div style={{ marginTop: 50, width: '100%' }} />
+
+					<Grid item xs={8} sm={4}>
+						<div className="customDatePickerWidth">
+							<DatePicker
+								disabled
+								label="Data de Admissão"
+								inputFormat="dd/MM/yyyy"
+								value={this.state.dataAdmissao}
+								onChange={event => this.setState({ dataAdmissao: event })}
+								style={{ width: '100%' }}
+								renderInput={params => <TextField {...params} />}
+							/>
+						</div>
+					</Grid>
+					<Grid item xs={3} sm={3}>
+						<TextField
+							required
+							id="firstName"
+							name="firstName"
+							label="Peso"
+							fullWidth
+							autoComplete="given-name"
+							variant="standard"
+							type="number"
+							value={this.state.peso}
+							onChange={event => this.setState({ peso: event.target.value })}
+						/>
+					</Grid>
+					<Grid item xs={3} sm={3}>
+						<TextField
+							required
+							id="firstName"
+							name="firstName"
+							label="Altura"
+							fullWidth
+							autoComplete="given-name"
+							variant="standard"
+							value={this.state.altura}
+							InputProps={{
+								inputComponent: NumberFormatCustom,
+							}}
+							onChange={event => this.setState({ altura: event.target.value })}
+						/>
+					</Grid>
+					<Grid item xs={4} sm={4}>
+						<TextField
+							required
+							id="firstName"
+							name="firstName"
+							label="CEP"
+							fullWidth
+							autoComplete="given-name"
+							variant="standard"
+							value={this.state.cep}
+							onBlur={() => {
+								this.getCEP(this.state.token, this.state.cep);
+							}}
+							onChange={event => this.setState({ cep: event.target.value })}
+						/>
+					</Grid>
+					<Grid item xs={8} sm={8}>
+						<TextField
+							required
+							id="firstName"
+							name="firstName"
+							label="Endereço"
+							fullWidth
+							autoComplete="given-name"
+							variant="standard"
+							value={this.state.endereco}
+							onChange={event =>
+								this.setState({ endereco: event.target.value })
+							}
+						/>
+					</Grid>
+					<Grid item xs={4} sm={4}>
+						<TextField
+							required
+							id="firstName"
+							name="firstName"
+							label="Bairro"
+							fullWidth
+							autoComplete="given-name"
+							variant="standard"
+							value={this.state.bairro}
+							onChange={event => this.setState({ bairro: event.target.value })}
+						/>
+					</Grid>
+					<Grid item xs={4} sm={4}>
+						<TextField
+							required
+							id="firstName"
+							name="firstName"
+							label="Cidade"
+							fullWidth
+							autoComplete="given-name"
+							variant="standard"
+							value={this.state.cidade}
+							onChange={event => this.setState({ cidade: event.target.value })}
+						/>
+					</Grid>
+					<div style={{ marginTop: 50, width: '100%' }} />
+
+					<Grid item xs={3} sm={3}>
+						<FormControl
+							style={{ width: 200 }}
+							variant="standard"
+							sx={{ m: 1, minWidth: 120 }}
+						>
+							<InputLabel id="demo-simple-select-standard-label">
+								Plano de Saúde?{' '}
+							</InputLabel>
+							<Select
+								defaultValue=""
+								style={{ width: '100%' }}
+								labelId="demo-simple-select-standard-label"
+								id="demo-simple-select-standard"
+								value={this.state.selectedTemPlanoSaude}
+								onChange={event => {
+									this.setState({ selectedTemPlanoSaude: event.target.value });
+								}}
+								label="Age"
+							>
+								<MenuItem value={100}>Sim</MenuItem>
+								<MenuItem value={101}>Não</MenuItem>
+							</Select>
+						</FormControl>
+					</Grid>
+
+					{!!(this.state.selectedTemPlanoSaude == 100) && (
+						<Grid item xs={4} sm={4}>
+							<FormControl
+								style={{ width: '100%' }}
+								variant="standard"
+								sx={{ m: 1, minWidth: 120 }}
+							>
+								<InputLabel id="demo-simple-select-standard-label">
+									Operadora
+								</InputLabel>
+								<Select
+									defaultValue=""
+									style={{ width: '100%' }}
+									labelId="demo-simple-select-standard-label"
+									id="demo-simple-select-standard"
+									value={this.state.selectedOperadora}
+									onChange={event => {
+										this.setState({ selectedOperadora: event.target.value });
+										this.getPlano(
+											event.target.value,
+											this.state.fk_cargo,
+											this.state.token,
+										);
+									}}
+									label="Age"
+								>
+									{this.state.domainOperadora.map((item, index) => {
+										return (
+											<MenuItem value={item.ID}>{item.OPERADORA}</MenuItem>
+										);
+									})}
+								</Select>
+							</FormControl>
+						</Grid>
+					)}
+
+					{!!(this.state.selectedTemPlanoSaude == 100) && (
+						<Grid item xs={4} sm={4}>
+							<FormControl
+								style={{ width: '100%' }}
+								variant="standard"
+								sx={{ m: 1, minWidth: 120 }}
+							>
+								<InputLabel id="demo-simple-select-standard-label">
+									Plano
+								</InputLabel>
+								<Select
+									defaultValue=""
+									style={{ width: '100%' }}
+									labelId="demo-simple-select-standard-label"
+									id="demo-simple-select-standard"
+									value={this.state.selectedPlano}
+									onChange={event => {
+										this.setState({ selectedPlano: event.target.value });
+
+										this.getValores(this.state.token, event.target.value);
+										this.getPDFPlano(this.state.token, event.target.value);
+									}}
+									label="Age"
+								>
+									{this.state.domainPlanos.map((item, index) => {
+										return <MenuItem value={item.ID}>{item.PLANO}</MenuItem>;
+									})}
+								</Select>
+							</FormControl>
+						</Grid>
+					)}
+
+					{!!(this.state.selectedTemPlanoSaude == 100) && this.state.pdfPlano && (
+						<Grid item xs={1} sm={1}>
+							<IconButton
+								onClick={() => window.open(this.state.pdfPlano, '_blank')}
+								color="primary"
+								aria-label="upload picture"
+								component="span"
+							>
+								<HelpIcon style={{ marginTop: 10 }} />
+							</IconButton>
+						</Grid>
+					)}
+
+					{!!(this.state.selectedTemPlanoSaude == 100) && (
+						<Grid item xs={4} sm={4}>
+							<div style={{ fontSize: 13 }}>Valor Plano</div>
+							<TextField
+								required
+								id="firstName"
+								name="firstName"
+								fullWidth
+								autoComplete="given-name"
+								variant="standard"
+								contentEditable={false}
+								disabled
+								value={this.state.valor_plano}
+							/>
+						</Grid>
+					)}
+
+					{!!(this.state.selectedTemPlanoSaude == 100) && (
+						<Grid item xs={4} sm={4}>
+							<div style={{ fontSize: 13 }}>Valor Participação</div>
+							<TextField
+								required
+								id="firstName"
+								name="firstName"
+								fullWidth
+								defaultValue=""
+								autoComplete="given-name"
+								variant="standard"
+								disabled
+								value={this.state.valor_participacao}
+							/>
+						</Grid>
+					)}
+
+					{!!(this.state.selectedTemPlanoSaude == 100) && (
+						<Grid item xs={4} sm={4}>
+							<div style={{ fontSize: 13 }}>Valor a Pagar</div>
+							<TextField
+								required
+								id="firstName"
+								name="firstName"
+								fullWidth
+								defaultValue=""
+								variant="standard"
+								disabled
+								value={this.state.valor_pagar}
+							/>
+						</Grid>
+					)}
+
+					{!!(this.state.selectedTemPlanoSaude == 100) &&
+						this.state.valor_pagar > 0 && (
+							<Grid item xs={12} sm={12} style={{ marginLeft: 0 }}>
+								<FormControlLabel
+									control={
+										<Checkbox
+											defaultChecked={false}
+											onChange={event => {
+												this.setState({
+													aceitoPagar: event.target.checked ? 100 : 101,
+												});
+											}}
+										/>
+									}
+									label="Aceito Pagar a Diferença"
+								/>
+							</Grid>
+						)}
+
+					<div style={{ marginTop: 50, width: '100%' }} />
+					<Grid item xs={3} sm={3}>
+						<FormControl
+							style={{ width: 200 }}
+							variant="standard"
+							sx={{ m: 1, minWidth: 120 }}
+						>
+							<InputLabel id="demo-simple-select-standard-label">
+								Plano Odonto?
+							</InputLabel>
+							<Select
+								defaultValue=""
+								style={{ width: '100%' }}
+								labelId="demo-simple-select-standard-label"
+								id="demo-simple-select-standard"
+								value={this.state.selectedTemOdonto}
+								onChange={event => {
+									this.setState({ selectedTemOdonto: event.target.value });
+								}}
+								label="Age"
+							>
+								<MenuItem value={100}>Sim</MenuItem>
+								<MenuItem value={101}>Não</MenuItem>
+							</Select>
+						</FormControl>
+					</Grid>
+
+					{!!(this.state.selectedTemOdonto == 100) && (
+						<Grid item xs={4} sm={4}>
+							<FormControl
+								style={{ width: '100%' }}
+								variant="standard"
+								sx={{ m: 1, minWidth: 120 }}
+							>
+								<InputLabel id="demo-simple-select-standard-label">
+									Operadora
+								</InputLabel>
+								<Select
+									defaultValue=""
+									style={{ width: '100%' }}
+									labelId="demo-simple-select-standard-label"
+									id="demo-simple-select-standard"
+									value={this.state.selectedOperadoraOdonto}
+									onChange={event => {
+										this.setState({
+											selectedOperadoraOdonto: event.target.value,
+										});
+										this.getPlanoOdonto(event.target.value, this.state.token);
+									}}
+									label="Age"
+								>
+									{this.state.domainOperadora.map((item, index) => {
+										return (
+											<MenuItem value={item.ID}>{item.OPERADORA}</MenuItem>
+										);
+									})}
+								</Select>
+							</FormControl>
+						</Grid>
+					)}
+
+					{!!(this.state.selectedTemOdonto == 100) && (
+						<Grid item xs={5} sm={5}>
+							<FormControl
+								style={{ width: '100%' }}
+								variant="standard"
+								sx={{ m: 1, minWidth: 120 }}
+							>
+								<InputLabel id="demo-simple-select-standard-label">
+									Plano
+								</InputLabel>
+								<Select
+									defaultValue=""
+									style={{ width: '100%' }}
+									labelId="demo-simple-select-standard-label"
+									id="demo-simple-select-standard"
+									value={this.state.selectedPlanoOdonto}
+									onChange={event => {
+										this.setState({ selectedPlanoOdonto: event.target.value });
+									}}
+									label="Age"
+								>
+									{this.state.domainPlanosOdonto.map((item, index) => {
+										return (
+											<MenuItem value={item.ID}>{item.PLANO_ODONTO}</MenuItem>
+										);
+									})}
+								</Select>
+							</FormControl>
+						</Grid>
+					)}
+
+					<div style={{ marginTop: 50, width: '100%' }} />
+					{!!(this.state.regime != 'PJ') && (
+						<Grid item xs={12} sm={12}>
+							<FormControlLabel
+								control={
+									<Checkbox
+										disabled
+										defaultChecked
+										onChange={event => {
+											this.setState({
+												seguroVida: event.target.checked ? 100 : 101,
+											});
+										}}
+									/>
+								}
+								label="Seguro Vida?"
+							/>
+						</Grid>
+					)}
+					<div style={{ marginTop: 50, width: '100%' }} />
+
+					{/* <Grid item xs={3} sm={3}>
+                        <FormControlLabel control={<Checkbox defaultChecked={false} onChange={(event) => {
+                            this.setState({outroBeneficio: (event.target.checked ? 100 : 101)});
+                        }} />} label="Outro Benefício?" />
+                    </Grid>
+ */}
+					{!!(this.state.outroBeneficio == 100) && (
+						<Grid item xs={4} sm={4}>
+							<FormControl
+								style={{ width: '100%' }}
+								variant="standard"
+								sx={{ m: 1, minWidth: 120 }}
+							>
+								<InputLabel id="demo-simple-select-standard-label">
+									Operadora
+								</InputLabel>
+								<Select
+									defaultValue=""
+									style={{ width: '100%' }}
+									labelId="demo-simple-select-standard-label"
+									id="demo-simple-select-standard"
+									value={this.state.selectedOperadoraOutroBeneificio}
+									onChange={event => {
+										this.setState({
+											selectedOperadoraOutroBeneificio: event.target.value,
+										});
+										this.getBeneficio(event.target.value, this.state.token);
+									}}
+									label="Age"
+								>
+									{this.state.domainOperadora.map((item, index) => {
+										return (
+											<MenuItem value={item.ID}>{item.OPERADORA}</MenuItem>
+										);
+									})}
+								</Select>
+							</FormControl>
+						</Grid>
+					)}
+
+					{!!(this.state.outroBeneficio == 100) && (
+						<Grid item xs={5} sm={5}>
+							<FormControl
+								style={{ width: '100%' }}
+								variant="standard"
+								sx={{ m: 1, minWidth: 120 }}
+							>
+								<InputLabel id="demo-simple-select-standard-label">
+									Benefício
+								</InputLabel>
+								<Select
+									defaultValue=""
+									style={{ width: '100%' }}
+									labelId="demo-simple-select-standard-label"
+									id="demo-simple-select-standard"
+									value={this.state.selectedBeneficio}
+									onChange={event => {
+										this.setState({ selectedBeneficio: event.target.value });
+									}}
+									label="Age"
+								>
+									{this.state.domainBeneficios.map((item, index) => {
+										return (
+											<MenuItem value={item.ID}>{item.BENEFICIO}</MenuItem>
+										);
+									})}
+								</Select>
+							</FormControl>
+						</Grid>
+					)}
+
+					<div style={{ marginTop: 50, width: '100%' }} />
+
+					<Grid
+						container
+						spacing={1}
+						style={{ marginBottom: 20, marginLeft: 20, marginTop: 20 }}
+					>
+						<Typography component="h3" variant="h4" align="center">
+							Marque os items abaixo
+						</Typography>
+					</Grid>
+
+					<Grid item xs={12} sm={12} style={{ marginBottom: 20 }}>
+						<FormControlLabel
+							control={
+								<Switch
+									defaultChecked={false}
+									onChange={value => {
+										const i = value.target.checked ? 100 : 101;
+										this.setState({ resposta_1: i });
+									}}
+								/>
+							}
+							label={
+								<Typography className="formControlLabel">
+									Você já fez ou tem que fazer alguma cirurgia?
+								</Typography>
+							}
+						/>
+
+						{!!(this.state.resposta_1 == 100) && (
+							<TextField
+								required
+								id="firstName"
+								name="firstName"
+								label="Esclarecimento"
+								fullWidth
+								autoComplete="given-name"
+								variant="standard"
+								value={this.state.esclarecimento_1}
+								onChange={event =>
+									this.setState({ esclarecimento_1: event.target.value })
+								}
+							/>
+						)}
+					</Grid>
+					<Grid item xs={12} sm={12} style={{ marginBottom: 20 }}>
+						<FormControlLabel
+							control={
+								<Switch
+									defaultChecked={false}
+									onChange={value => {
+										const i = value.target.checked ? 100 : 101;
+										this.setState({ resposta_2: i });
+									}}
+								/>
+							}
+							label={
+								<Typography className="formControlLabel">
+									Você já fez ou tem que fzer alguma cirurgia? Por qual motivo?
+									Quando?
+								</Typography>
+							}
+						/>
+
+						{!!(this.state.resposta_2 == 100) && (
+							<TextField
+								required
+								id="firstName"
+								name="firstName"
+								label="Esclarecimento"
+								fullWidth
+								autoComplete="given-name"
+								variant="standard"
+								value={this.state.esclarecimento_2}
+								onChange={event =>
+									this.setState({ esclarecimento_2: event.target.value })
+								}
+							/>
+						)}
+					</Grid>
+					<Grid item xs={12} sm={12} style={{ marginBottom: 20 }}>
+						<FormControlLabel
+							control={
+								<Switch
+									defaultChecked={false}
+									onChange={value => {
+										const i = value.target.checked ? 100 : 101;
+										this.setState({ resposta_3: i });
+									}}
+								/>
+							}
+							label={
+								<Typography className="formControlLabel">
+									É portador de doenças como infarto? Angina? Hipertenção
+									arterial? Doença de Chagas? Problemas Pulmonares? Problema
+									neurológicos? (ex: AVC, Esclerose Múltipla, Epilepsia,
+									Tumores) ?
+								</Typography>
+							}
+						/>
+
+						{!!(this.state.resposta_3 == 100) && (
+							<TextField
+								required
+								id="firstName"
+								name="firstName"
+								label="Esclarecimento"
+								fullWidth
+								autoComplete="given-name"
+								variant="standard"
+								value={this.state.esclarecimento_3}
+								onChange={event =>
+									this.setState({ esclarecimento_3: event.target.value })
+								}
+							/>
+						)}
+					</Grid>
+					<Grid item xs={12} sm={12} style={{ marginBottom: 20 }}>
+						<FormControlLabel
+							control={
+								<Switch
+									defaultChecked={false}
+									onChange={value => {
+										const i = value.target.checked ? 100 : 101;
+										this.setState({ resposta_4: i });
+									}}
+								/>
+							}
+							label={
+								<Typography className="formControlLabel">
+									É portador de doença nos rins (ex: Cálculos, Insuficiencia
+									Renal), na bexiga, próstata, órgãos genitais? Problemas nas
+									mamas, útero, ovários?
+								</Typography>
+							}
+						/>
+
+						{!!(this.state.resposta_4 == 100) && (
+							<TextField
+								required
+								id="firstName"
+								name="firstName"
+								label="Esclarecimento"
+								fullWidth
+								autoComplete="given-name"
+								variant="standard"
+								value={this.state.esclarecimento_4}
+								onChange={event =>
+									this.setState({ esclarecimento_4: event.target.value })
+								}
+							/>
+						)}
+					</Grid>
+					<Grid item xs={12} sm={12} style={{ marginBottom: 20 }}>
+						<FormControlLabel
+							control={
+								<Switch
+									defaultChecked={false}
+									onChange={value => {
+										const i = value.target.checked ? 100 : 101;
+										this.setState({ resposta_5: i });
+									}}
+								/>
+							}
+							label={
+								<Typography className="formControlLabel">
+									É portador de doenças da Tireóide? Diabetes? Doenças do fígado
+									(cirrose, hepatite) do estômago? Do intestino (Crohn,
+									Retocolite, Diverticulite) Tumores? Câncer? Faz tratamentos?
+									Quais?
+								</Typography>
+							}
+						/>
+						{!!(this.state.resposta_5 == 100) && (
+							<TextField
+								required
+								id="firstName"
+								name="firstName"
+								label="Esclarecimento"
+								fullWidth
+								autoComplete="given-name"
+								variant="standard"
+								value={this.state.esclarecimento_5}
+								onChange={event =>
+									this.setState({ esclarecimento_5: event.target.value })
+								}
+							/>
+						)}
+					</Grid>
+					<Grid item xs={12} sm={12} style={{ marginBottom: 20 }}>
+						<FormControlLabel
+							control={
+								<Switch
+									defaultChecked={false}
+									onChange={value => {
+										const i = value.target.checked ? 100 : 101;
+										this.setState({ resposta_6: i });
+									}}
+								/>
+							}
+							label={
+								<Typography className="formControlLabel">
+									Tem problemas nas articulações ( Artrose, Artrite, Lúpus,
+									Espondilite Anquilosante, Artrite Reumatóide, Gota, outras) e
+									na Coluna Vertebral? Faz tratamentos? Quais?
+								</Typography>
+							}
+						/>
+
+						{!!(this.state.resposta_6 == 100) && (
+							<TextField
+								required
+								id="firstName"
+								name="firstName"
+								label="Esclarecimento"
+								fullWidth
+								autoComplete="given-name"
+								variant="standard"
+								value={this.state.esclarecimento_6}
+								onChange={event =>
+									this.setState({ esclarecimento_6: event.target.value })
+								}
+							/>
+						)}
+					</Grid>
+					<Grid item xs={12} sm={12} style={{ marginBottom: 20 }}>
+						<FormControlLabel
+							control={
+								<Switch
+									defaultChecked={false}
+									onChange={value => {
+										const i = value.target.checked ? 100 : 101;
+										this.setState({ resposta_7: i });
+									}}
+								/>
+							}
+							label={
+								<Typography className="formControlLabel">
+									É ou foi portador de Anemia, Leucemia, Linfoma (Doença de
+									Hodgkin, problemas com as plaquetas (púrpuras) Doenças
+									infecciosas (ex: HIV, Sífilis, Hepatite C, Doenç de Chagas,
+									outras)
+								</Typography>
+							}
+						/>
+						{!!(this.state.resposta_7 == 100) && (
+							<TextField
+								required
+								id="firstName"
+								name="firstName"
+								label="Esclarecimento"
+								fullWidth
+								autoComplete="given-name"
+								variant="standard"
+								value={this.state.esclarecimento_7}
+								onChange={event =>
+									this.setState({ esclarecimento_7: event.target.value })
+								}
+							/>
+						)}
+					</Grid>
+				</Grid>
+
+				<LoadingButton
+					loading={this.state.loading}
+					loadingPosition="start"
+					startIcon={<SaveIcon />}
+					variant="contained"
+					onClick={() => this.updateDadosTitular()}
+					style={{
+						marginBottom: 40,
+						marginTop: 20,
+						alignSelf: 'flex-end',
+						textAlign: 'right',
+						backgroundColor: '#f06e3c',
+					}}
+				>
+					Salvar Dados
+				</LoadingButton>
+			</div>
+		);
+	}
+
+	render() {
+		if (this.state.loadingInicial) {
+			return (
+				<div className="container">
+					{/* <AppBar
+						position="fixed"
+						style={{ backgroundColor: 'rgb(10, 78, 90)' }}
+					>
+						<Toolbar variant="dense" />
+					</AppBar> */}
+					<Paper className="formPaper">
+						<div
+							style={{
+								width: '100%',
+								height: '100%',
+								alignItems: 'center',
+								textAlign: 'center',
+							}}
+						>
+							<CircularProgress style={{ margin: 40, alignSelf: 'center' }} />
+						</div>
+					</Paper>
+				</div>
+			);
+		}
+		return (
+			<div className="container">
+				{/* <AppBar position="fixed" style={{ backgroundColor: 'rgb(10, 78, 90)' }}>
+					<Toolbar variant="dense" />
+				</AppBar> */}
+				<Snackbar
+					open={this.state.showSuccess}
+					autoHideDuration={2000}
+					onClose={this.handleClose}
+				>
+					<Alert
+						onClose={this.handleClose}
+						severity="success"
+						sx={{ width: '100%' }}
+					>
+						Registro Salvo com Sucesso!!
+					</Alert>
+				</Snackbar>
+				<Snackbar
+					open={this.state.showError}
+					autoHideDuration={2000}
+					onClose={this.handleClose}
+				>
+					<Alert
+						onClose={this.handleClose}
+						severity="error"
+						sx={{ width: '100%' }}
+					>
+						{this.state.erroMessage}
+					</Alert>
+				</Snackbar>
+				<LocalizationProvider dateAdapter={AdapterDateFns}>
+					<Paper className="formPaper">
+						<Grid
+							container
+							spacing={1}
+							style={{
+								marginBottom: 50,
+								marginLeft: 2,
+								marginTop: 50,
+								alignItems: 'center',
+								textAlign: 'center',
+							}}
+						>
+							{/* <Typography component="h1" variant="h4" align="center">
+                            {this.state.solicitacao_empresa}
+                        </Typography> */}
+							<img
+								src={this.state.url_imagem}
+								style={{ marginLeft: 'auto', marginRight: 'auto' }}
+							/>
+						</Grid>
+
+						<Grid container>
+							<Box sx={{ width: '100%', marginBottom: 10, marginTop: 5 }}>
+								<Stepper activeStep={this.state.selectedStep} alternativeLabel>
+									{this.state.steps.map(label => (
+										<Step key={label}>
+											<StepLabel>{label}</StepLabel>
+										</Step>
+									))}
+								</Stepper>
+							</Box>
+						</Grid>
+
+						{this.renderContainers()}
+					</Paper>
+				</LocalizationProvider>
+			</div>
+		);
+	}
+}

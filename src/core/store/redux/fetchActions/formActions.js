@@ -1,4 +1,5 @@
 import queryString from 'query-string';
+import { titularSet } from '../reducers/titularreducer';
 
 // ////////////////////
 // ////////////////////
@@ -25,7 +26,7 @@ export const loginGuest = () => {
 				// var token;
 
 				const token = responseJson.data.auth_ticket;
-				dispatch(this.getDomains(token));
+				dispatch(getDomains(token));
 			});
 	};
 };
@@ -35,17 +36,54 @@ export const getDomains = token => {
 		const value = queryString.parse(window.location.search);
 		console.log(value.id);
 
-		dispatch(this.getSolicitacoes(token, value.id));
-		dispatch(this.setState({ token }));
-		dispatch(this.getSexo(token));
-		dispatch(this.getEstadoCivil(token));
-		dispatch(this.getTipoDependente(token));
-		dispatch(this.getTermos(token));
+		dispatch(getSolicitacoes(token, value.id));
+		dispatch(titularSet({ token }));
+		dispatch(getSexo(token));
+		dispatch(getEstadoCivil(token));
+		// dispatch(getTipoDependente(token));
+		dispatch(getTermos(token));
+	};
+};
+
+export const getOperadora = (token, fk_empresa) => {
+	return async dispatch => {
+		try {
+			const obj = {
+				qid: 'DOMINIOS:OPERADORA',
+				conditions: [
+					{
+						filterid: 'EMPRESA',
+						values: [fk_empresa],
+					},
+				],
+			};
+
+			await fetch(
+				'https://apps.blueprojects.com.br/arturos_mr/Integration/Query',
+				{
+					method: 'POST',
+					headers: {
+						Accept: 'application/json',
+						'Content-Type': 'application/json',
+						auth: token,
+					},
+					body: JSON.stringify(obj),
+				},
+			)
+				.then(response => response.json())
+				.then(responseJson => {
+					console.log(responseJson);
+
+					dispatch(titularSet({ domainOperadora: responseJson.list }));
+				});
+		} catch (err) {
+			console.log(err);
+		}
 	};
 };
 
 export const getSolicitacoes = (token, ID) => {
-	return dispatch => {
+	return async dispatch => {
 		try {
 			const obj = {
 				qid: 'MINHAS_SOLICITACOES:MINHAS_SOLICITACOES',
@@ -57,24 +95,27 @@ export const getSolicitacoes = (token, ID) => {
 				],
 			};
 
-			fetch('https://apps.blueprojects.com.br/arturos_mr/Integration/Query', {
-				method: 'POST',
-				headers: {
-					Accept: 'application/json',
-					'Content-Type': 'application/json',
-					auth: token,
+			await fetch(
+				'https://apps.blueprojects.com.br/arturos_mr/Integration/Query',
+				{
+					method: 'POST',
+					headers: {
+						Accept: 'application/json',
+						'Content-Type': 'application/json',
+						auth: token,
+					},
+					body: JSON.stringify(obj),
 				},
-				body: JSON.stringify(obj),
-			})
+			)
 				.then(response => response.json())
 				.then(responseJson => {
 					console.log(responseJson);
 
 					if (responseJson.list.length > 0) {
-						dispatch(this.getOperadora(token, responseJson.list[0].FK_EMPRESA));
+						dispatch(getOperadora(token, responseJson.list[0].FK_EMPRESA));
 
 						dispatch(
-							this.setState({
+							titularSet({
 								loadingInicial: false,
 								email: responseJson.list[0].EMail,
 								whatsapp: responseJson.list[0].WhatsApp,
@@ -121,7 +162,7 @@ export const getSexo = token => {
 				.then(responseJson => {
 					console.log(responseJson);
 
-					dispatch(this.setState({ domainSexo: responseJson.list }));
+					dispatch(titularSet({ domainSexo: responseJson.list }));
 				});
 		} catch (err) {
 			console.log(err);
@@ -152,7 +193,7 @@ export const getTermos = token => {
 
 					if (!responseJson.error) {
 						if (responseJson.list.length > 0) {
-							dispatch(this.setState({ urlPDF: responseJson.list[0].Arquivo }));
+							dispatch(titularSet({ urlPDF: responseJson.list[0].Arquivo }));
 						}
 					}
 				});
@@ -183,7 +224,7 @@ export const getEstadoCivil = token => {
 				.then(responseJson => {
 					console.log(responseJson);
 
-					dispatch(this.setState({ domainEstadoCivil: responseJson.list }));
+					dispatch(titularSet({ domainEstadoCivil: responseJson.list }));
 				});
 		} catch (err) {
 			console.log(err);
@@ -262,7 +303,7 @@ export const getValores = (token, ID_PLANO) => {
 
 					if (responseJson.list.length > 0) {
 						dispatch(
-							this.setState({
+							titularSet({
 								valor_pagar: responseJson.list[0].VALOR_PAGAR.toFixed(2),
 								valor_plano: responseJson.list[0].VALOR_PLANO.toFixed(2),
 								valor_participacao:
