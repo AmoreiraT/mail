@@ -1,0 +1,559 @@
+<Dialog
+	// open={this.state.openModal}
+	// onClose={() => this.handleCloseModal()}
+	scroll="paper"
+	maxWidth="md"
+	aria-labelledby="scroll-dialog-title"
+	aria-describedby="scroll-dialog-description"
+>
+	<DialogTitle id="scroll-dialog-title">Dados do Dependente</DialogTitle>
+	<DialogContent dividers>
+		<div style={{ padding: 20 }}>
+			<Grid container spacing={3}>
+				<Grid item xs={12} sm={6}>
+					<TextField
+						required
+						id="firstName"
+						name="firstName"
+						label="Nome Completo"
+						fullWidth
+						autoComplete="given-name"
+						variant="standard"
+						// value={this.state.dependente_nome}
+						// onChange={event =>
+						// 	this.setState({ dependente_nome: event.target.value })
+						// }
+					/>
+				</Grid>
+				<Grid item xs={6} sm={3}>
+					<TextField
+						required
+						id="firstName"
+						name="firstName"
+						label="CPF"
+						fullWidth
+						autoComplete="given-name"
+						variant="standard"
+						// value={this.state.dependente_cpf}
+						// onChange={event =>
+						// 	this.setState({ dependente_cpf: event.target.value })
+						// }
+					/>
+				</Grid>
+				<Grid item xs={6} sm={3}>
+					<TextField
+						required
+						id="firstName"
+						name="firstName"
+						label="RG"
+						fullWidth
+						autoComplete="given-name"
+						variant="standard"
+						// value={this.state.dependente_rg}
+						// onChange={event =>
+						// 	this.setState({ dependente_rg: event.target.value })
+						// }
+					/>
+				</Grid>
+				<Grid item xs={4} sm={4}>
+					<div className="customDatePickerWidth">
+						<DatePicker
+							label="Data de Nascimento"
+							inputFormat="dd/MM/yyyy"
+							// value={this.state.dependente_dataNascimento}
+							// onChange={event =>
+							// 	this.setState({ dependente_dataNascimento: event })
+							// }
+							style={{ width: '100%' }}
+							renderInput={params => <TextField {...params} />}
+						/>
+					</div>
+				</Grid>
+				<Grid item xs={8} sm={8}>
+					<FormControl
+						style={{ width: '100%' }}
+						variant="standard"
+						sx={{ m: 1, minWidth: 120 }}
+					>
+						<InputLabel id="demo-simple-select-standard-label">
+							Tipo Dependente
+						</InputLabel>
+						<Select
+							defaultValue=""
+							style={{ width: '100%' }}
+							labelId="demo-simple-select-standard-label"
+							id="demo-simple-select-standard"
+							// value={this.state.selectedTipoDependente}
+							// onChange={event => {
+							// 	this.setState({
+							// 		selectedTipoDependente: event.target.value,
+							// 	});
+							// }}
+							label="Age"
+						>
+							{/* {this.state.tipoDependente.map((item, index) => {
+												return (
+													<MenuItem value={item.ID}>
+														{item.TIPO_DEPENDENTE}
+													</MenuItem>
+												);
+											})} */}
+						</Select>
+					</FormControl>
+				</Grid>
+				<Grid item xs={12} sm={12}>
+					<TextField
+						required
+						id="firstName"
+						name="firstName"
+						label="Nome da mãe"
+						fullWidth
+						autoComplete="given-name"
+						variant="standard"
+						// value={this.state.dependente_nome_mae}
+						// onChange={event =>
+						// 	this.setState({ dependente_nome_mae: event.target.value })
+						// }
+					/>
+				</Grid>
+				<Grid item xs={6} sm={6}>
+					<TextField
+						required
+						id="firstName"
+						name="firstName"
+						label="Peso"
+						fullWidth
+						type="number"
+						variant="standard"
+						// value={this.state.dependente_peso}
+						// onChange={event =>
+						// 	this.setState({ dependente_peso: event.target.value })
+						// }
+					/>
+				</Grid>
+				<Grid item xs={6} sm={6}>
+					<TextField
+						required
+						id="firstName"
+						name="firstName"
+						label="Altura"
+						fullWidth
+						autoComplete="given-name"
+						variant="standard"
+						// value={this.state.dependente_altura}
+						// InputProps={{
+						// 	inputComponent: NumberFormatCustom,
+						// }}
+						// onChange={event =>
+						// 	this.setState({ dependente_altura: event.target.value })
+						// }
+					/>
+				</Grid>
+				<Grid item xs={6} sm={6}>
+					<FormControl
+						style={{ width: '100%' }}
+						variant="standard"
+						sx={{ m: 1, minWidth: 120 }}
+					>
+						<InputLabel id="demo-simple-select-standard-label">
+							Dependente Odonto?
+						</InputLabel>
+						<Select
+							defaultValue=""
+							style={{ width: '100%' }}
+							labelId="demo-simple-select-standard-label"
+							id="demo-simple-select-standard"
+							// value={this.state.selectedDependenteOdonto}
+							// onChange={event => {
+							// 	this.checkDependenteOdonto(
+							// 		this.state.selectedPlanoOdonto,
+							// 		event.target.value,
+							// 	);
+							// 	this.setState({
+							// 		selectedDependenteOdonto: event.target.value,
+							// 	});
+
+							// 	if (event.target.value == 101) {
+							// 		this.setState({
+							// 			mensagemOdonto: '',
+							// 			valorAdicionalOdonto: '',
+							// 		});
+							// 	}
+							// }}
+							label="Age"
+						>
+							<MenuItem value={100}>Sim</MenuItem>
+							<MenuItem value={101}>Não</MenuItem>
+						</Select>
+
+						{/* {!!(this.state.mensagemOdonto != '') && ( */}
+						<Grid item xs={12} sm={12} style={{ marginLeft: 0, marginTop: 15 }}>
+							<div style={{ marginBottom: 15 }}>
+								<div style={{ fontSize: 14 }}>Valor Adicional</div>
+
+								<TextField
+									required
+									id="firstName"
+									name="firstName"
+									fullWidth
+									autoComplete="given-name"
+									variant="standard"
+									contentEditable={false}
+									disabled
+									// value={this.state.valorAdicionalOdonto}
+								/>
+							</div>
+
+							<FormControlLabel
+								control={
+									<Checkbox
+										defaultChecked={false}
+										// onChange={event => {
+										// 	this.setState({
+										// 		termoAceiteOdonto: event.target.checked
+										// 			? 100
+										// 			: 101,
+										// 	});
+										// }}
+									/>
+								}
+								// label={this.state.mensagemOdonto}
+							/>
+						</Grid>
+						{/* )} */}
+					</FormControl>
+				</Grid>
+				<Grid item xs={6} sm={6}>
+					<FormControl
+						style={{ width: '100%' }}
+						variant="standard"
+						sx={{ m: 1, minWidth: 120 }}
+					>
+						<InputLabel id="demo-simple-select-standard-label">
+							Dependente Saúde?
+						</InputLabel>
+						<Select
+							defaultValue=""
+							style={{ width: '100%' }}
+							labelId="demo-simple-select-standard-label"
+							id="demo-simple-select-standard"
+							// value={this.state.selectedDependenteSaude}
+							// onChange={event => {
+							// 	this.setState({
+							// 		selectedDependenteSaude: event.target.value,
+							// 	});
+							// }}
+							label="Age"
+						>
+							<MenuItem value={100}>Sim</MenuItem>
+							<MenuItem value={101}>Não</MenuItem>
+						</Select>
+					</FormControl>
+
+					{/* {!!(this.state.selectedDependenteSaude == 100) && ( */}
+					<Grid item xs={12} sm={12} style={{ marginLeft: 0, marginTop: 15 }}>
+						<div style={{ marginBottom: 15 }}>
+							<div style={{ fontSize: 14 }}>Valor Adicional</div>
+
+							<TextField
+								required
+								id="firstName"
+								name="firstName"
+								fullWidth
+								autoComplete="given-name"
+								variant="standard"
+								contentEditable={false}
+								disabled
+								// value={this.state.valor_plano}
+							/>
+						</div>
+					</Grid>
+					{/* )} */}
+				</Grid>
+
+				<Grid
+					container
+					spacing={1}
+					style={{ marginBottom: 20, marginLeft: 20, marginTop: 50 }}
+				>
+					<Typography
+						component="h3"
+						variant="h4"
+						align="center"
+						className="headerTitle"
+					>
+						Marque os items abaixo
+					</Typography>
+				</Grid>
+				<Grid item xs={12} sm={12} style={{ marginBottom: 20 }}>
+					<FormControlLabel
+						control={
+							<Switch
+								defaultChecked={false}
+								// onChange={value => {
+								// 	const i = value.target.checked ? 100 : 101;
+								// 	this.setState({ dependente_resposta_1: i });
+								// }}
+							/>
+						}
+						label={
+							<Typography className="formControlLabel">
+								Você já fez ou tem que fazer alguma cirurgia?
+							</Typography>
+						}
+					/>
+
+					{/* {!!(this.state.dependente_resposta_1 == 100) && ( */}
+					<TextField
+						required
+						id="firstName"
+						name="firstName"
+						label="Esclarecimento"
+						fullWidth
+						autoComplete="given-name"
+						variant="standard"
+						// value={this.state.dependente_esclarecimento_1}
+						// onChange={event =>
+						// 	this.setState({
+						// 		dependente_esclarecimento_1: event.target.value,
+						// 	})
+						// }
+					/>
+					{/* )} */}
+				</Grid>
+				<Grid item xs={12} sm={12} style={{ marginBottom: 20 }}>
+					<FormControlLabel
+						control={
+							<Switch
+								defaultChecked={false}
+								// onChange={value => {
+								// 	const i = value.target.checked ? 100 : 101;
+								// 	this.setState({ dependente_resposta_2: i });
+								// }}
+							/>
+						}
+						label={
+							<Typography className="formControlLabel">
+								Você já fez ou tem que fzer alguma cirurgia? Por qual motivo?
+								Quando?
+							</Typography>
+						}
+					/>
+
+					{/* {!!(this.state.dependente_resposta_2 == 100) && ( */}
+					<TextField
+						required
+						id="firstName"
+						name="firstName"
+						label="Esclarecimento"
+						fullWidth
+						autoComplete="given-name"
+						variant="standard"
+						// value={this.state.dependente_esclarecimento_2}
+						// onChange={event =>
+						// 	this.setState({
+						// 		dependente_esclarecimento_2: event.target.value,
+						// 	})
+						// }
+					/>
+					{/* )} */}
+				</Grid>
+				<Grid item xs={12} sm={12} style={{ marginBottom: 20 }}>
+					<FormControlLabel
+						control={
+							<Switch
+								defaultChecked={false}
+								// onChange={value => {
+								// 	const i = value.target.checked ? 100 : 101;
+								// 	this.setState({ dependente_resposta_3: i });
+								// }}
+							/>
+						}
+						label={
+							<Typography className="formControlLabel">
+								É portador de doenças como infarto? Angina? Hipertenção
+								arterial? Doença de Chagas? Problemas Pulmonares? Problema
+								neurológicos? (ex: AVC, Esclerose Múltipla, Epilepsia, Tumores)
+								?
+							</Typography>
+						}
+					/>
+
+					{/* {!!(this.state.dependente_resposta_3 == 100) && ( */}
+					<TextField
+						required
+						id="firstName"
+						name="firstName"
+						label="Esclarecimento"
+						fullWidth
+						autoComplete="given-name"
+						variant="standard"
+						// value={this.state.dependente_esclarecimento_3}
+						// onChange={event =>
+						// 	this.setState({
+						// 		dependente_esclarecimento_3: event.target.value,
+						// 	})
+						// }
+					/>
+					{/* )} */}
+				</Grid>
+				<Grid item xs={12} sm={12} style={{ marginBottom: 20 }}>
+					<FormControlLabel
+						control={
+							<Switch
+								defaultChecked={false}
+								// onChange={value => {
+								// 	const i = value.target.checked ? 100 : 101;
+								// 	this.setState({ dependente_resposta_4: i });
+								// }}
+							/>
+						}
+						label={
+							<Typography className="formControlLabel">
+								É portador de doença nos rins (ex: Cálculos, Insuficiencia
+								Renal), na bexiga, próstata, órgãos genitais? Problemas nas
+								mamas, útero, ovários?
+							</Typography>
+						}
+					/>
+
+					{/* {!!(this.state.dependente_resposta_4 == 100) && ( */}
+					<TextField
+						required
+						id="firstName"
+						name="firstName"
+						label="Esclarecimento"
+						fullWidth
+						autoComplete="given-name"
+						variant="standard"
+						// value={this.state.dependente_esclarecimento_4}
+						// onChange={event =>
+						// 	this.setState({
+						// 		dependente_esclarecimento_4: event.target.value,
+						// 	})
+						// }
+					/>
+					{/* )} */}
+				</Grid>
+				<Grid item xs={12} sm={12} style={{ marginBottom: 20 }}>
+					<FormControlLabel
+						control={
+							<Switch
+								defaultChecked={false}
+								// onChange={value => {
+								// 	const i = value.target.checked ? 100 : 101;
+								// 	this.setState({ dependente_resposta_5: i });
+								// }}
+							/>
+						}
+						label={
+							<Typography className="formControlLabel">
+								É portador de doenças da Tireóide? Diabetes? Doenças do fígado
+								(cirrose, hepatite) do estômago? Do intestino (Crohn,
+								Retocolite, Diverticulite) Tumores? Câncer? Faz tratamentos?
+								Quais?
+							</Typography>
+						}
+					/>
+					{/* {!!(this.state.dependente_resposta_5 == 100) && ( */}
+					<TextField
+						required
+						id="firstName"
+						name="firstName"
+						label="Esclarecimento"
+						fullWidth
+						autoComplete="given-name"
+						variant="standard"
+						// value={this.state.dependente_esclarecimento_5}
+						// onChange={event =>
+						// 	this.setState({
+						// 		dependente_esclarecimento_5: event.target.value,
+						// 	})
+						// }
+					/>
+					{/* )} */}
+				</Grid>
+				<Grid item xs={12} sm={12} style={{ marginBottom: 20 }}>
+					<FormControlLabel
+						control={
+							<Switch
+								defaultChecked={false}
+								// onChange={value => {
+								// 	const i = value.target.checked ? 100 : 101;
+								// 	this.setState({ dependente_resposta_6: i });
+								// }}
+							/>
+						}
+						label={
+							<Typography className="formControlLabel">
+								Tem problemas nas articulações ( Artrose, Artrite, Lúpus,
+								Espondilite Anquilosante, Artrite Reumatóide, Gota, outras) e na
+								Coluna Vertebral? Faz tratamentos? Quais?
+							</Typography>
+						}
+					/>
+
+					{/* {!!(this.state.dependente_resposta_6 == 100) && ( */}
+					<TextField
+						required
+						id="firstName"
+						name="firstName"
+						label="Esclarecimento"
+						fullWidth
+						autoComplete="given-name"
+						variant="standard"
+						// value={this.state.dependente_esclarecimento_6}
+						// onChange={event =>
+						// 	this.setState({
+						// 		dependente_esclarecimento_6: event.target.value,
+						// 	})
+						// }
+					/>
+					{/* )} */}
+				</Grid>
+				<Grid item xs={12} sm={12} style={{ marginBottom: 20 }}>
+					<FormControlLabel
+						control={
+							<Switch
+								defaultChecked={false}
+								// onChange={value => {
+								// 	const i = value.target.checked ? 100 : 101;
+								// 	this.setState({ dependente_resposta_7: i });
+								// }}
+							/>
+						}
+						label={
+							<Typography className="formControlLabel">
+								É ou foi portador de Anemia, Leucemia, Linfoma (Doença de
+								Hodgkin, problemas com as plaquetas (púrpuras) Doenças
+								infecciosas (ex: HIV, Sífilis, Hepatite C, Doenç de Chagas,
+								outras)
+							</Typography>
+						}
+					/>
+					{/* {!!(this.state.dependente_resposta_7 == 100) && ( */}
+					<TextField
+						required
+						id="firstName"
+						name="firstName"
+						label="Esclarecimento"
+						fullWidth
+						autoComplete="given-name"
+						variant="standard"
+						// value={this.state.dependente_esclarecimento_7}
+						// onChange={event =>
+						// 	this.setState({
+						// 		dependente_esclarecimento_7: event.target.value,
+						// 	})
+						// }
+					/>
+					{/* )} */}
+				</Grid>
+			</Grid>
+		</div>
+	</DialogContent>
+	<DialogActions>
+		<Button onClick={() => this.handleCloseModal()}>Cancelar</Button>
+		<Button onClick={() => this.handlerAdicionar()}>Adicionar</Button>
+	</DialogActions>
+</Dialog>;

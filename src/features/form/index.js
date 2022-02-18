@@ -1,13 +1,11 @@
+import { ThemeProvider } from '@emotion/react';
 import React from 'react';
 import { connect, Provider } from 'react-redux';
-import { ThemeProvider } from 'styled-components';
-import store from './core/store';
-import MailPresentation from './features/mail';
-// import Simulation from './features/simulationMock';
+import { ThemeContext } from 'styled-components';
+import store from '../../core/store';
+import FormPresentation from './presentation/Form';
 
-import ThemeContext from './shared/themes/context';
-
-function App({ theme }) {
+function Form({ theme }) {
 	return (
 		<div>
 			<Provider store={store}>
@@ -15,7 +13,7 @@ function App({ theme }) {
 					<ThemeContext.Consumer>
 						{t => (
 							<ThemeProvider theme={t}>
-								<MailPresentation />
+								<FormPresentation />
 							</ThemeProvider>
 						)}
 					</ThemeContext.Consumer>
@@ -28,4 +26,4 @@ function App({ theme }) {
 const mapStateToProps = state => ({
 	theme: state.mail.theme,
 });
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps)(Form);

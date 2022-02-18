@@ -1,0 +1,119 @@
+import React from 'react';
+import {
+	// Avatar,
+	Button,
+	// Checkbox,
+	// Dialog,
+	// DialogActions,
+	// DialogContent,
+	// DialogTitle,
+	// FormControl,
+	// FormControlLabel,
+	Grid,
+	IconButton,
+	// InputLabel,
+	// List,
+	// ListItem,
+	// ListItemAvatar,
+	// ListItemText,
+	// MenuItem,
+	// Select,
+	// Switch,
+	// TextField,
+	Typography,
+} from '@mui/material';
+import {
+	LoadingButton,
+	// DatePicker
+} from '@mui/lab';
+import { AddCircle, Save } from '@mui/icons-material';
+
+export const RenderDependente = () => {
+	return (
+		<div>
+			<Grid container spacing={3}>
+				<Grid item xs={12} sm={12}>
+					<Typography
+						component="h3"
+						variant="h4"
+						align="left"
+						className="headerTitle"
+					>
+						Adicione os dependentes do seu plano
+					</Typography>
+				</Grid>
+
+				<Grid item xs={12} sm={12}>
+					<IconButton
+						// onClick={() => {
+						// 	this.setState({
+						// 		openModal: true,
+						// 		mensagemOdonto: '',
+						// 		valorAdicionalOdonto: '',
+						// 	});
+						// 	this.clearModal();
+						// }}
+						variant="contained"
+					>
+						<AddCircle />
+					</IconButton>
+				</Grid>
+
+				<Grid item xs={12} sm={12}>
+					{/* <List dense={false}>
+						{this.state.arrayDependentes.map((item, index) => {
+							return (
+								<ListItem>
+									<ListItemAvatar>
+										<Avatar>
+											{item.NOME_DEPENDENTE.substring(0, 1).toUpperCase()}
+										</Avatar>
+									</ListItemAvatar>
+									<ListItemText primary={item.NOME_DEPENDENTE} />
+								</ListItem>
+							);
+						})}
+					</List> */}
+				</Grid>
+
+				<Grid container>
+					<Grid item xs={2}>
+						<Button
+							// onClick={() => this.setState({ selectedStep: 0 })}
+							variant="outlined"
+							style={{
+								marginBottom: 40,
+								marginTop: 60,
+								width: '100%',
+								marginLeft: 25,
+								alignSelf: 'flex-end',
+								textAlign: 'right',
+							}}
+						>
+							Voltar
+						</Button>
+					</Grid>
+					<Grid item xs={2}>
+						<LoadingButton
+							// loading={this.state.loading}
+							// onClick={() => this.setState({ selectedStep: 2 })}
+							loadingPosition="start"
+							startIcon={<Save />}
+							variant="contained"
+							style={{
+								marginBottom: 40,
+								marginTop: 60,
+								marginLeft: 40,
+								width: '100%',
+								textAlign: 'right',
+								backgroundColor: '#f06e3c',
+							}}
+						>
+							Avançar
+						</LoadingButton>
+					</Grid>
+				</Grid>
+			</Grid>
+		</div>
+	);
+};

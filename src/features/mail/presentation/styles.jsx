@@ -193,6 +193,9 @@ export const GenteComBr = styled.p`
 	text-transform: lowercase;
 	text-decoration: underline;
 	letter-spacing: 3.6px;
+	@media (max-width: 800px) {
+		font-size: 14px;
+	}
 `;
 export const HttpWwwPortoseguroComBr = styled.p`
 	position: relative;
@@ -207,4 +210,7 @@ export const HttpWwwPortoseguroComBr = styled.p`
 	text-align: center;
 	text-decoration: underline;
 	letter-spacing: -0.24px;
+	@media (max-width: 800px) {
+		font-size: 14px;
+	}
 `;

@@ -2,6 +2,11 @@ import queryString from 'query-string';
 // import api from '../../../services/api';
 import { depSet, userSet, toogleTheme, isCNPJ } from '../reducers/mail';
 
+// ////////////////////
+// ////////////////////
+
+// MAIL PHASE
+
 export const doLogin = () => {
 	return async dispatch => {
 		await fetch('https://apps.blueprojects.com.br/arturos_mr/Security/login', {
@@ -11,8 +16,8 @@ export const doLogin = () => {
 				'Content-Type': 'application/json',
 			},
 			body: JSON.stringify({
-				username: 'leega_admin',
-				password: 'leega@mr',
+				username: 'andre',
+				password: 'andre',
 			}),
 		})
 			.then(response => response.json())

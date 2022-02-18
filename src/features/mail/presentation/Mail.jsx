@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { connect, useDispatch } from 'react-redux';
-import CssBaseline from '@mui/material/CssBaseline';
+// import CssBaseline from '@mui/material/CssBaseline';
 import CardDepContainer from '../components/CardDepContainer';
 import NaoResponda from '../components/NaoResponda';
 import {
@@ -48,7 +48,7 @@ const MailPresentation = ({
 
 	return (
 		<Container>
-			<CssBaseline />
+			{/* <CssBaseline /> */}
 
 			<LogoFrame>
 				{isLeega === false ? <StyledFMapLogo /> : <StyledLeegaLogoSvg />}

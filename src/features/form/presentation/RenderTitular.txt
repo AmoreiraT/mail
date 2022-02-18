@@ -1,0 +1,1041 @@
+import React from 'react';
+
+export const RenderTitular = () => {
+	return (
+		<div>
+			<Grid container spacing={3}>
+				<Grid item xs={12} sm={12}>
+					<Typography component="h3" variant="h4" align="left">
+						Dados do Titular
+					</Typography>
+				</Grid>
+				<Grid item xs={12} sm={6}>
+					<TextField
+						required
+						id="firstName"
+						name="firstName"
+						label="Nome Completo"
+						fullWidth
+						autoComplete="given-name"
+						variant="standard"
+						contentEditable={false}
+						disabled
+						value={this.state.nome}
+					/>
+				</Grid>
+				<Grid item xs={6} sm={3}>
+					<TextField
+						required
+						id="firstName"
+						name="firstName"
+						label="CPF"
+						fullWidth
+						autoComplete="given-name"
+						variant="standard"
+						value={this.state.cpf}
+						disabled
+						contentEditable={false}
+						onChange={event => this.setState({ cpf: event.target.value })}
+					/>
+				</Grid>
+				<Grid item xs={6} sm={3}>
+					<TextField
+						required
+						id="firstName"
+						name="firstName"
+						label="RG"
+						fullWidth
+						autoComplete="given-name"
+						variant="standard"
+						value={this.state.rg}
+						onChange={event => this.setState({ rg: event.target.value })}
+					/>
+				</Grid>
+				<Grid item xs={6} sm={6}>
+					<TextField
+						required
+						id="firstName"
+						name="firstName"
+						label="E-mail"
+						fullWidth
+						autoComplete="given-name"
+						variant="standard"
+						value={this.state.email}
+						disabled
+						contentEditable={false}
+						onChange={event => this.setState({ email: event.target.value })}
+					/>
+				</Grid>
+				<Grid item xs={6} sm={6}>
+					<TextField
+						required
+						id="firstName"
+						name="firstName"
+						label="Whatsapp"
+						fullWidth
+						disabled
+						contentEditable={false}
+						autoComplete="given-name"
+						variant="standard"
+						value={this.state.whatsapp}
+						onChange={event => this.setState({ whatsapp: event.target.value })}
+					/>
+				</Grid>
+				<Grid item xs={6} sm={6}>
+					<TextField
+						required
+						id="cargo"
+						name="cargo"
+						label="Cargo"
+						fullWidth
+						disabled
+						contentEditable={false}
+						autoComplete="given-name"
+						variant="standard"
+						value={this.state.cargo}
+						disabled
+					/>
+				</Grid>
+				<Grid item xs={6} sm={6}>
+					<TextField
+						required
+						id="regime"
+						name="regime"
+						label="Regime"
+						fullWidth
+						disabled
+						contentEditable={false}
+						autoComplete="given-name"
+						variant="standard"
+						value={this.state.regime}
+						disabled
+					/>
+				</Grid>
+
+				<Grid item xs={6} sm={6}>
+					<FormControl
+						style={{ width: '100%' }}
+						variant="standard"
+						sx={{ m: 1, minWidth: 120 }}
+					>
+						<InputLabel id="demo-simple-select-standard-label">Sexo</InputLabel>
+						<Select
+							defaultValue=""
+							style={{ width: '100%' }}
+							labelId="demo-simple-select-standard-label"
+							id="demo-simple-select-standard"
+							value={this.state.selectedSexo}
+							onChange={event => {
+								this.setState({ selectedSexo: event.target.value });
+							}}
+							label="Age"
+						>
+							{this.state.domainSexo.map((item, index) => {
+								return <MenuItem value={item.ID}>{item.SEXO}</MenuItem>;
+							})}
+						</Select>
+					</FormControl>
+				</Grid>
+				<Grid item xs={6} sm={6}>
+					<FormControl
+						style={{ width: '100%' }}
+						variant="standard"
+						sx={{ m: 1, minWidth: 120 }}
+					>
+						<InputLabel id="demo-simple-select-standard-label">
+							Estado Cívil
+						</InputLabel>
+						<Select
+							defaultValue=""
+							style={{ width: '100%' }}
+							labelId="demo-simple-select-standard-label"
+							id="demo-simple-select-standard"
+							value={this.state.selectedEstadoCivil}
+							onChange={event => {
+								this.setState({ selectedEstadoCivil: event.target.value });
+							}}
+							label="Age"
+						>
+							{this.state.domainEstadoCivil.map((item, index) => {
+								return <MenuItem value={item.ID}>{item.ESTADO_CIVIL}</MenuItem>;
+							})}
+						</Select>
+					</FormControl>
+				</Grid>
+				<Grid item xs={8} sm={4}>
+					<div className="customDatePickerWidth">
+						<DatePicker
+							label="Data de Nascimento"
+							inputFormat="dd/MM/yyyy"
+							value={this.state.dataNascimento}
+							onChange={event => {
+								const years = moment().diff(event, 'years');
+								console.log(years);
+								this.setState({ dataNascimento: event });
+
+								if (years < 120 && years != null) {
+									this.setState({ idade: years });
+								}
+							}}
+							style={{ width: '100%' }}
+							renderInput={params => <TextField {...params} />}
+						/>
+					</div>
+				</Grid>
+				<Grid item xs={4} sm={2}>
+					<TextField
+						required
+						id="firstName"
+						name="firstName"
+						label="Idade"
+						fullWidth
+						autoComplete="given-name"
+						variant="standard"
+						value={this.state.idade}
+						onChange={event => this.setState({ idade: event.target.value })}
+					/>
+				</Grid>
+				<Grid item xs={12} sm={6}>
+					<TextField
+						required
+						id="firstName"
+						name="firstName"
+						label="Nome da Mãe"
+						fullWidth
+						autoComplete="given-name"
+						variant="standard"
+						value={this.state.nomeMae}
+						onChange={event => this.setState({ nomeMae: event.target.value })}
+					/>
+				</Grid>
+				<div style={{ marginTop: 50, width: '100%' }} />
+
+				<Grid item xs={8} sm={4}>
+					<div className="customDatePickerWidth">
+						<DatePicker
+							disabled
+							label="Data de Admissão"
+							inputFormat="dd/MM/yyyy"
+							value={this.state.dataAdmissao}
+							onChange={event => this.setState({ dataAdmissao: event })}
+							style={{ width: '100%' }}
+							renderInput={params => <TextField {...params} />}
+						/>
+					</div>
+				</Grid>
+				<Grid item xs={3} sm={3}>
+					<TextField
+						required
+						id="firstName"
+						name="firstName"
+						label="Peso"
+						fullWidth
+						autoComplete="given-name"
+						variant="standard"
+						type="number"
+						value={this.state.peso}
+						onChange={event => this.setState({ peso: event.target.value })}
+					/>
+				</Grid>
+				<Grid item xs={3} sm={3}>
+					<TextField
+						required
+						id="firstName"
+						name="firstName"
+						label="Altura"
+						fullWidth
+						autoComplete="given-name"
+						variant="standard"
+						value={this.state.altura}
+						InputProps={{
+							inputComponent: NumberFormatCustom,
+						}}
+						onChange={event => this.setState({ altura: event.target.value })}
+					/>
+				</Grid>
+				<Grid item xs={4} sm={4}>
+					<TextField
+						required
+						id="firstName"
+						name="firstName"
+						label="CEP"
+						fullWidth
+						autoComplete="given-name"
+						variant="standard"
+						value={this.state.cep}
+						onBlur={() => {
+							this.getCEP(this.state.token, this.state.cep);
+						}}
+						onChange={event => this.setState({ cep: event.target.value })}
+					/>
+				</Grid>
+				<Grid item xs={8} sm={8}>
+					<TextField
+						required
+						id="firstName"
+						name="firstName"
+						label="Endereço"
+						fullWidth
+						autoComplete="given-name"
+						variant="standard"
+						value={this.state.endereco}
+						onChange={event => this.setState({ endereco: event.target.value })}
+					/>
+				</Grid>
+				<Grid item xs={4} sm={4}>
+					<TextField
+						required
+						id="firstName"
+						name="firstName"
+						label="Bairro"
+						fullWidth
+						autoComplete="given-name"
+						variant="standard"
+						value={this.state.bairro}
+						onChange={event => this.setState({ bairro: event.target.value })}
+					/>
+				</Grid>
+				<Grid item xs={4} sm={4}>
+					<TextField
+						required
+						id="firstName"
+						name="firstName"
+						label="Cidade"
+						fullWidth
+						autoComplete="given-name"
+						variant="standard"
+						value={this.state.cidade}
+						onChange={event => this.setState({ cidade: event.target.value })}
+					/>
+				</Grid>
+				<div style={{ marginTop: 50, width: '100%' }} />
+
+				<Grid item xs={3} sm={3}>
+					<FormControl
+						style={{ width: 200 }}
+						variant="standard"
+						sx={{ m: 1, minWidth: 120 }}
+					>
+						<InputLabel id="demo-simple-select-standard-label">
+							Plano de Saúde?{' '}
+						</InputLabel>
+						<Select
+							defaultValue=""
+							style={{ width: '100%' }}
+							labelId="demo-simple-select-standard-label"
+							id="demo-simple-select-standard"
+							value={this.state.selectedTemPlanoSaude}
+							onChange={event => {
+								this.setState({ selectedTemPlanoSaude: event.target.value });
+							}}
+							label="Age"
+						>
+							<MenuItem value={100}>Sim</MenuItem>
+							<MenuItem value={101}>Não</MenuItem>
+						</Select>
+					</FormControl>
+				</Grid>
+
+				{!!(this.state.selectedTemPlanoSaude == 100) && (
+					<Grid item xs={4} sm={4}>
+						<FormControl
+							style={{ width: '100%' }}
+							variant="standard"
+							sx={{ m: 1, minWidth: 120 }}
+						>
+							<InputLabel id="demo-simple-select-standard-label">
+								Operadora
+							</InputLabel>
+							<Select
+								defaultValue=""
+								style={{ width: '100%' }}
+								labelId="demo-simple-select-standard-label"
+								id="demo-simple-select-standard"
+								value={this.state.selectedOperadora}
+								onChange={event => {
+									this.setState({ selectedOperadora: event.target.value });
+									this.getPlano(
+										event.target.value,
+										this.state.fk_cargo,
+										this.state.token,
+									);
+								}}
+								label="Age"
+							>
+								{this.state.domainOperadora.map((item, index) => {
+									return <MenuItem value={item.ID}>{item.OPERADORA}</MenuItem>;
+								})}
+							</Select>
+						</FormControl>
+					</Grid>
+				)}
+
+				{!!(this.state.selectedTemPlanoSaude == 100) && (
+					<Grid item xs={4} sm={4}>
+						<FormControl
+							style={{ width: '100%' }}
+							variant="standard"
+							sx={{ m: 1, minWidth: 120 }}
+						>
+							<InputLabel id="demo-simple-select-standard-label">
+								Plano
+							</InputLabel>
+							<Select
+								defaultValue=""
+								style={{ width: '100%' }}
+								labelId="demo-simple-select-standard-label"
+								id="demo-simple-select-standard"
+								value={this.state.selectedPlano}
+								onChange={event => {
+									this.setState({ selectedPlano: event.target.value });
+
+									this.getValores(this.state.token, event.target.value);
+									this.getPDFPlano(this.state.token, event.target.value);
+								}}
+								label="Age"
+							>
+								{this.state.domainPlanos.map((item, index) => {
+									return <MenuItem value={item.ID}>{item.PLANO}</MenuItem>;
+								})}
+							</Select>
+						</FormControl>
+					</Grid>
+				)}
+
+				{!!(this.state.selectedTemPlanoSaude == 100) && this.state.pdfPlano && (
+					<Grid item xs={1} sm={1}>
+						<IconButton
+							onClick={() => window.open(this.state.pdfPlano, '_blank')}
+							color="primary"
+							aria-label="upload picture"
+							component="span"
+						>
+							<HelpIcon style={{ marginTop: 10 }} />
+						</IconButton>
+					</Grid>
+				)}
+
+				{!!(this.state.selectedTemPlanoSaude == 100) && (
+					<Grid item xs={4} sm={4}>
+						<div style={{ fontSize: 13 }}>Valor Plano</div>
+						<TextField
+							required
+							id="firstName"
+							name="firstName"
+							fullWidth
+							autoComplete="given-name"
+							variant="standard"
+							contentEditable={false}
+							disabled
+							value={this.state.valor_plano}
+						/>
+					</Grid>
+				)}
+
+				{!!(this.state.selectedTemPlanoSaude == 100) && (
+					<Grid item xs={4} sm={4}>
+						<div style={{ fontSize: 13 }}>Valor Participação</div>
+						<TextField
+							required
+							id="firstName"
+							name="firstName"
+							fullWidth
+							defaultValue=""
+							autoComplete="given-name"
+							variant="standard"
+							disabled
+							value={this.state.valor_participacao}
+						/>
+					</Grid>
+				)}
+
+				{!!(this.state.selectedTemPlanoSaude == 100) && (
+					<Grid item xs={4} sm={4}>
+						<div style={{ fontSize: 13 }}>Valor a Pagar</div>
+						<TextField
+							required
+							id="firstName"
+							name="firstName"
+							fullWidth
+							defaultValue=""
+							variant="standard"
+							disabled
+							value={this.state.valor_pagar}
+						/>
+					</Grid>
+				)}
+
+				{!!(this.state.selectedTemPlanoSaude == 100) &&
+					this.state.valor_pagar > 0 && (
+						<Grid item xs={12} sm={12} style={{ marginLeft: 0 }}>
+							<FormControlLabel
+								control={
+									<Checkbox
+										defaultChecked={false}
+										onChange={event => {
+											this.setState({
+												aceitoPagar: event.target.checked ? 100 : 101,
+											});
+										}}
+									/>
+								}
+								label="Aceito Pagar a Diferença"
+							/>
+						</Grid>
+					)}
+
+				<div style={{ marginTop: 50, width: '100%' }} />
+				<Grid item xs={3} sm={3}>
+					<FormControl
+						style={{ width: 200 }}
+						variant="standard"
+						sx={{ m: 1, minWidth: 120 }}
+					>
+						<InputLabel id="demo-simple-select-standard-label">
+							Plano Odonto?
+						</InputLabel>
+						<Select
+							defaultValue=""
+							style={{ width: '100%' }}
+							labelId="demo-simple-select-standard-label"
+							id="demo-simple-select-standard"
+							value={this.state.selectedTemOdonto}
+							onChange={event => {
+								this.setState({ selectedTemOdonto: event.target.value });
+							}}
+							label="Age"
+						>
+							<MenuItem value={100}>Sim</MenuItem>
+							<MenuItem value={101}>Não</MenuItem>
+						</Select>
+					</FormControl>
+				</Grid>
+
+				{!!(this.state.selectedTemOdonto == 100) && (
+					<Grid item xs={4} sm={4}>
+						<FormControl
+							style={{ width: '100%' }}
+							variant="standard"
+							sx={{ m: 1, minWidth: 120 }}
+						>
+							<InputLabel id="demo-simple-select-standard-label">
+								Operadora
+							</InputLabel>
+							<Select
+								defaultValue=""
+								style={{ width: '100%' }}
+								labelId="demo-simple-select-standard-label"
+								id="demo-simple-select-standard"
+								value={this.state.selectedOperadoraOdonto}
+								onChange={event => {
+									this.setState({
+										selectedOperadoraOdonto: event.target.value,
+									});
+									this.getPlanoOdonto(event.target.value, this.state.token);
+								}}
+								label="Age"
+							>
+								{this.state.domainOperadora.map((item, index) => {
+									return <MenuItem value={item.ID}>{item.OPERADORA}</MenuItem>;
+								})}
+							</Select>
+						</FormControl>
+					</Grid>
+				)}
+
+				{!!(this.state.selectedTemOdonto == 100) && (
+					<Grid item xs={5} sm={5}>
+						<FormControl
+							style={{ width: '100%' }}
+							variant="standard"
+							sx={{ m: 1, minWidth: 120 }}
+						>
+							<InputLabel id="demo-simple-select-standard-label">
+								Plano
+							</InputLabel>
+							<Select
+								defaultValue=""
+								style={{ width: '100%' }}
+								labelId="demo-simple-select-standard-label"
+								id="demo-simple-select-standard"
+								value={this.state.selectedPlanoOdonto}
+								onChange={event => {
+									this.setState({ selectedPlanoOdonto: event.target.value });
+								}}
+								label="Age"
+							>
+								{this.state.domainPlanosOdonto.map((item, index) => {
+									return (
+										<MenuItem value={item.ID}>{item.PLANO_ODONTO}</MenuItem>
+									);
+								})}
+							</Select>
+						</FormControl>
+					</Grid>
+				)}
+
+				<div style={{ marginTop: 50, width: '100%' }} />
+				{!!(this.state.regime != 'PJ') && (
+					<Grid item xs={12} sm={12}>
+						<FormControlLabel
+							control={
+								<Checkbox
+									disabled
+									defaultChecked
+									onChange={event => {
+										this.setState({
+											seguroVida: event.target.checked ? 100 : 101,
+										});
+									}}
+								/>
+							}
+							label="Seguro Vida?"
+						/>
+					</Grid>
+				)}
+				<div style={{ marginTop: 50, width: '100%' }} />
+
+				{/* <Grid item xs={3} sm={3}>
+                    <FormControlLabel control={<Checkbox defaultChecked={false} onChange={(event) => {
+                        this.setState({outroBeneficio: (event.target.checked ? 100 : 101)});
+                    }} />} label="Outro Benefício?" />
+                </Grid>
+*/}
+				{!!(this.state.outroBeneficio == 100) && (
+					<Grid item xs={4} sm={4}>
+						<FormControl
+							style={{ width: '100%' }}
+							variant="standard"
+							sx={{ m: 1, minWidth: 120 }}
+						>
+							<InputLabel id="demo-simple-select-standard-label">
+								Operadora
+							</InputLabel>
+							<Select
+								defaultValue=""
+								style={{ width: '100%' }}
+								labelId="demo-simple-select-standard-label"
+								id="demo-simple-select-standard"
+								value={this.state.selectedOperadoraOutroBeneificio}
+								onChange={event => {
+									this.setState({
+										selectedOperadoraOutroBeneificio: event.target.value,
+									});
+									this.getBeneficio(event.target.value, this.state.token);
+								}}
+								label="Age"
+							>
+								{this.state.domainOperadora.map((item, index) => {
+									return <MenuItem value={item.ID}>{item.OPERADORA}</MenuItem>;
+								})}
+							</Select>
+						</FormControl>
+					</Grid>
+				)}
+
+				{!!(this.state.outroBeneficio == 100) && (
+					<Grid item xs={5} sm={5}>
+						<FormControl
+							style={{ width: '100%' }}
+							variant="standard"
+							sx={{ m: 1, minWidth: 120 }}
+						>
+							<InputLabel id="demo-simple-select-standard-label">
+								Benefício
+							</InputLabel>
+							<Select
+								defaultValue=""
+								style={{ width: '100%' }}
+								labelId="demo-simple-select-standard-label"
+								id="demo-simple-select-standard"
+								value={this.state.selectedBeneficio}
+								onChange={event => {
+									this.setState({ selectedBeneficio: event.target.value });
+								}}
+								label="Age"
+							>
+								{this.state.domainBeneficios.map((item, index) => {
+									return <MenuItem value={item.ID}>{item.BENEFICIO}</MenuItem>;
+								})}
+							</Select>
+						</FormControl>
+					</Grid>
+				)}
+
+				<div style={{ marginTop: 50, width: '100%' }} />
+
+				<Grid
+					container
+					spacing={1}
+					style={{ marginBottom: 20, marginLeft: 20, marginTop: 20 }}
+				>
+					<Typography component="h3" variant="h4" align="center">
+						Marque os items abaixo
+					</Typography>
+				</Grid>
+
+				<Grid item xs={12} sm={12} style={{ marginBottom: 20 }}>
+					<FormControlLabel
+						control={
+							<Switch
+								defaultChecked={false}
+								onChange={value => {
+									const i = value.target.checked ? 100 : 101;
+									this.setState({ resposta_1: i });
+								}}
+							/>
+						}
+						label={
+							<Typography className="formControlLabel">
+								Você já fez ou tem que fazer alguma cirurgia?
+							</Typography>
+						}
+					/>
+
+					{!!(this.state.resposta_1 == 100) && (
+						<TextField
+							required
+							id="firstName"
+							name="firstName"
+							label="Esclarecimento"
+							fullWidth
+							autoComplete="given-name"
+							variant="standard"
+							value={this.state.esclarecimento_1}
+							onChange={event =>
+								this.setState({ esclarecimento_1: event.target.value })
+							}
+						/>
+					)}
+				</Grid>
+				<Grid item xs={12} sm={12} style={{ marginBottom: 20 }}>
+					<FormControlLabel
+						control={
+							<Switch
+								defaultChecked={false}
+								onChange={value => {
+									const i = value.target.checked ? 100 : 101;
+									this.setState({ resposta_2: i });
+								}}
+							/>
+						}
+						label={
+							<Typography className="formControlLabel">
+								Você já fez ou tem que fzer alguma cirurgia? Por qual motivo?
+								Quando?
+							</Typography>
+						}
+					/>
+
+					{!!(this.state.resposta_2 == 100) && (
+						<TextField
+							required
+							id="firstName"
+							name="firstName"
+							label="Esclarecimento"
+							fullWidth
+							autoComplete="given-name"
+							variant="standard"
+							value={this.state.esclarecimento_2}
+							onChange={event =>
+								this.setState({ esclarecimento_2: event.target.value })
+							}
+						/>
+					)}
+				</Grid>
+				<Grid item xs={12} sm={12} style={{ marginBottom: 20 }}>
+					<FormControlLabel
+						control={
+							<Switch
+								defaultChecked={false}
+								onChange={value => {
+									const i = value.target.checked ? 100 : 101;
+									this.setState({ resposta_3: i });
+								}}
+							/>
+						}
+						label={
+							<Typography className="formControlLabel">
+								É portador de doenças como infarto? Angina? Hipertenção
+								arterial? Doença de Chagas? Problemas Pulmonares? Problema
+								neurológicos? (ex: AVC, Esclerose Múltipla, Epilepsia, Tumores)
+								?
+							</Typography>
+						}
+					/>
+
+					{!!(this.state.resposta_3 == 100) && (
+						<TextField
+							required
+							id="firstName"
+							name="firstName"
+							label="Esclarecimento"
+							fullWidth
+							autoComplete="given-name"
+							variant="standard"
+							value={this.state.esclarecimento_3}
+							onChange={event =>
+								this.setState({ esclarecimento_3: event.target.value })
+							}
+						/>
+					)}
+				</Grid>
+				<Grid item xs={12} sm={12} style={{ marginBottom: 20 }}>
+					<FormControlLabel
+						control={
+							<Switch
+								defaultChecked={false}
+								onChange={value => {
+									const i = value.target.checked ? 100 : 101;
+									this.setState({ resposta_4: i });
+								}}
+							/>
+						}
+						label={
+							<Typography className="formControlLabel">
+								É portador de doença nos rins (ex: Cálculos, Insuficiencia
+								Renal), na bexiga, próstata, órgãos genitais? Problemas nas
+								mamas, útero, ovários?
+							</Typography>
+						}
+					/>
+
+					{!!(this.state.resposta_4 == 100) && (
+						<TextField
+							required
+							id="firstName"
+							name="firstName"
+							label="Esclarecimento"
+							fullWidth
+							autoComplete="given-name"
+							variant="standard"
+							value={this.state.esclarecimento_4}
+							onChange={event =>
+								this.setState({ esclarecimento_4: event.target.value })
+							}
+						/>
+					)}
+				</Grid>
+				<Grid item xs={12} sm={12} style={{ marginBottom: 20 }}>
+					<FormControlLabel
+						control={
+							<Switch
+								defaultChecked={false}
+								onChange={value => {
+									const i = value.target.checked ? 100 : 101;
+									this.setState({ resposta_5: i });
+								}}
+							/>
+						}
+						label={
+							<Typography className="formControlLabel">
+								É portador de doenças da Tireóide? Diabetes? Doenças do fígado
+								(cirrose, hepatite) do estômago? Do intestino (Crohn,
+								Retocolite, Diverticulite) Tumores? Câncer? Faz tratamentos?
+								Quais?
+							</Typography>
+						}
+					/>
+					{!!(this.state.resposta_5 == 100) && (
+						<TextField
+							required
+							id="firstName"
+							name="firstName"
+							label="Esclarecimento"
+							fullWidth
+							autoComplete="given-name"
+							variant="standard"
+							value={this.state.esclarecimento_5}
+							onChange={event =>
+								this.setState({ esclarecimento_5: event.target.value })
+							}
+						/>
+					)}
+				</Grid>
+				<Grid item xs={12} sm={12} style={{ marginBottom: 20 }}>
+					<FormControlLabel
+						control={
+							<Switch
+								defaultChecked={false}
+								onChange={value => {
+									const i = value.target.checked ? 100 : 101;
+									this.setState({ resposta_6: i });
+								}}
+							/>
+						}
+						label={
+							<Typography className="formControlLabel">
+								Tem problemas nas articulações ( Artrose, Artrite, Lúpus,
+								Espondilite Anquilosante, Artrite Reumatóide, Gota, outras) e na
+								Coluna Vertebral? Faz tratamentos? Quais?
+							</Typography>
+						}
+					/>
+
+					{!!(this.state.resposta_6 == 100) && (
+						<TextField
+							required
+							id="firstName"
+							name="firstName"
+							label="Esclarecimento"
+							fullWidth
+							autoComplete="given-name"
+							variant="standard"
+							value={this.state.esclarecimento_6}
+							onChange={event =>
+								this.setState({ esclarecimento_6: event.target.value })
+							}
+						/>
+					)}
+				</Grid>
+				<Grid item xs={12} sm={12} style={{ marginBottom: 20 }}>
+					<FormControlLabel
+						control={
+							<Switch
+								defaultChecked={false}
+								onChange={value => {
+									const i = value.target.checked ? 100 : 101;
+									this.setState({ resposta_7: i });
+								}}
+							/>
+						}
+						label={
+							<Typography className="formControlLabel">
+								É ou foi portador de Anemia, Leucemia, Linfoma (Doença de
+								Hodgkin, problemas com as plaquetas (púrpuras) Doenças
+								infecciosas (ex: HIV, Sífilis, Hepatite C, Doenç de Chagas,
+								outras)
+							</Typography>
+						}
+					/>
+					{!!(this.state.resposta_7 == 100) && (
+						<TextField
+							required
+							id="firstName"
+							name="firstName"
+							label="Esclarecimento"
+							fullWidth
+							autoComplete="given-name"
+							variant="standard"
+							value={this.state.esclarecimento_7}
+							onChange={event =>
+								this.setState({ esclarecimento_7: event.target.value })
+							}
+						/>
+					)}
+				</Grid>
+			</Grid>
+
+			<LoadingButton
+				loading={this.state.loading}
+				loadingPosition="start"
+				startIcon={<SaveIcon />}
+				variant="contained"
+				onClick={() => this.updateDadosTitular()}
+				style={{
+					marginBottom: 40,
+					marginTop: 20,
+					alignSelf: 'flex-end',
+					textAlign: 'right',
+					backgroundColor: '#f06e3c',
+				}}
+			>
+				Salvar Dados
+			</LoadingButton>
+		</div>
+	);
+}
+render() {
+	if (this.state.loadingInicial) {
+		return (
+			<div className="container">
+				<AppBar position="fixed" style={{ backgroundColor: 'rgb(10, 78, 90)' }}>
+					<Toolbar variant="dense" />
+				</AppBar>
+				<Paper className="formPaper">
+					<div
+						style={{
+							width: '100%',
+							height: '100%',
+							alignItems: 'center',
+							textAlign: 'center',
+						}}
+					>
+						<CircularProgress style={{ margin: 40, alignSelf: 'center' }} />
+					</div>
+				</Paper>
+			</div>
+		);
+	}
+
+	return (
+		<div className="container">
+			<AppBar position="fixed" style={{ backgroundColor: 'rgb(10, 78, 90)' }}>
+				<Toolbar variant="dense" />
+			</AppBar>
+			<Snackbar
+				open={this.state.showSuccess}
+				autoHideDuration={2000}
+				onClose={this.handleClose}
+			>
+				<Alert
+					onClose={this.handleClose}
+					severity="success"
+					sx={{ width: '100%' }}
+				>
+					Registro Salvo com Sucesso!!
+				</Alert>
+			</Snackbar>
+			<Snackbar
+				open={this.state.showError}
+				autoHideDuration={2000}
+				onClose={this.handleClose}
+			>
+				<Alert
+					onClose={this.handleClose}
+					severity="error"
+					sx={{ width: '100%' }}
+				>
+					{this.state.erroMessage}
+				</Alert>
+			</Snackbar>
+			<LocalizationProvider dateAdapter={AdapterDateFns}>
+				<Paper className="formPaper">
+					<Grid
+						container
+						spacing={1}
+						style={{
+							marginBottom: 50,
+							marginLeft: 2,
+							marginTop: 50,
+							alignItems: 'center',
+							textAlign: 'center',
+						}}
+					>
+						{/* <Typography component="h1" variant="h4" align="center">
+                        {this.state.solicitacao_empresa}
+                    </Typography> */}
+						<img
+							src={this.state.url_imagem}
+							style={{ marginLeft: 'auto', marginRight: 'auto' }}
+						/>
+					</Grid>
+
+					<Grid container>
+						<Box sx={{ width: '100%', marginBottom: 10, marginTop: 5 }}>
+							<Stepper activeStep={this.state.selectedStep} alternativeLabel>
+								{this.state.steps.map(label => (
+									<Step key={label}>
+										<StepLabel>{label}</StepLabel>
+									</Step>
+								))}
+							</Stepper>
+						</Box>
+					</Grid>
+
+					{this.renderContainers()}
+				</Paper>
+			</LocalizationProvider>
+		</div>
+	);
+}

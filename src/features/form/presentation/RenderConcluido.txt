@@ -1,0 +1,85 @@
+import React from 'react';
+import { Checkbox, FormControlLabel, Grid, Typography } from '@mui/material';
+import LoadingButton from '@mui/lab/LoadingButton';
+import { Description, Save } from '@mui/icons-material';
+
+export const RenderConcluido = () => {
+	return (
+		<div>
+			<Grid container spacing={3}>
+				<Grid item xs={12} sm={12} style={{ marginBottom: 60 }}>
+					{/* {!!this.state.concluido && ( */}
+					<Typography
+						component="h3"
+						variant="h4"
+						align="center"
+						className="headerTitle"
+					>
+						Cadastro Finalizado!
+					</Typography>
+					{/* )} */}
+
+					{/* {!this.state.concluido && ( */}
+					<Grid container>
+						<Grid item xs={12} sm={12} style={{ marginLeft: 20 }}>
+							<FormControlLabel
+								control={
+									<Checkbox
+										defaultChecked={false}
+										// onChange={event => {
+										// 	this.setState({
+										// 		termoAceito: event.target.checked ? 100 : 101,
+										// 	});
+										// }}
+									/>
+								}
+								label="Aceito os termos e condições de uso"
+							/>
+						</Grid>
+
+						<Grid item xs={12} sm={12}>
+							<LoadingButton
+								loading={false}
+								loadingPosition="start"
+								startIcon={<Description />}
+								variant="contained"
+								// onClick={() => window.open(this.state.urlPDF, '_blank')}
+								style={{
+									marginBottom: 10,
+									marginTop: 20,
+									marginLeft: 25,
+									alignSelf: 'flex-end',
+									textAlign: 'right',
+									backgroundColor: '#f06e3c',
+								}}
+							>
+								Visualizar Termos
+							</LoadingButton>
+						</Grid>
+						<Grid item xs={12} sm={12}>
+							<LoadingButton
+								// disabled={this.state.termoAceito == 101 ? true : false}
+								// loading={this.state.loading}
+								loadingPosition="start"
+								startIcon={<Save />}
+								variant="contained"
+								// onClick={() => this.finalizarAceite()}
+								style={{
+									marginBottom: 40,
+									marginTop: 0,
+									marginLeft: 25,
+									alignSelf: 'flex-end',
+									textAlign: 'right',
+									backgroundColor: '#f06e3c',
+								}}
+							>
+								Finalizar
+							</LoadingButton>
+						</Grid>
+					</Grid>
+					{/* )} */}
+				</Grid>
+			</Grid>
+		</div>
+	);
+};
