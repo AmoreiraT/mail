@@ -28,9 +28,18 @@ export default createReducer(COLABORADOR, {
 		};
 	},
 	[userSet.type]: (state, action) => {
+		const array = [];
+		array.push(state.cartoes);
+
+		console.log(array);
 		const cartao = state.cartoes.map((card, i) =>
-			i === 0 ? { ...card, cardNum: action.payload.NRO_CARTEIRA } : card,
+			i === 0
+				? { ...card, cardNum: action.payload.NRO_CARTEIRA }
+				: { ...card, cardNum: action.payload.NRO_CARTEIRA_ODONTO },
 		);
+
+		console.log(cartao);
+
 		return {
 			...state,
 			nameColab: action.payload.Titular,
@@ -39,16 +48,48 @@ export default createReducer(COLABORADOR, {
 		};
 	},
 	[depSet.type]: (state, action) => {
-		const cartao = state.cartoes.map((card, i) =>
-			i === 0 ? { ...card, dependentes: [action.payload] } : card,
-		);
-		cartao.map((card, i) =>
-			i === 1 ? { ...card, dependentes: [action.payload] } : card,
-		);
+		const deps = action.payload;
+		const cartao = state.cartoes;
+		const array = [];
+		array.push(state.cartoes);
+
+		console.log(array);
+
+		deps.forEach(e => {
+			if (e.NRO_CARTEIRA !== null) {
+				cartao[0].dependentes.push({ num: e.NRO_CARTEIRA });
+			}
+		});
+		// const arr = [];
+		// const obj = {
+		// 	saude: [],
+		// 	odonto: [],
+		// };
+
+		// const objcartao = { saude: {}, odonto: {} };
+
+		// deps.forEach(element => {
+		// 	obj.saude.push(element.NRO_CARTEIRA);
+		// 	obj.odonto.push(element.NRO_CARTEIRA_ODONTO);
+		// });
+
+		// cartao.forEach((e, i) => {
+		// 	i === 0
+		// 		? e.dependentes.forEach(d => d.num.replace(action.payload.NRO_CARTEIRA))
+		// 		: e.dependentes.forEach(d =>
+		// 				d.num.replace(action.payload.NRO_CARTEIRA_ODONTO),
+		// 		  );
+		// });
+
+		console.log(cartao);
+		console.log(deps);
+		// console.log(obj);
+		// console.log(objcartao);
 
 		return {
 			...state,
-			cartoes: cartao,
+			// cartoes: cartao,
+			dependentes: deps,
 		};
 	},
 });

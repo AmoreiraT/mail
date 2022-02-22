@@ -142,22 +142,25 @@ export const getSolicitacoes = (token, ID) => {
 };
 
 export const getSexo = token => {
-	return dispatch => {
+	return async dispatch => {
 		try {
 			const obj = {
 				qid: 'DOMINIOS:SEXO',
 				conditions: [],
 			};
 
-			fetch('https://apps.blueprojects.com.br/arturos_mr/Integration/Query', {
-				method: 'POST',
-				headers: {
-					Accept: 'application/json',
-					'Content-Type': 'application/json',
-					auth: token,
+			await fetch(
+				'https://apps.blueprojects.com.br/arturos_mr/Integration/Query',
+				{
+					method: 'POST',
+					headers: {
+						Accept: 'application/json',
+						'Content-Type': 'application/json',
+						auth: token,
+					},
+					body: JSON.stringify(obj),
 				},
-				body: JSON.stringify(obj),
-			})
+			)
 				.then(response => response.json())
 				.then(responseJson => {
 					console.log(responseJson);
@@ -171,22 +174,25 @@ export const getSexo = token => {
 };
 
 export const getTermos = token => {
-	return dispatch => {
+	return async dispatch => {
 		try {
 			const obj = {
 				qid: 'LGPD:LGPD',
 				conditions: [],
 			};
 
-			fetch('https://apps.blueprojects.com.br/arturos_mr/Integration/Query', {
-				method: 'POST',
-				headers: {
-					Accept: 'application/json',
-					'Content-Type': 'application/json',
-					auth: token,
+			await fetch(
+				'https://apps.blueprojects.com.br/arturos_mr/Integration/Query',
+				{
+					method: 'POST',
+					headers: {
+						Accept: 'application/json',
+						'Content-Type': 'application/json',
+						auth: token,
+					},
+					body: JSON.stringify(obj),
 				},
-				body: JSON.stringify(obj),
-			})
+			)
 				.then(response => response.json())
 				.then(responseJson => {
 					console.log(responseJson);
@@ -204,22 +210,25 @@ export const getTermos = token => {
 };
 
 export const getEstadoCivil = token => {
-	return dispatch => {
+	return async dispatch => {
 		try {
 			const obj = {
 				qid: 'DOMINIOS:ESTADO_CIVIL',
 				conditions: [],
 			};
 
-			fetch('https://apps.blueprojects.com.br/arturos_mr/Integration/Query', {
-				method: 'POST',
-				headers: {
-					Accept: 'application/json',
-					'Content-Type': 'application/json',
-					auth: token,
+			await fetch(
+				'https://apps.blueprojects.com.br/arturos_mr/Integration/Query',
+				{
+					method: 'POST',
+					headers: {
+						Accept: 'application/json',
+						'Content-Type': 'application/json',
+						auth: token,
+					},
+					body: JSON.stringify(obj),
 				},
-				body: JSON.stringify(obj),
-			})
+			)
 				.then(response => response.json())
 				.then(responseJson => {
 					console.log(responseJson);
@@ -232,7 +241,7 @@ export const getEstadoCivil = token => {
 	};
 };
 export const getCEP = (token, cep) => {
-	return dispatch => {
+	return async dispatch => {
 		try {
 			const obj = {
 				qid: 'DOMINIOS:CEP',
@@ -244,15 +253,18 @@ export const getCEP = (token, cep) => {
 				],
 			};
 
-			fetch('https://apps.blueprojects.com.br/arturos_mr/Integration/Query', {
-				method: 'POST',
-				headers: {
-					Accept: 'application/json',
-					'Content-Type': 'application/json',
-					auth: token,
+			await fetch(
+				'https://apps.blueprojects.com.br/arturos_mr/Integration/Query',
+				{
+					method: 'POST',
+					headers: {
+						Accept: 'application/json',
+						'Content-Type': 'application/json',
+						auth: token,
+					},
+					body: JSON.stringify(obj),
 				},
-				body: JSON.stringify(obj),
-			})
+			)
 				.then(response => response.json())
 				.then(responseJson => {
 					console.log(responseJson);
@@ -260,7 +272,7 @@ export const getCEP = (token, cep) => {
 					if (!responseJson.error) {
 						if (responseJson.list.length > 0) {
 							dispatch(
-								this.setState({
+								titularSet({
 									endereco: responseJson.list[0].ENDERECO,
 									bairro: responseJson.list[0].BAIRRO,
 									cidade: responseJson.list[0].CIDADE,
@@ -276,7 +288,7 @@ export const getCEP = (token, cep) => {
 };
 
 export const getValores = (token, ID_PLANO) => {
-	return dispatch => {
+	return async dispatch => {
 		try {
 			const obj = {
 				qid: 'DOMINIOS:VALORES_PLANO',
@@ -288,15 +300,18 @@ export const getValores = (token, ID_PLANO) => {
 				],
 			};
 
-			fetch('https://apps.blueprojects.com.br/arturos_mr/Integration/Query', {
-				method: 'POST',
-				headers: {
-					Accept: 'application/json',
-					'Content-Type': 'application/json',
-					auth: token,
+			await fetch(
+				'https://apps.blueprojects.com.br/arturos_mr/Integration/Query',
+				{
+					method: 'POST',
+					headers: {
+						Accept: 'application/json',
+						'Content-Type': 'application/json',
+						auth: token,
+					},
+					body: JSON.stringify(obj),
 				},
-				body: JSON.stringify(obj),
-			})
+			)
 				.then(response => response.json())
 				.then(responseJson => {
 					console.log(responseJson);
@@ -319,7 +334,7 @@ export const getValores = (token, ID_PLANO) => {
 };
 
 export const updateDadosTitular = () => {
-	return dispatch => {
+	return async dispatch => {
 		if (this.state.email === '') {
 			dispatch(
 				this.setState({
@@ -543,15 +558,18 @@ export const updateDadosTitular = () => {
 			},
 		};
 
-		fetch('https://apps.blueprojects.com.br/arturos_mr/Integration/Save', {
-			method: 'POST',
-			headers: {
-				Accept: 'application/json',
-				'Content-Type': 'application/json',
-				auth: this.state.token,
+		await fetch(
+			'https://apps.blueprojects.com.br/arturos_mr/Integration/Save',
+			{
+				method: 'POST',
+				headers: {
+					Accept: 'application/json',
+					'Content-Type': 'application/json',
+					auth: this.state.token,
+				},
+				body: JSON.stringify(obj),
 			},
-			body: JSON.stringify(obj),
-		})
+		)
 			.then(response => response.json())
 			.then(responseJson => {
 				console.log(responseJson);
@@ -609,7 +627,7 @@ export const clearModal = () => {
 };
 
 export const saveDependente = () => {
-	return dispatch => {
+	return async dispatch => {
 		const array = this.state.arrayDependentes;
 
 		if (this.state.dependente_cpf === '') {
@@ -651,15 +669,18 @@ export const saveDependente = () => {
 			},
 		};
 
-		fetch('https://apps.blueprojects.com.br/arturos_mr/Integration/Save', {
-			method: 'POST',
-			headers: {
-				Accept: 'application/json',
-				'Content-Type': 'application/json',
-				auth: this.state.token,
+		await fetch(
+			'https://apps.blueprojects.com.br/arturos_mr/Integration/Save',
+			{
+				method: 'POST',
+				headers: {
+					Accept: 'application/json',
+					'Content-Type': 'application/json',
+					auth: this.state.token,
+				},
+				body: JSON.stringify(obj),
 			},
-			body: JSON.stringify(obj),
-		})
+		)
 			.then(response => response.json())
 			.then(responseJson => {
 				console.log(responseJson);
@@ -700,7 +721,7 @@ export const saveDependente = () => {
 };
 
 export const finalizarAceite = () => {
-	return dispatch => {
+	return async dispatch => {
 		const obj = {
 			tid: 'VF9NUl9USVRVTEFSOjA5ODI5Mw==',
 			fid: 100,
@@ -766,15 +787,18 @@ export const finalizarAceite = () => {
 			},
 		};
 
-		fetch('https://apps.blueprojects.com.br/arturos_mr/Integration/Save', {
-			method: 'POST',
-			headers: {
-				Accept: 'application/json',
-				'Content-Type': 'application/json',
-				auth: this.state.token,
+		await fetch(
+			'https://apps.blueprojects.com.br/arturos_mr/Integration/Save',
+			{
+				method: 'POST',
+				headers: {
+					Accept: 'application/json',
+					'Content-Type': 'application/json',
+					auth: this.state.token,
+				},
+				body: JSON.stringify(obj),
 			},
-			body: JSON.stringify(obj),
-		})
+		)
 			.then(response => response.json())
 			.then(responseJson => {
 				console.log(responseJson);

@@ -5,10 +5,11 @@ export const titularSet = createAction('TITULAR_SET');
 
 export default createReducer(TITULAR, {
 	[titularSet.type]: (state, action) => {
-		console.log(action);
+		const obj = action.payload;
+		console.log(obj);
 		return {
 			...state,
-			[state]: [action.payload],
+			...obj,
 		};
 	},
 });

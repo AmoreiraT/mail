@@ -21,7 +21,7 @@ ReactDOM.render(
 		<Provider store={store}>
 			<CssBaseline />
 
-			<BrowserRouter>
+			<BrowserRouter basename="beneficios">
 				<Routes />
 			</BrowserRouter>
 		</Provider>

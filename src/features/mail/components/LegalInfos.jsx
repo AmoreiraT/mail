@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 import styled from 'styled-components';
 import { Theme } from '../../../shared/constants/colors';
@@ -87,9 +88,10 @@ export const JoseCarlosFerreira = styled.p`
 	}
 `;
 
-const LegalInfos = ({ cartao }) => {
+const LegalInfos = ({ cartao, dependentes, cards }) => {
 	console.log(cartao);
-	console.log(cartao.dependentes.NOME_DEPENDENTE);
+	console.log(dependentes);
+	console.log(cards);
 
 	return (
 		<Frame3Seven>
@@ -110,7 +112,7 @@ const LegalInfos = ({ cartao }) => {
 								</JoseCarlosFerreira>
 
 								<Num35966120211203023536Two>
-									{dependente.NRO_SEGURO}
+									{dependente.num}
 								</Num35966120211203023536Two>
 							</Frame3Five>
 						))}
@@ -123,7 +125,12 @@ const LegalInfos = ({ cartao }) => {
 	);
 };
 
-export default LegalInfos;
+const mapStateToProps = state => ({
+	dependentes: state.mail.dependentes,
+	cards: state.mail.cartoes,
+});
+
+export default connect(mapStateToProps)(LegalInfos);
 
 // {
 // 	/* <Frame3Five>

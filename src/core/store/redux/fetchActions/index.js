@@ -111,8 +111,8 @@ export const fetchMRDependente = token => {
 
 				if (resList.length > 0) {
 					console.log('cheguei no if');
-					const dependente = responseJson.list[0];
-					console.log(resList);
+					const dependente = responseJson.list;
+					console.log(dependente);
 
 					dispatch(depSet(dependente));
 				}

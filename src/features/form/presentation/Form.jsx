@@ -1,8 +1,10 @@
 // import CssBaseline from '@mui/material/CssBaseline';
+import { StyledEngineProvider } from '@mui/system';
 import React, { useEffect } from 'react';
 import { connect, useDispatch } from 'react-redux';
 import { doLogin } from '../../../core/store/redux/fetchActions';
 import { loginGuest } from '../../../core/store/redux/fetchActions/formActions';
+import FormStep from '../components/FormStep';
 import {
 	Container,
 	FormBody,
@@ -27,6 +29,9 @@ function FormPresentation({ isLeega, titular }) {
 			</LogoFrame>
 			<FormBody>
 				<CorpoForm>
+					<StyledEngineProvider injectFirst>
+						<FormStep />
+					</StyledEngineProvider>
 					<div>a</div>
 				</CorpoForm>
 			</FormBody>
